@@ -1,0 +1,6 @@
+Projeto do Sistema Gerenciador de Estágios
+
+O sistema deverá ter:
+
+- Cadastro de Estagiários Voluntários e Obrigatórios
+- Cadastro das Empresas (Conveniadas ou pelo IEL)
