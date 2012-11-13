@@ -7,3 +7,18 @@ O sistema deverá ter:
 - Cadastro de Orientador
 - Cadastro de Supervisor
 - Envio do arquivo pdf do relatório
+
+Descriação Geral do Sistema
+
+O curso precisa de um sistema para cadastro, controle e avaliação dos estágios supervisionados.
+O estágio é o período em que um aluno trabalha para um empresa e realiza um conjunto de atividades.
+As empresas podem receber alunos estagiários. Cada estágio tem um professor orientador, 
+um supervisor pertencente a empresa. Cada estagiário ao final do estágio deve apresentar um 
+relatório para obtenção da nota. Para que o aluno seja aprovado é preciso que dois professores 
+avaliadores e o supervisor da empresa avaliem o relatório de estágio. Os avaliadores poderão 
+considerar o relatório de estágio “aprovado” ou “reprovado” e descrever sugestões de melhorias. 
+O estágio tem período, empresa, local, nota e status. O sistema devem manter um cadastro com 
+atributos básicos de professores, de alunos, de empresas, de supervisores, de avaliadores, 
+de estágios e de relatórios. 
+O estágio é de um aluno, e este é orientado por  um professor orientador. 
+É interessante associar os estágios as mais diversas áreas, e associar os professores à essas áreas.
