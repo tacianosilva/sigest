@@ -35,6 +35,13 @@
 			<url>https://github.com/tacianosilva</url>
 			<id>tacianosilva</id>
 		</developer>
+		
+		<developer>
+			<email>felipesilvabsi@gmail.com</email>
+			<name>Felipe Augusto Dantas da Silva</name>
+			<url>https://github.com/felipesilvabsi</url>
+			<id>felipesilvabsi</id>
+		</developer>
 	</developers>
 
 	<properties>
@@ -48,6 +55,25 @@
 			<version>4.8.2</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.1.2.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.1.2.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.primefaces.extensions</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.7</version>
+		</dependency>
+            
 	</dependencies>
 
 	<build>
