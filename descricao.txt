@@ -8,7 +8,7 @@ O sistema deverá ter:
 - Cadastro de Supervisor
 - Envio do arquivo pdf do relatório
 
-Descriação Geral do Sistema
+Descrição Geral do Sistema
 
 O curso precisa de um sistema para cadastro, controle e avaliação dos estágios supervisionados.
 O estágio é o período em que um aluno trabalha para um empresa e realiza um conjunto de atividades.
