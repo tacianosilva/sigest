@@ -14,9 +14,16 @@ import java.util.logging.Logger;
  * 
  * @author taciano
  */
-public class Main {
+public class MainProvaDeConceito {
 
 	public static void main(String[] args) {
+		
+		Curso curso = new Curso(1, "Bacharelado em Sistemas de Informação");
+		curso.setCoordenadorCurso();
+		curso.setViceCoordenadorCurso();
+		curso.setCoordenadorEstagios();
+		
+		
 		/*
 		 * Evento evento = new Evento();
 		 * 
@@ -50,7 +57,7 @@ public class Main {
 		 * JasperFillManager.fillReport(jasperReport, parameters, data);
 		 * //executa o relatório JasperViewer.viewReport(jasperPrint); } catch
 		 * (JRException ex) {
-		 * Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex); }
+		 * Logger.getLogger(MainProvaDeConceito.class.getName()).log(Level.SEVERE, null, ex); }
 		 */
 
 		/*
