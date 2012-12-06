@@ -1,8 +1,20 @@
 \subsection{Descrição}
 
 \subsection{Fluxo Principal}
+1.  O sistema exibe o formulário para o cadastro de professor.
+2.	O usuário preenche os campos de acordo com a RN001 e clica no botão cadastrar.
+3.	O sistema persiste os dados. FE001
+4.	O caso de uso termina.
 
 \subsection{Fluxo Secundário}
+FE001 - Se houver algum erro ao persistir os dados, o sistema exibe a mensagem  MSG001 e retorna ao passo 2 com os dados já preenchidos. Se não o sistema exibe a mensagem MSG002 e continua com o passo seguinte.
+
+\subsection{Regra de Negócio}
+    RN001 - Todos os campos em negrito são obrigatórios.
+
+\subsection{Mensagens do Sistema} 
+    MSG001 - “Erro ao salvar dados.”
+    MSG002 - “Professor cadastrado com sucesso!”
 
 \subsection{Fluxo de Exceção}
 
