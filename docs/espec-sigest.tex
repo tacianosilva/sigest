@@ -1,8 +1,9 @@
-\documentclass[12pt]{report}
+\documentclass[12pt,a4paper]{report}
 
-\usepackage[portuguese, brazil]{babel}
-\usepackage[T1]{fontenc}
-\usepackage[portuguese, noprefix]{nomencl}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{graphicx}
 
 \title{Especificações do Projeto SIGEST}
 \author{Taciano Morais Silva - tacianosilva@gmail.com}
@@ -10,13 +11,16 @@
 \begin{document}
 
 \maketitle
+\listoffigures
 \tableofcontents
 
 \chapter{Introdução}
 
+Texto de introdução para testar a citação \cite{morais04a}.
+
 \section{Definição de Perfis}
 
-\paragraph No sistema teremos vários tipos de usuário e seus respectivos perfis.
+No sistema teremos vários tipos de usuário e seus respectivos perfis.
 Segue abaixo a lista de usuários do sistema e seus respecitivos perfis. 
 
 \emph{Professor} - Entidade que representa o professor que pode assumir um dos
@@ -41,8 +45,19 @@ assumir um dos seguintes perfis:
 
 \chapter{Modelo de Dados}
 
+% Figura Modelo de Dados
+\begin{figure}[!htb]
+        \centering
+        \includegraphics[scale=0.4]{esquema_sigest.eps}
+        \caption{Esquema Relacionado para o Sistema SIGEST}
+        \label{esquema_sigest}
+\end{figure}
+%\footnote{"A framework is a set of classes that embodies an abstract design for solutions to a family of related problems", \cite{johnson88}}
+
+
 \chapter{Lista de Casos de Uso}
 
+%% Input para a Section CDU001 - Estagiário
 \section{CDU01 - Estagiário}
 
 \subsection{Responsável}
@@ -82,5 +97,19 @@ Nome: Mércia
 GitHub:
 
 \input{cdu004}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Bibliografia
+
+\bibliographystyle{alpha} % estilo de bibliografia
+\bibliography{bib-dis} % arquivos com as entradas bib.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Ap\^endice
+ % Caso seja necessário algum apêndice, descomente a próxima linha.
+
+%\appendix
+
+%\input{capA-filosofos}
 
 \end{document}
