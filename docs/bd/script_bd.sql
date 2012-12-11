@@ -1,3 +1,24 @@
+CREATE TABLE usuario (
+                codigo serial,
+                nome VARCHAR(255) NOT NULL,
+                email VARCHAR(255) NOT NULL,
+                senha VARCHAR(255) NOT NULL,
+                CONSTRAINT usuario_pk PRIMARY KEY (codigo)
+);
+
+CREATE TABLE perfil (
+                codigo serial,
+                nome VARCHAR(255) NOT NULL,
+                descricao VARCHAR(255) NOT NULL,
+                CONSTRAINT perfil_pk PRIMARY KEY (codigo)
+);
+
+CREATE TABLE perfis (
+                codigo serial,
+                codigo_usuario INTEGER NOT NULL,
+                codigo_perfil INTEGER NOT NULL,
+                CONSTRAINT perfis_pk PRIMARY KEY (codigo)
+);
 
 CREATE TABLE empresa (
                 codigo serial,
@@ -138,6 +159,20 @@ NOT DEFERRABLE;
 ALTER TABLE avaliacao ADD CONSTRAINT estagio_avaliacao_fk
 FOREIGN KEY (estagio)
 REFERENCES estagio (codigo)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE perfis ADD CONSTRAINT perfil_perfis_fk
+FOREIGN KEY (codigo_perfil)
+REFERENCES perfil (codigo)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE perfis ADD CONSTRAINT usuario_perfis_fk
+FOREIGN KEY (codigo_usuario)
+REFERENCES usuario (codigo)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
