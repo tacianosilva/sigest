@@ -13,11 +13,11 @@ public interface Bean extends Serializable {
      * Retorna o identificador do bean.
      * @return O identificador do bean.
      */
-    public Integer getId();
+    public Integer getCodigo();
 
     /**
      * Modifica o identificador do bean.
      * @param id O novo identificador do bean.
      */
-    public void setId(Integer id);
+    public void setCodigo(Integer id);
 }

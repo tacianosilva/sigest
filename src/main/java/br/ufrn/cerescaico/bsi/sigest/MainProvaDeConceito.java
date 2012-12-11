@@ -10,6 +10,9 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import br.ufrn.cerescaico.bsi.sigest.model.Curso;
+import br.ufrn.cerescaico.bsi.sigest.model.Professor;
+
 /**
  * 
  * @author taciano
@@ -18,10 +21,13 @@ public class MainProvaDeConceito {
 
 	public static void main(String[] args) {
 		
+		Professor taciano = new Professor(1, 1721652, "Taciano de Morais Silva");
+		Professor fabricio = new Professor(1, 1721653, "Fabrício");
+		
 		Curso curso = new Curso(1, "Bacharelado em Sistemas de Informação");
-		curso.setCoordenadorCurso();
-		curso.setViceCoordenadorCurso();
-		curso.setCoordenadorEstagios();
+//		curso.setCoordenadorCurso(taciano);
+//		curso.setViceCoordenadorCurso(fabricio);
+//		curso.setCoordenadorEstagios(fabricio);
 		
 		
 		/*

@@ -1,6 +1,6 @@
 
 CREATE TABLE empresa (
-                codigo INTEGER NOT NULL,
+                codigo serial,
                 nome VARCHAR(255) NOT NULL,
                 cnpj VARCHAR(15) NOT NULL,
                 CONSTRAINT empresa_pk PRIMARY KEY (codigo)
@@ -8,7 +8,7 @@ CREATE TABLE empresa (
 
 
 CREATE TABLE supervisor (
-                codigo INTEGER NOT NULL,
+                codigo serial,
                 nome VARCHAR(255) NOT NULL,
                 cod_empresa INTEGER NOT NULL,
                 CONSTRAINT supervisor_pk PRIMARY KEY (codigo)
@@ -16,7 +16,7 @@ CREATE TABLE supervisor (
 
 
 CREATE TABLE convenio (
-                codigo INTEGER NOT NULL,
+                codigo serial,
                 descricao VARCHAR(255) NOT NULL,
                 documento BYTEA NOT NULL,
                 data_inicio DATE NOT NULL,
@@ -28,14 +28,14 @@ COMMENT ON COLUMN convenio.documento IS 'Arquivo pdf com o contrato de convênio
 
 
 CREATE TABLE curso (
-                codigo INTEGER NOT NULL,
+                codigo serial,
                 nome VARCHAR(255) NOT NULL,
                 CONSTRAINT curso_pk PRIMARY KEY (codigo)
 );
 
 
 CREATE TABLE estagiario (
-                codigo INTEGER NOT NULL,
+                codigo serial,
                 nome VARCHAR(255) NOT NULL,
                 matricula VARCHAR(10) NOT NULL,
                 curso INTEGER NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE estagiario (
 
 
 CREATE TABLE professor (
-                codigo INTEGER NOT NULL,
+                codigo serial,
                 siape INTEGER NOT NULL,
                 nome VARCHAR(255) NOT NULL,
                 curso INTEGER NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE professor (
 
 
 CREATE TABLE estagio (
-                codigo INTEGER NOT NULL,
+                codigo serial,
                 descricao VARCHAR(255) NOT NULL,
                 data_inicio DATE NOT NULL,
                 data_fim DATE NOT NULL,
@@ -70,7 +70,7 @@ COMMENT ON COLUMN estagio.media IS 'Média optida pelas notas emitidas pelos ava
 
 
 CREATE TABLE avaliacao (
-                codigo INTEGER NOT NULL,
+                codigo serial,
                 avaliador INTEGER NOT NULL,
                 comentario VARCHAR(255) NOT NULL,
                 estagio INTEGER NOT NULL,
