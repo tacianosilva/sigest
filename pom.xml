@@ -69,6 +69,21 @@
 			<artifactId>jta</artifactId>
 			<version>1.1</version>
 		</dependency>
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.1.15</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>2.1.15</version>
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>3.4</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>
@@ -76,22 +91,22 @@
 			<id>EclipseLink</id>
 			<url>http://download.eclipse.org/rt/eclipselink/maven.repo</url>
 		</repository>
-		 <repository>  
-            <id>prime-repo</id>  
-            <name>PrimeFaces Maven Repository</name>  
-            <url>http://repository.primefaces.org</url>  
-            <layout>default</layout>  
-        </repository>
-        <repository>
-            <id>mvn</id>
-            <name>MVN Repository</name>
-            <url>http://mvnrepository.com</url>
-        </repository>
-        <repository>
-            <id>Maven2</id>
-            <name>Maven 2</name>
-            <url>http://repo1.maven.org/maven2/</url>
-        </repository>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>mvn</id>
+			<name>MVN Repository</name>
+			<url>http://mvnrepository.com</url>
+		</repository>
+		<repository>
+			<id>Maven2</id>
+			<name>Maven 2</name>
+			<url>http://repo1.maven.org/maven2/</url>
+		</repository>
 	</repositories>
 	<build>
 		<finalName>sigest</finalName>
