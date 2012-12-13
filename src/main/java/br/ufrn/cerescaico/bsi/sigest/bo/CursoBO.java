@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufrn.cerescaico.bsi.sigest.bo;
 
 import java.util.List;
@@ -30,6 +26,12 @@ public class CursoBO extends AbstractBO {
         this.dao = new CursoJpaController(JPAUtil.EMF);
     }
     
+    /**
+     * Insere um novo curso.
+     * @param curso O novo curos.
+     * @return O curso inserido com a chave primária preenchida.
+     * @throws NegocioException Caso ocorra erro na inserção.
+     */
     public Curso inserir(Curso curso) throws NegocioException {
         try {
             return dao.create(curso);
