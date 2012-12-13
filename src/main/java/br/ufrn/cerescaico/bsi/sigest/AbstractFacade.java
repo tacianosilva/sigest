@@ -1,5 +1,7 @@
 package br.ufrn.cerescaico.bsi.sigest;
 
+import br.ufrn.cerescaico.bsi.sigest.bo.CursoBO;
+
 /**
  * Classe Abstrata para a Fachada do sistema Sigest.
  * 
@@ -9,10 +11,7 @@ package br.ufrn.cerescaico.bsi.sigest;
  */
 class AbstractFacade {
 
-	/*
-	 * protected UsuarioBO createUsuarioBO() { 
-	 * 	   return new UsuarioBO();
-	 * }
-	 */
-
+	protected CursoBO createCursoBO() {
+		return new CursoBO();
+	}
 }

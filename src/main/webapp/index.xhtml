@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Index Teste do JSF com Primefaces</title>
+</h:head>
+<body>
+	<div>
+		<h1>Sistema Gerenciador de Estágios - SIGEST</h1>
+		<hr />
+		<h:form>
+			<h:messages />
+			<p:dataTable id="dataTable" var="curso" value="#{cursoBean.cursos}"
+				paginator="true" rows="10">
+				<f:facet name="header">
+                        Lista de Cursos
+                </f:facet>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Codigo" />
+					</f:facet>
+
+					<h:outputText value="#{curso.codigo}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome" />
+					</f:facet>
+
+					<h:outputText value="#{curso.nome}" />
+				</p:column>
+             </p:dataTable>
+		</h:form>
+        <hr />
+		<h:form>
+			<h:commandLink action="#{usuarioBean.novo}">Novo usuário</h:commandLink>
+			<br />
+			<h:commandLink action="usuario">Novo usuário</h:commandLink>
+			<br />
+			<h:commandLink action="#{usuarioBean.login}">Entrar no Sistema</h:commandLink>
+			<br />
+			<h:commandLink action="publico/usuario/login.jsf">Entrar no Sistema</h:commandLink>
+			<br />
+			<h:commandLink action="#{usuarioBean.listar}">Listar Usuários</h:commandLink>
+		</h:form>
+	</div>
+</body>
+</html>

@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import br.ufrn.cerescaico.bsi.sigest.bo.CursoBO;
+import br.ufrn.cerescaico.bsi.sigest.bo.NegocioException;
 import br.ufrn.cerescaico.bsi.sigest.model.Curso;
 import br.ufrn.cerescaico.bsi.sigest.model.Professor;
 
@@ -19,15 +21,27 @@ import br.ufrn.cerescaico.bsi.sigest.model.Professor;
  */
 public class MainProvaDeConceito {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NegocioException {
 		
 		Professor taciano = new Professor(1, 1721652, "Taciano de Morais Silva");
 		Professor fabricio = new Professor(1, 1721653, "Fabrício");
 		
-		Curso curso = new Curso(1, "Bacharelado em Sistemas de Informação");
+		Curso curso = new Curso();
+		curso.setNome("Bacharelado em Sistemas de Informação");
 //		curso.setCoordenadorCurso(taciano);
 //		curso.setViceCoordenadorCurso(fabricio);
 //		curso.setCoordenadorEstagios(fabricio);
+		
+		CursoBO cursoBO = new CursoBO();
+		Curso salvo = cursoBO.inserir(curso);
+		
+		System.out.println("Salvo no BD: " + salvo);
+		
+		List<Curso> lista = cursoBO.listar();
+		for (Curso c : lista) {
+			System.out.println("lista: " + c);
+		}
+		
 		
 		
 		/*
