@@ -37,12 +37,16 @@ public class EstagioBean implements Serializable {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage("estagioBean.listar", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao carregar a lista de estagios", ex.getMessage()));
         }
-        return "index";
+        return "estagio";
     }
 
     public List<Estagio> getEstagios() {
     	listar();
         return estagios;
+    }
+    
+    public String manter(){
+    	return "estagio.xhtml";
     }
 
     public void setEstagios(List<Estagio> estagios) {

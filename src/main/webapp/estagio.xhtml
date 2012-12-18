@@ -1,19 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Insert title here</title>
-</head>
+</h:head>
 <body>
-<div>
+	<div>
 		<h1>Sistema Gerenciador de Estágios - SIGEST</h1>
-		<hr />
-		
-		<hr />
 		<h:form>
 			<h:messages />
-			<p:dataTable id="dataTable" var="estagio" value="#{estagioBean.estagios}"
-				paginator="true" rows="10">
+			<p:dataTable id="dataTable" var="estagio"
+				value="#{estagioBean.estagios}" paginator="true" rows="10">
 				<f:facet name="header">
                         Lista de Estágios
                 </f:facet>
@@ -31,10 +32,19 @@
 
 					<h:outputText value="#{estagio.descricao}" />
 				</p:column>
-             </p:dataTable>
+			</p:dataTable>
+
 		</h:form>
-        <hr />
+		<hr />
+		<h:form>
+			<h:commandLink action="#{cursoBean.manter}">Manter Curso</h:commandLink>
+			<br />
+			<h:commandLink action="#{estagioBean.listar}">Consultar Estágios</h:commandLink>
+			<br />
+			<h:commandLink action="#{professorBean.manter}">Manter Professor</h:commandLink>
+		</h:form>
 		
+
 	</div>
 
 </body>
