@@ -31,14 +31,16 @@
 					<h:outputLabel for="crm" value="CNPJ: " />
 					<p:inputMask id="crm" value="#{empresaBean.empresa.cnpj}"
 						required="true" requiredMessage="Campo Obrigatório"
-						mask=" ****/**" />
+						mask=" **********" />
 					<p:ajax update="msgCrm" event="keyup" />
 					<p:message for="crm" id="msgCrm" display="Campo Obrigatório" />
 					
 					</h:panelGrid>
 			</p:panel>
 			<p:commandButton value="Inserir" update="panel" action="#{empresaBean.inserir}" />
+			<p:commandButton ajax="false" update=":form1:dataTable" value="Alterar" action="#{EmpresaBean.editar}" />
 			<p:commandButton immediate="true" ajax="false" update=":form1:dataTable" value="Pesquisar" action="#{empresaBean.listar}" />
+			<p:commandButton immediate="true" ajax="false" update="panel" value="Excluir" action="#{empresaBean.excluir}"/>
 		</h:form>
 
 

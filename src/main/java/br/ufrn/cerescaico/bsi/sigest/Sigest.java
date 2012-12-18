@@ -1,6 +1,7 @@
 package br.ufrn.cerescaico.bsi.sigest;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 import br.ufrn.cerescaico.bsi.sigest.bo.CursoBO;
@@ -65,6 +66,16 @@ public final class Sigest extends AbstractFacade implements Serializable {
     public Empresa cadastrarEmpresa(Empresa empresa) throws NegocioException {
 		EmpresaBO bo = createEmpresaBO();
         return bo.inserir(empresa);
+    }
+    
+    public void editarEmpresa(Empresa empresa) throws NegocioException{
+    	EmpresaBO bo = createEmpresaBO();
+    	bo.editar(empresa);
+    }
+    
+    public void excluirEmpresa(Integer codigo) throws NegocioException{
+    	EmpresaBO bo = createEmpresaBO();
+    	bo.excluir(codigo);
     }
     
     public List<Empresa> listarEmpresas() throws NegocioException {

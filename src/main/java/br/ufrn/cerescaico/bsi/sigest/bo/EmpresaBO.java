@@ -1,5 +1,6 @@
 package br.ufrn.cerescaico.bsi.sigest.bo;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +37,29 @@ private static final Logger logger = Logger.getLogger(CursoBO.class.getName());
         catch (Exception ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.empresa.bo.inserir.exception",ex);
+        }
+    }
+    
+    public void editar(Empresa empresa) throws NegocioException {
+        try {
+            dao.edit(empresa);
+        }
+        catch (PreexistingEntityException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new NegocioException("erro.empresa.bo.editar.PreexistingEntityException",ex);
+        }
+        catch (Exception ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new NegocioException("erro.empresa.bo.editar.exception",ex);
+        }
+    }
+    
+    public void excluir(Integer codigo) throws NegocioException {
+        try {
+            dao.destroy(codigo);
+        }catch (Exception ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new NegocioException("erro.empresa.bo.editar.exception",ex);
         }
     }
     

@@ -47,6 +47,36 @@ public class EmpresaBean implements Serializable {
 		
 		return empresa1;
 	}
+	
+	public void editar(){
+		try{
+			sigest.editarEmpresa(empresa);
+			initComps();
+			//JOptionPane.showConfirmDialog(null, "Cliente cadastrou");
+		}catch(NegocioException ex){
+			Logger.getLogger(EmpresaBean.class.getName()).log(Level.SEVERE,
+					ex.getMessage(), ex);
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage("empresaBean.editar", new FacesMessage(
+					FacesMessage.SEVERITY_ERROR,
+					"Erro ao editar a empresa", ex.getMessage()));
+		}
+	}
+	
+	public void excluir(){
+		try{
+			sigest.excluirEmpresa(empresa.getCodigo());
+			initComps();
+			//JOptionPane.showConfirmDialog(null, "Cliente cadastrou");
+		}catch(NegocioException ex){
+			Logger.getLogger(EmpresaBean.class.getName()).log(Level.SEVERE,
+					ex.getMessage(), ex);
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage("empresaBean.inserir", new FacesMessage(
+					FacesMessage.SEVERITY_ERROR,
+					"Erro ao cadastrar a empresa", ex.getMessage()));
+		}
+	}
 
 	public String listar() {
 		try {
