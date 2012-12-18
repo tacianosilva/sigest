@@ -11,8 +11,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import br.ufrn.cerescaico.bsi.sigest.bo.CursoBO;
+import br.ufrn.cerescaico.bsi.sigest.bo.EmpresaBO;
 import br.ufrn.cerescaico.bsi.sigest.bo.NegocioException;
 import br.ufrn.cerescaico.bsi.sigest.model.Curso;
+import br.ufrn.cerescaico.bsi.sigest.model.Empresa;
 import br.ufrn.cerescaico.bsi.sigest.model.Professor;
 
 /**
@@ -32,6 +34,13 @@ public class MainProvaDeConceito {
 //		curso.setViceCoordenadorCurso(fabricio);
 //		curso.setCoordenadorEstagios(fabricio);
 		
+		//Empresa
+		
+		Empresa empresa = new Empresa();
+		empresa.setNome("Kurtição");
+		empresa.setCnpj("123456");
+		
+		/*
 		CursoBO cursoBO = new CursoBO();
 		Curso salvo = cursoBO.inserir(curso);
 		
@@ -40,6 +49,19 @@ public class MainProvaDeConceito {
 		List<Curso> lista = cursoBO.listar();
 		for (Curso c : lista) {
 			System.out.println("lista: " + c);
+		}
+		*/
+		
+		//Cadastrar Empresa
+		
+		EmpresaBO empresaBO = new EmpresaBO();
+		Empresa salva = empresaBO.inserir(empresa);
+				
+		System.out.println("Salva no BD: " + salva);
+		
+		List<Empresa> empresas = empresaBO.listar();
+		for (Empresa e : empresas) {
+			System.out.println("lista: " + e);
 		}
 		
 		
