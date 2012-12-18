@@ -33,11 +33,13 @@ public class MainProvaDeConceito {
 		
 		Estagio estagio = new Estagio();
 		estagio.setDescricao("Kurtição");
+		estagio.se
 //		curso.setCoordenadorCurso(taciano);
 //		curso.setViceCoordenadorCurso(fabricio);
 //		curso.setCoordenadorEstagios(fabricio);
 		EstagioBO estagioBO = new EstagioBO();
 		estagioBO.inserir(estagio);
+		
 		//CursoBO cursoBO = new CursoBO();
 		//Curso salvo = cursoBO.inserir(curso);
 		
