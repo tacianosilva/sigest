@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div>
+		<h1>Sistema Gerenciador de Estágios - SIGEST</h1>
+		<hr />
+		
+		<hr />
+		<h:form>
+			<h:messages />
+			<p:dataTable id="dataTable" var="estagio" value="#{estagioBean.estagios}"
+				paginator="true" rows="10">
+				<f:facet name="header">
+                        Lista de Estágios
+                </f:facet>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Codigo" />
+					</f:facet>
+
+					<h:outputText value="#{estagio.codigo}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Descrição" />
+					</f:facet>
+
+					<h:outputText value="#{estagio.descricao}" />
+				</p:column>
+             </p:dataTable>
+		</h:form>
+        <hr />
+		
+	</div>
+
+</body>
+</html>

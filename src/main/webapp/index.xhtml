@@ -14,6 +14,14 @@
 		<h1>Sistema Gerenciador de Estágios - SIGEST</h1>
 		<hr />
 		<h:form>
+			<h:commandLink action="#{cursoBean.manter}">Manter Curso</h:commandLink>
+			<br />
+			<h:commandLink action="#{estagioBean.manter}">Manter Estágio</h:commandLink>
+			<br />
+			<h:commandLink action="#{professorBean.manter}">Manter Professor</h:commandLink>
+		</h:form>
+		<hr />
+		<h:form>
 			<h:messages />
 			<p:dataTable id="dataTable" var="curso" value="#{cursoBean.cursos}"
 				paginator="true" rows="10">
@@ -47,6 +55,9 @@
 			<h:commandLink action="publico/usuario/login.jsf">Entrar no Sistema</h:commandLink>
 			<br />
 			<h:commandLink action="#{usuarioBean.listar}">Listar Usuários</h:commandLink>
+			<br />
+			<h:commandLink action="/estagio.xhtml">Pagina de Estagios</h:commandLink>
+			<br />
 		</h:form>
 	</div>
 </body>

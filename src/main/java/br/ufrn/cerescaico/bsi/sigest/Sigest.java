@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import br.ufrn.cerescaico.bsi.sigest.bo.CursoBO;
+import br.ufrn.cerescaico.bsi.sigest.bo.EstagioBO;
 import br.ufrn.cerescaico.bsi.sigest.bo.NegocioException;
 import br.ufrn.cerescaico.bsi.sigest.model.Curso;
+import br.ufrn.cerescaico.bsi.sigest.model.Estagio;
 
 /**
  * Fachada do sistema Sigest.
@@ -56,6 +58,16 @@ public final class Sigest extends AbstractFacade implements Serializable {
     
     public List<Curso> listarCursos() throws NegocioException {
         CursoBO bo = createCursoBO();
+        return bo.listar();
+    }
+    
+    public Estagio cadastrarEstagio(Estagio estagio) throws NegocioException{
+    	EstagioBO bo = createEstagioBO();
+    	return bo.inserir(estagio);
+    }
+    
+    public List<Estagio> listarEstagios() throws NegocioException {
+        EstagioBO bo = createEstagioBO();
         return bo.listar();
     }
 

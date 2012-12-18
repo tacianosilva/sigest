@@ -13,9 +13,9 @@
 		<class>br.ufrn.cerescaico.bsi.sigest.model.Perfis</class>
 		<class>br.ufrn.cerescaico.bsi.sigest.model.Usuario</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/sigest_db"/>
-			<property name="javax.persistence.jdbc.user" value="sigest"/>
-			<property name="javax.persistence.jdbc.password" value="12345"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/sigest"/>
+			<property name="javax.persistence.jdbc.user" value="postgres"/>
+			<property name="javax.persistence.jdbc.password" value="7896321"/>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
 		</properties>
 	</persistence-unit>

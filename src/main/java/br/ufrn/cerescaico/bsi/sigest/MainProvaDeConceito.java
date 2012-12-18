@@ -11,8 +11,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import br.ufrn.cerescaico.bsi.sigest.bo.CursoBO;
+import br.ufrn.cerescaico.bsi.sigest.bo.EstagioBO;
 import br.ufrn.cerescaico.bsi.sigest.bo.NegocioException;
 import br.ufrn.cerescaico.bsi.sigest.model.Curso;
+import br.ufrn.cerescaico.bsi.sigest.model.Estagio;
 import br.ufrn.cerescaico.bsi.sigest.model.Professor;
 
 /**
@@ -23,25 +25,34 @@ public class MainProvaDeConceito {
 
 	public static void main(String[] args) throws NegocioException {
 		
-		Professor taciano = new Professor(1, 1721652, "Taciano de Morais Silva");
-		Professor fabricio = new Professor(1, 1721653, "Fabrício");
+		//Professor taciano = new Professor(1, 1721652, "Taciano de Morais Silva");
+		//Professor fabricio = new Professor(1, 1721653, "Fabrício");
+		//
+		//Curso curso = new Curso();
+		//curso.setNome("Bacharelado em Sistemas de Informação");
 		
-		Curso curso = new Curso();
-		curso.setNome("Bacharelado em Sistemas de Informação");
+		Estagio estagio = new Estagio();
+		estagio.setDescricao("Kurtição");
 //		curso.setCoordenadorCurso(taciano);
 //		curso.setViceCoordenadorCurso(fabricio);
 //		curso.setCoordenadorEstagios(fabricio);
+		EstagioBO estagioBO = new EstagioBO();
+		estagioBO.inserir(estagio);
+		//CursoBO cursoBO = new CursoBO();
+		//Curso salvo = cursoBO.inserir(curso);
 		
-		CursoBO cursoBO = new CursoBO();
-		Curso salvo = cursoBO.inserir(curso);
+		//System.out.println("Salvo no BD: " + salvo);
 		
-		System.out.println("Salvo no BD: " + salvo);
+		//List<Curso> lista = cursoBO.listar();
+		//for (Curso c : lista) {
+		//	System.out.println("lista: " + c);
+		//}
 		
-		List<Curso> lista = cursoBO.listar();
-		for (Curso c : lista) {
+		List<Estagio> listaestagio = estagioBO.listar();
+		
+		for (Estagio c : listaestagio) {
 			System.out.println("lista: " + c);
 		}
-		
 		
 		
 		/*
