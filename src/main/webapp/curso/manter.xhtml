@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="utf-8" />
+	<title>SisEventos - Login de Usuário</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Tela Manter Curso - SIGEST" />
+	<meta name="author" content="Taciano Morais Silva" />
+</h:head>
+<h:body>
+	<div class="container" style="-moz-appearance: normal">
+		<h1>Manter Curso</h1>
+		<h:form>
+			<h:messages id="messages" class="alert-error" />
+			<h:panelGrid columns="3">
+				<h:outputLabel value="Nome:" for="nome" />
+				<p:inputText id="nome" value="#{cursoBean.nome}"
+					required="true" label="nome">
+					<f:validateLength minimum="2" />
+				</p:inputText>
+				<p:message for="nome" />
+				<h:outputLabel for="coordenador" value="Coordenador: *" />
+				<h:selectOneMenu id="coordenador" value="#{cursoBean.coordenador}"
+					required="false">
+					<f:selectItem itemLabel="Select One" itemValue="" />
+					<f:selectItems value="#{cursoBean.professores}" />
+				</h:selectOneMenu>
+				<p:message for="coordenador" />
+				<h:outputText value="#{cursoBean.coordenador}" />
+			</h:panelGrid>
+
+			<p:commandButton value="Incluir"
+				actionListener="#{cursoBean.incluir}" update="messages"/>
+		</h:form>
+	</div>
+	<hr />
+	<div>
+		<h:form>
+			<h:messages />
+			<p:dataTable id="dataTable" var="curso" value="#{cursoBean.cursos}"
+				paginator="true" rows="10">
+				<f:facet name="header">
+                        Lista de Cursos
+                </f:facet>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Codigo" />
+					</f:facet>
+
+					<h:outputText value="#{curso.codigo}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome" />
+					</f:facet>
+
+					<h:outputText value="#{curso.nome}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</div>
+</h:body>
+</html>
