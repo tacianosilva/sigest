@@ -5,14 +5,75 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
 </h:head>
 <body>
 	<div>
+
 		<h1>Sistema Gerenciador de Estágios - SIGEST</h1>
+		<hr />
 		<h:form>
-			<h:messages />
+			<p:panel header="Formulário de Estágio">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputText value="Data de Cadastro: " />
+					<p:inputMask required="true" requiredMessage="Campo Obrigatório" value="#{estagioBean.estagio.dataCadastro}"
+						mask="99/99/9999" />
+
+					<h:outputText value="Data Inicio do Estágio: " />
+					<p:inputMask required="true" requiredMessage="Campo Obrigatório" value="#{estagioBean.estagio.dataInicio}"
+						mask="99/99/9999" />
+
+					<h:outputText value="Data Fim do Estágio: " />
+					<p:inputMask required="true" requiredMessage="Campo Obrigatório" value="#{estagioBean.estagio.dataFim}"
+						mask="99/99/9999" />
+
+					<h:outputText value="Descrição: " />
+					<p:inputText required="true" requiredMessage="Campo Obrigatório" value="#{estagioBean.estagio.descricao}" />
+
+					<h:outputText value="Média: " />
+					<p:inputText required="true" requiredMessage="Campo Obrigatório" value="#{estagioBean.estagio.media}" />
+
+					<h:outputText value="Situação: " />
+					<p:selectOneMenu value="#{estagioBean.estagio.situacao}">
+						<f:selectItem itemLabel="Selecione a Situação" itemValue="" />
+						<f:selectItem itemLabel="Aprovado" itemValue="1" />
+						<f:selectItem itemLabel="Reprovado" itemValue="2" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Empresa: " />
+					<p:selectOneMenu value="#{empresaBean.nome}" effect="fold"
+						editable="true">
+						<f:selectItem itemLabel="Selecione um Empresa." itemValue="" />
+						<f:selectItems value="#{empresaBean.empresas}" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Estagiário: " />
+					<p:selectOneMenu value="#{estagiarioBean.nome}" effect="fold"
+						editable="true">
+						<f:selectItem itemLabel="Selecione um Estagiário." itemValue="" />
+						<f:selectItems value="#{estagiarioBean.estagiarios}" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Orientador: " />
+					<p:selectOneMenu value="#{professorBean.nome}" effect="fold"
+						editable="true">
+						<f:selectItem itemLabel="Selecione um Orientador." itemValue="" />
+						<f:selectItems value="#{professorBean.professores}" />
+					</p:selectOneMenu>
+
+				</h:panelGrid>
+				<p:commandButton action="#{estagioBean.incluir}" ajax="false" value="Incluir" type="reset" />
+				<p:commandButton action="#{estagioBean.alterar}" ajax="false" value="Alterar" />
+				<p:commandButton action="#{estagioBean.pesquisar}" ajax="false" value="Pesquisar" type="reset" />
+				<p:commandButton action="#{estagioBean.excluir}" ajax="false" value="Excluir" />
+			</p:panel>
+
+		</h:form>
+		<HR />
+
+		<h:form>
+			<!--  p:messages id="messages" /-->
 			<p:dataTable id="dataTable" var="estagio"
 				value="#{estagioBean.estagios}" paginator="true" rows="10">
 				<f:facet name="header">
@@ -20,7 +81,7 @@
                 </f:facet>
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value="Codigo" />
+						<h:outputText value="Código" />
 					</f:facet>
 
 					<h:outputText value="#{estagio.codigo}" />
@@ -36,14 +97,8 @@
 
 		</h:form>
 		<hr />
-		<h:form>
-			<h:commandLink action="#{cursoBean.manter}">Manter Curso</h:commandLink>
-			<br />
-			<h:commandLink action="#{estagioBean.listar}">Consultar Estágios</h:commandLink>
-			<br />
-			<h:commandLink action="#{professorBean.manter}">Manter Professor</h:commandLink>
-		</h:form>
-		
+
+
 
 	</div>
 

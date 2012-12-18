@@ -28,6 +28,21 @@ public class EstagioBean implements Serializable {
     
     private List<Estagio> estagios = null;
     
+    private Estagio estagio = null;
+    
+    
+
+	public String incluir() {
+        FacesContext context = FacesContext.getCurrentInstance();
+           try {
+               sigest.cadastrarEstagio(getEstagio());
+               context.addMessage("Estágio cadastrado com sucesso!", new FacesMessage(FacesMessage.SEVERITY_INFO, "Estágio cadastrado com sucesso!",""));
+           } catch (NegocioException ex) {
+               context.addMessage("Erro ao cadastrar estágio. Tente novamente.", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao cadastrar estágio. Tente novamente.", ex.getMessage()));
+           }
+           return "";
+       }
+    
     public String listar() {
         try {
             estagios = sigest.listarEstagios();
@@ -52,4 +67,12 @@ public class EstagioBean implements Serializable {
     public void setEstagios(List<Estagio> estagios) {
         this.estagios = estagios;
     }
+    
+    public Estagio getEstagio() {
+		return estagio;
+	}
+
+	public void setEstagio(Estagio estagio) {
+		this.estagio = estagio;
+	}
 }
