@@ -25,9 +25,26 @@ public class EstagiarioBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Sigest sigest = Sigest.getInstance();
-    
+
     private List<Estagiario> estagiarios = null;
-    
+
+    private Estagiario estagiario = null;
+
+    public EstagiarioBean(){
+        estagiario = new Estagiario();
+    }
+
+    public String incluir() {
+     FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            sigest.cadastrarEstagiario(getEstagiario());
+            context.addMessage("Estagiário cadastrado com sucesso!", new FacesMessage(FacesMessage.SEVERITY_INFO, "Estagiário cadastrado com sucesso!",""));
+        } catch (NegocioException ex) {
+            context.addMessage("Erro ao cadastrar estagiário. Tente novamente.", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao cadastrar estagiário. Tente novamente.", ex.getMessage()));
+        }
+        return "";
+    }
+
     public String listar() {
         try {
             estagiarios = sigest.listarEstagiarios();
@@ -47,6 +64,14 @@ public class EstagiarioBean implements Serializable {
 
     public void setEstagiarios(List<Estagiario> estagiarios) {
         this.estagiarios = estagiarios;
+    }
+
+    public Estagiario getEstagiario(){
+        return estagiario;
+    }
+
+    public void setEstagiario(Estagiario estagiario){
+        this.estagiario = estagiario;
     }
 
 }
