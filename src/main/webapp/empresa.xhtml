@@ -14,7 +14,7 @@
 		<h1>Sistema Gerenciador de Estágios - SIGEST</h1>
 		<hr />
 
-		<h:form>
+		<h:form id="form0">
 			<p:panel id="panel" header="CADASTRO DE EMPRESAS">
 
 				<p:messages id="msgs"/>
@@ -37,10 +37,14 @@
 					
 					</h:panelGrid>
 			</p:panel>
-			<p:commandButton value="Inserir" update="panel" action="#{empresaBean.inserir}" />
-			<p:commandButton ajax="false" update=":form1:dataTable" value="Alterar" action="#{EmpresaBean.editar}" />
+			
+		</h:form>
+		
+		<h:form>
+			<p:commandButton value="Inserir" update=":form0:panel" action="#{empresaBean.inserir}" />
+			<p:commandButton ajax="false" update=":form1:dataTable" value="Alterar" action="#{empresaBean.editar}" />
 			<p:commandButton immediate="true" ajax="false" update=":form1:dataTable" value="Pesquisar" action="#{empresaBean.listar}" />
-			<p:commandButton immediate="true" ajax="false" update="panel" value="Excluir" action="#{empresaBean.excluir}"/>
+			<p:commandButton immediate="true" ajax="false" update=":form0:panel" value="Excluir" action="#{empresaBean.excluir}"/>
 		</h:form>
 
 

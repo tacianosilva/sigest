@@ -35,7 +35,8 @@ public class EmpresaBean implements Serializable {
 		try{
 			empresa1 = sigest.cadastrarEmpresa(empresa);
 			initComps();
-			//JOptionPane.showConfirmDialog(null, "Cliente cadastrou");
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage("empresaBean.inserir", new FacesMessage(FacesMessage.SEVERITY_INFO, "Empresa cadastrada com Sucesso", ""));
 		}catch(NegocioException ex){
 			Logger.getLogger(EmpresaBean.class.getName()).log(Level.SEVERE,
 					ex.getMessage(), ex);
