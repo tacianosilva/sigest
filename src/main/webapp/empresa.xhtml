@@ -13,11 +13,15 @@
 	<div>
 		<h1>Sistema Gerenciador de Estágios - SIGEST</h1>
 		<hr />
+		
+		<h:form>
+			<p:messages id="msgs"/>
+		</h:form>
 
 		<h:form id="form0">
 			<p:panel id="panel" header="CADASTRO DE EMPRESAS">
 
-				<p:messages id="msgs"/>
+				<!-- p:messages id="msgs"/-->
 
 				<h:panelGrid columns="3" title="Informações da Empresa">
 
@@ -29,9 +33,10 @@
 					<p:message for="nome" id="msgNome" display="Campo Obrigatório" />
 
 					<h:outputLabel for="crm" value="CNPJ: " />
-					<p:inputMask id="crm" value="#{empresaBean.empresa.cnpj}"
-						required="true" requiredMessage="Campo Obrigatório"
-						mask=" **********" />
+					<p:inputText id="crm" value="#{empresaBean.empresa.cnpj}"
+						required="true" requiredMessage="Campo Obrigatório">
+						<f:validateLength maximum="15" /> 
+					</p:inputText>
 					<p:ajax update="msgCrm" event="keyup" />
 					<p:message for="crm" id="msgCrm" display="Campo Obrigatório" />
 					
@@ -41,7 +46,7 @@
 		</h:form>
 		
 		<h:form>
-			<p:commandButton value="Inserir" update=":form0:panel" action="#{empresaBean.inserir}" />
+			<p:commandButton value="Inserir" update=":form0:panel,:form1:dataTable" action="#{empresaBean.inserir}" />
 			<p:commandButton ajax="false" update=":form1:dataTable" value="Alterar" action="#{empresaBean.editar}" />
 			<p:commandButton immediate="true" ajax="false" update=":form1:dataTable" value="Pesquisar" action="#{empresaBean.listar}" />
 			<p:commandButton immediate="true" ajax="false" update=":form0:panel" value="Excluir" action="#{empresaBean.excluir}"/>
@@ -54,20 +59,14 @@
 			<p:dataTable id="dataTable" var="emp" value="#{empresaBean.empresas}">
 				paginator="true" rows="10">
 				<f:facet name="header">
-                        Lista de Cursos
+                        Lista de Empresas
                 </f:facet>
-				<p:column>
-					<f:facet name="header">
-						<h:outputText value="Codigo" />
-					</f:facet>
-
-					<h:outputText value="#{emp.codigo}" />
-				</p:column>
+				
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value=" Carregar " />
 					</f:facet>
-					<!--h:outputText value="#{con.codigo}"/-->
+					
 					<h:commandLink value="Carregar">
 						<f:setPropertyActionListener value="#{emp}"
 							target="#{empresaBean.empresa}" />

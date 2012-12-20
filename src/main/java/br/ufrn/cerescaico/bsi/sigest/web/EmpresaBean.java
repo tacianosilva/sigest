@@ -12,7 +12,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.swing.JOptionPane;
 
 import br.ufrn.cerescaico.bsi.sigest.Sigest;
 
@@ -35,6 +34,7 @@ public class EmpresaBean implements Serializable {
 		try{
 			empresa1 = sigest.cadastrarEmpresa(empresa);
 			initComps();
+			listar();
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage("empresaBean.inserir", new FacesMessage(FacesMessage.SEVERITY_INFO, "Empresa cadastrada com Sucesso", ""));
 		}catch(NegocioException ex){
@@ -53,7 +53,8 @@ public class EmpresaBean implements Serializable {
 		try{
 			sigest.editarEmpresa(empresa);
 			initComps();
-			//JOptionPane.showConfirmDialog(null, "Cliente cadastrou");
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage("empresaBean.inserir", new FacesMessage(FacesMessage.SEVERITY_INFO, "Empresa Alterada com Sucesso", ""));
 		}catch(NegocioException ex){
 			Logger.getLogger(EmpresaBean.class.getName()).log(Level.SEVERE,
 					ex.getMessage(), ex);
@@ -68,18 +69,19 @@ public class EmpresaBean implements Serializable {
 		try{
 			sigest.excluirEmpresa(empresa.getCodigo());
 			initComps();
-			//JOptionPane.showConfirmDialog(null, "Cliente cadastrou");
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage("empresaBean.excluir", new FacesMessage(FacesMessage.SEVERITY_INFO, "Empresa excluida com Sucesso", ""));
 		}catch(NegocioException ex){
 			Logger.getLogger(EmpresaBean.class.getName()).log(Level.SEVERE,
 					ex.getMessage(), ex);
 			FacesContext context = FacesContext.getCurrentInstance();
-			context.addMessage("empresaBean.inserir", new FacesMessage(
+			context.addMessage("empresaBean.excluir", new FacesMessage(
 					FacesMessage.SEVERITY_ERROR,
 					"Erro ao cadastrar a empresa", ex.getMessage()));
 		}
 	}
 
-	public String listar() {
+	public void listar() {
 		try {
 			empresas = sigest.listarEmpresas();
 		} catch (NegocioException ex) {
@@ -91,7 +93,7 @@ public class EmpresaBean implements Serializable {
 					FacesMessage.SEVERITY_ERROR,
 					"Erro ao carregar a lista de empresas", ex.getMessage()));
 		}
-		return "empresa";
+		//return "empresa";
 	}
 
 	public List<Empresa> getEmpresas() {
