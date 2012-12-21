@@ -76,7 +76,7 @@ private static final long serialVersionUID = -5378480370337728386L;
         }
     }
 
-    public void destroy(BigDecimal id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();

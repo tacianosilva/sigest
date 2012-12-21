@@ -11,11 +11,10 @@
 </h:head>
 <body>
 	<div>
-
 		<h1>Sistema Gerenciador de Estágios - SIGEST</h1>
 		<hr />
 
-		<h:form>
+		<h:form id="form1">
 
 			<p:panel header="Formulário de Estágio">
 				<h:panelGrid columns="3">
@@ -56,12 +55,12 @@
 						<f:selectItem itemLabel="Selecione a Situação" itemValue="" />
 						<f:selectItem itemLabel="Aprovado" itemValue="1" />
 						<f:selectItem itemLabel="Reprovado" itemValue="2" />
+						<f:selectItem itemLabel="Em Andamento" itemValue="3" />
 					</p:selectOneMenu>
 					<p:message id="defaultmessage6" for="situacao" display="text" />
 
-					<h:outputText value="Empresa: " />
-					<p:selectOneMenu id="empresa" required="true"
-						requiredMessage="Campo Obrigatório" value="#{empresaBean.nome}"
+					<!-- <h:outputText value="Empresa: " />
+					<p:selectOneMenu id="empresa"  value="#{empresaBean.nome}"
 						effect="fold" editable="true">
 						<f:selectItem itemLabel="Selecione um Empresa." itemValue="" />
 						<f:selectItems value="#{empresaBean.empresas}" />
@@ -69,8 +68,7 @@
 					<p:message id="defaultmessage7" for="empresa" display="text" />
 
 					<h:outputText value="Estagiário: " />
-					<p:selectOneMenu id="estagiario" required="true"
-						requiredMessage="Campo Obrigatório" value="#{estagiarioBean.nome}"
+					<p:selectOneMenu id="estagiario" value="#{estagiarioBean.nome}"
 						effect="fold" editable="true">
 						<f:selectItem itemLabel="Selecione um Estagiário." itemValue="" />
 						<f:selectItems value="#{estagiarioBean.estagiarios}" />
@@ -78,22 +76,21 @@
 					<p:message id="defaultmessage8" for="estagiario" display="text" />
 
 					<h:outputText value="Orientador: " />
-					<p:selectOneMenu required="true"
-						requiredMessage="Campo Obrigatório" id="orientador"
-						value="#{professorBean.nome}" effect="fold" editable="true">
+					<p:selectOneMenu id="orientador" value="#{professorBean.nome}"
+						effect="fold" editable="true">
 						<f:selectItem itemLabel="Selecione um Orientador:" itemValue="" />
 						<f:selectItems value="#{professorBean.professores}" />
 					</p:selectOneMenu>
-					<p:message id="defaultmessage9" for="orientador" display="text" />
+					<p:message id="defaultmessage9" for="orientador" display="text" />  -->
 
 				</h:panelGrid>
-				<p:commandButton id="botaoinserir" action="#{estagioBean.incluir()}"
+				<p:commandButton id="botaoinserir" action="#{estagioBean.inserir()}"
 					ajax="false" value="Incluir" />
 				<p:commandButton id="botaoalterar" action="#{estagioBean.alterar()}"
 					ajax="false" value="Alterar" />
 				<p:commandButton id="botaopesquisar"
-					action="#{estagioBean.pesquisar()}" ajax="false" value="Pesquisar" />
-				<p:commandButton id="botaoexcluir" action="#{estagioBean.excluir()}"
+					action="#{estagioBean.listar()}"   ajax="false" value="Pesquisar" />
+				<p:commandButton id="botaoexcluir" update=":form2" action="#{estagioBean.excluir()}"
 					ajax="false" value="Excluir" />
 			</p:panel>
 
@@ -101,7 +98,7 @@
 
 		<hr />
 
-		<h:form>
+		<h:form id="form2">
 			<!--  p:messages id="messages" /-->
 			<p:dataTable id="dataTable" var="estagio"
 				value="#{estagioBean.estagios}" paginator="true" rows="10">
@@ -126,8 +123,6 @@
 
 		</h:form>
 		<hr />
-
-
 
 	</div>
 

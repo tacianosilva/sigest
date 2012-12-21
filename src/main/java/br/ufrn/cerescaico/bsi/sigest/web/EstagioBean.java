@@ -30,10 +30,28 @@ public class EstagioBean implements Serializable {
 
 	private Estagio estagio = new Estagio();
 
-	public String incluir() {
+	public String inserir() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			sigest.cadastrarEstagio(getEstagio());
+			context.addMessage("Estágio cadastrado com sucesso!",
+					new FacesMessage(FacesMessage.SEVERITY_INFO,
+							"Estágio cadastrado com sucesso!", ""));
+			estagio = new Estagio();
+		} catch (NegocioException ex) {
+			context.addMessage(
+					"Erro ao cadastrar estágio. Tente novamente.",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Erro ao cadastrar estágio. Tente novamente.", ex
+									.getMessage()));
+		}
+		return "";
+	}
+	
+	public String alterar() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		try {
+			sigest.alterarEstagio(getEstagio());
 			context.addMessage("Estágio cadastrado com sucesso!",
 					new FacesMessage(FacesMessage.SEVERITY_INFO,
 							"Estágio cadastrado com sucesso!", ""));
@@ -45,6 +63,25 @@ public class EstagioBean implements Serializable {
 									.getMessage()));
 		}
 		return "";
+	}
+	
+	public String excluir(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		try {
+			sigest.excluirEstagio(estagio.getCodigo());
+			context.addMessage("Estágio cadastrado com sucesso!",
+					new FacesMessage(FacesMessage.SEVERITY_INFO,
+							"Estágio cadastrado com sucesso!", ""));
+			estagio = new Estagio();
+		} catch (NegocioException ex) {
+			context.addMessage(
+					"Erro ao cadastrar estágio. Tente novamente.",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Erro ao cadastrar estágio. Tente novamente.", ex
+									.getMessage()));
+		}
+		return "";
+		
 	}
 
 	public String listar() {

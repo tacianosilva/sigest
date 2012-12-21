@@ -20,9 +20,11 @@ public class Estagio implements Serializable, Bean {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESTAGIO_CODIGO_GENERATOR")
 	@Column(unique=true, nullable=false)
 	private Integer codigo;
-
-	@Column(name="data_cadastro", nullable=false, length=2147483647)
-	private String dataCadastro;
+	
+	@Temporal( TemporalType.DATE)
+	@Column(name="data_cadastro", nullable=false)
+	//@Column(name="data_cadastro", nullable=false, length=2147483647)
+	private Date dataCadastro;
 
     @Temporal( TemporalType.DATE)
 	@Column(name="data_fim", nullable=false)
@@ -74,11 +76,11 @@ public class Estagio implements Serializable, Bean {
 		this.codigo = codigo;
 	}
 
-	public String getDataCadastro() {
+	public Date getDataCadastro() {
 		return this.dataCadastro;
 	}
 
-	public void setDataCadastro(String dataCadastro) {
+	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
