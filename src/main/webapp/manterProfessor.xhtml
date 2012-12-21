@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<body>
+	<h1>Cadastro de Professor</h1>
+	<hr />
+	<h:form>
+		<h:messages />
+		<h:inputHidden value="#{professorBean.professor.codigo}" id="Id"/>
+        Nome <h:inputText value="#{professorBean.professor.nome}"/>
+        <br/>
+        <br/>
+        SIAPE <h:inputText value="#{professorBean.professor.siape}"/>
+        <br/>
+        <br/> 
+        <h:outputText value="Curso" />     
+        <p:selectOneMenu id="selectCurso" value="#{professorBean.professor}" effect="fold" editable="true">  
+            <f:selectItem itemLabel="Selecione um curso" itemValue="" />  
+            <f:selectItems value="#{cursoBean.cursos}" var="curso" itemLabel="#{curso.nome}"  itemValue="#{curso}" />  
+        </p:selectOneMenu>
+        <br/>
+        <br/>
+        <h:commandButton value="Inserir" action="#{professorBean.inserir}"/>
+        <br/>
+        <hr />
+        <p:selectOneMenu id="selectProf" value="#{avaliacaoBean.codProf}" effect="fold" editable="true">  
+            <f:selectItem itemLabel="Selecione um professor" itemValue="" />  
+            <f:selectItems value="#{professorBean.professores}" var="prof" itemLabel="#{prof.codigo}"  itemValue="#{prof.codigo}" />  
+        </p:selectOneMenu>
+        <br/>
+        <br/>
+        <!--<h:commandButton value="Consultar" action="#{avaliacaoBean.avaliacoesProf}"/> -->
+        <br/>
+        <br/>
+        <p:dataTable id="dataTable" var="ava" value="#{avaliacaoBean.avaliacoes}"
+				paginator="true" rows="10">
+				<f:facet name="header">
+                        Lista de Avaliações
+                </f:facet>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Codigo" />
+					</f:facet>
+
+					<h:outputText value="#{ava.codigo}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Avaliador" />
+					</f:facet>
+
+					<h:outputText value="#{ava.professor.nome}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nota" />
+					</f:facet>
+
+					<h:outputText value="#{ava.nota}" />
+				</p:column>
+				
+        </p:dataTable>
+        <br/>
+        <br/>
+        <h:commandLink action="index.xhtml">Voltar</h:commandLink>    
+	</h:form>
+</body>
+</html>

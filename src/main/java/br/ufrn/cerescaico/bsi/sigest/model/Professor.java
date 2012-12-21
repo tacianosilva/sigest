@@ -37,7 +37,7 @@ public class Professor implements Serializable, Bean {
 	//bi-directional many-to-one association to Curso
     @ManyToOne
 	@JoinColumn(name="curso", nullable=false)
-	private Curso cursoBean;
+	private Curso curso;
 
     public Professor() {
     }
@@ -86,12 +86,12 @@ public class Professor implements Serializable, Bean {
 		this.estagios = estagios;
 	}
 	
-	public Curso getCursoBean() {
-		return this.cursoBean;
+	public Curso getCurso() {
+		return this.curso;
 	}
 
-	public void setCursoBean(Curso cursoBean) {
-		this.cursoBean = cursoBean;
+	public void setCurso(Curso cursoBean) {
+		this.curso = cursoBean;
 	}
 	
 }

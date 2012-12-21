@@ -6,28 +6,50 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Index Teste do JSF com Primefaces</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Index Teste do JSF com Primefaces</title>
 </h:head>
 <body>
 	<div>
 		<h1>Sistema Gerenciador de Estágios - SIGEST</h1>
 		<hr />
-		<h2>Menu</h2>
 		<h:form>
-		<h:messages />
-			<h:commandLink action="#{cursoBean.manter}">Manter Curso</h:commandLink>
-			<br />
-			<h:commandLink action="#{professorBean.manter}">Manter Professor</h:commandLink>
-			<br />
-			<h:commandLink action="#{empresaBean.manter}">Manter Empresa</h:commandLink>
-            <br />
-            <h:commandLink action="#{estagiarioBean.manter}">Manter Estagiário</h:commandLink>
-            <br />
-			<h:commandLink action="#{estagioBean.manter}">Manter Estágio</h:commandLink>
-			<br />
+			<h:messages />
+			<p:dataTable id="dataTable" var="curso" value="#{cursoBean.cursos}"
+				paginator="true" rows="10">
+				<f:facet name="header">
+                        Lista de Cursos
+                </f:facet>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Codigo" />
+					</f:facet>
+
+					<h:outputText value="#{curso.codigo}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome" />
+					</f:facet>
+
+					<h:outputText value="#{curso.nome}" />
+				</p:column>
+             </p:dataTable>
 		</h:form>
-		<hr />
+        <hr />
+		<h:form>
+			<h:commandLink action="#{usuarioBean.novo}">Novo usuário</h:commandLink>
+			<br />
+			<h:commandLink action="usuario">Novo usuário</h:commandLink>
+			<br />
+			<h:commandLink action="#{usuarioBean.login}">Entrar no Sistema</h:commandLink>
+			<br />
+			<h:commandLink action="publico/usuario/login.jsf">Entrar no Sistema</h:commandLink>
+			<br />
+			<h:commandLink action="#{usuarioBean.listar}">Listar Usuários</h:commandLink>
+			<br/>
+			<h:commandLink action="manterProfessor.xhtml">Cadastro Professor</h:commandLink>
+		</h:form>
 	</div>
 </body>
 </html>

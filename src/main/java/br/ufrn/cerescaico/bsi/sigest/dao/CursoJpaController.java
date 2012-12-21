@@ -161,4 +161,12 @@ public class CursoJpaController implements Serializable {
         }
     }
     
+    public Curso buscarPorNome(String nome){
+    	EntityManager em = getEntityManager();
+        Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.nome like :nome");
+        query.setParameter("nome", nome+"%");
+        Curso rsl = (Curso) query.getSingleResult();        
+        return rsl;
+    }
+    
 }
