@@ -1,4 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -13,64 +14,92 @@
 
 		<h1>Sistema Gerenciador de Estágios - SIGEST</h1>
 		<hr />
+
 		<h:form>
+
 			<p:panel header="Formulário de Estágio">
-				<h:panelGrid columns="2" cellpadding="5">
+				<h:panelGrid columns="3">
 					<h:outputText value="Data de Cadastro: " />
-					<p:inputMask required="true" requiredMessage="Campo Obrigatório" value="#{estagioBean.estagio.dataCadastro}"
-						mask="99/99/9999" />
+					<p:calendar showOn="button" id="datacadastro" required="true"
+						requiredMessage="Campo Obrigatório"
+						value="#{estagioBean.estagio.dataCadastro}" />
+					<p:message id="defaultmessage1" for="datacadastro" display="text" />
 
 					<h:outputText value="Data Inicio do Estágio: " />
-					<p:inputMask required="true" requiredMessage="Campo Obrigatório" value="#{estagioBean.estagio.dataInicio}"
-						mask="99/99/9999" />
+					<p:calendar showOn="button" id="datainicio" required="true"
+						requiredMessage="Campo Obrigatório"
+						value="#{estagioBean.estagio.dataInicio}" />
+					<p:message id="defaultmessage2" for="datainicio" display="text" />
 
 					<h:outputText value="Data Fim do Estágio: " />
-					<p:inputMask required="true" requiredMessage="Campo Obrigatório" value="#{estagioBean.estagio.dataFim}"
-						mask="99/99/9999" />
+					<p:calendar showOn="button" id="datafim" required="true"
+						requiredMessage="Campo Obrigatório"
+						value="#{estagioBean.estagio.dataFim}" />
+					<p:message id="defaultmessage3" for="datafim" display="text" />
 
 					<h:outputText value="Descrição: " />
-					<p:inputText required="true" requiredMessage="Campo Obrigatório" value="#{estagioBean.estagio.descricao}" />
+					<p:inputText id="descricao" required="true"
+						requiredMessage="Campo Obrigatório"
+						value="#{estagioBean.estagio.descricao}" />
+					<p:message id="defaultmessage4" for="descricao" display="text" />
 
 					<h:outputText value="Média: " />
-					<p:inputText required="true" requiredMessage="Campo Obrigatório" value="#{estagioBean.estagio.media}" />
+					<p:inputText id="media" required="true"
+						requiredMessage="Campo Obrigatório"
+						value="#{estagioBean.estagio.media}" />
+					<p:message id="defaultmessage5" for="media" display="text" />
 
 					<h:outputText value="Situação: " />
-					<p:selectOneMenu value="#{estagioBean.estagio.situacao}">
+					<p:selectOneMenu id="situacao" required="true"
+						requiredMessage="Campo Obrigatório"
+						value="#{estagioBean.estagio.situacao}">
 						<f:selectItem itemLabel="Selecione a Situação" itemValue="" />
 						<f:selectItem itemLabel="Aprovado" itemValue="1" />
 						<f:selectItem itemLabel="Reprovado" itemValue="2" />
 					</p:selectOneMenu>
+					<p:message id="defaultmessage6" for="situacao" display="text" />
 
 					<h:outputText value="Empresa: " />
-					<p:selectOneMenu value="#{empresaBean.nome}" effect="fold"
-						editable="true">
+					<p:selectOneMenu id="empresa" required="true"
+						requiredMessage="Campo Obrigatório" value="#{empresaBean.nome}"
+						effect="fold" editable="true">
 						<f:selectItem itemLabel="Selecione um Empresa." itemValue="" />
 						<f:selectItems value="#{empresaBean.empresas}" />
 					</p:selectOneMenu>
+					<p:message id="defaultmessage7" for="empresa" display="text" />
 
 					<h:outputText value="Estagiário: " />
-					<p:selectOneMenu value="#{estagiarioBean.nome}" effect="fold"
-						editable="true">
+					<p:selectOneMenu id="estagiario" required="true"
+						requiredMessage="Campo Obrigatório" value="#{estagiarioBean.nome}"
+						effect="fold" editable="true">
 						<f:selectItem itemLabel="Selecione um Estagiário." itemValue="" />
 						<f:selectItems value="#{estagiarioBean.estagiarios}" />
 					</p:selectOneMenu>
+					<p:message id="defaultmessage8" for="estagiario" display="text" />
 
 					<h:outputText value="Orientador: " />
-					<p:selectOneMenu value="#{professorBean.nome}" effect="fold"
-						editable="true">
-						<f:selectItem itemLabel="Selecione um Orientador." itemValue="" />
+					<p:selectOneMenu required="true"
+						requiredMessage="Campo Obrigatório" id="orientador"
+						value="#{professorBean.nome}" effect="fold" editable="true">
+						<f:selectItem itemLabel="Selecione um Orientador:" itemValue="" />
 						<f:selectItems value="#{professorBean.professores}" />
 					</p:selectOneMenu>
+					<p:message id="defaultmessage9" for="orientador" display="text" />
 
 				</h:panelGrid>
-				<p:commandButton action="#{estagioBean.incluir}" ajax="false" value="Incluir" type="reset" />
-				<p:commandButton action="#{estagioBean.alterar}" ajax="false" value="Alterar" />
-				<p:commandButton action="#{estagioBean.pesquisar}" ajax="false" value="Pesquisar" type="reset" />
-				<p:commandButton action="#{estagioBean.excluir}" ajax="false" value="Excluir" />
+				<p:commandButton id="botaoinserir" action="#{estagioBean.incluir()}"
+					ajax="false" value="Incluir" />
+				<p:commandButton id="botaoalterar" action="#{estagioBean.alterar()}"
+					ajax="false" value="Alterar" />
+				<p:commandButton id="botaopesquisar"
+					action="#{estagioBean.pesquisar()}" ajax="false" value="Pesquisar" />
+				<p:commandButton id="botaoexcluir" action="#{estagioBean.excluir()}"
+					ajax="false" value="Excluir" />
 			</p:panel>
 
 		</h:form>
-		<HR />
+
+		<hr />
 
 		<h:form>
 			<!--  p:messages id="messages" /-->
