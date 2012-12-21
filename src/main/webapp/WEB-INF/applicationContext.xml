@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:b="http://www.springframework.org/schema/beans"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans
+                             http://www.springframework.org/schema/beans/spring-beans.xsd
+                             http://www.springframework.org/schema/security
+                             http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    
+    <http auto-config="false" access-denied-page="/publica/acessoNegado.xhtml">
+        <intercept-url pattern="/supervisor/**" access="ROLE_SUPERVISOR, ROLE_ESTAGIARIO, ROLE_PROFESSOR, ROLE_COORDENADOR, ROLE_ADMINISTRADOR"/>
+        <intercept-url pattern="/estagiario/**" access="ROLE_ESTAGIARIO, ROLE_PROFESSOR, ROLE_COORDENADOR, ROLE_ADMINISTRADOR" />
+        <intercept-url pattern="/professor/**" access="ROLE_PROFESSOR, ROLE_COORDENADOR, ROLE_ADMINISTRADOR"/>
+        <intercept-url pattern="/coordenador/**" access="ROLE_COORDENADOR, ROLE_ADMINISTRADOR"/>
+        <intercept-url pattern="/administrador/**" access="ROLE_ADMINISTRADOR"/>
+
+        <form-login login-page="/publica/login.xhtml" 
+                    always-use-default-target="false"
+                    default-target-url="/index.xhtml"
+                    authentication-failure-url="/publica/login.xhtml?error=1"/>
+                    
+        <logout logout-success-url="/"/>
+    </http>
+
+    <authentication-manager>
+        <authentication-provider>
+            <jdbc-user-service data-source-ref="dataSource"
+                               users-by-username-query="SELECT login, senha, 'true' as enable FROM Usuario WHERE login=?"
+                               authorities-by-username-query="SELECT u.login, u.role_tipo FROM Usuario u WHERE u.login = ?"/>
+        </authentication-provider>
+    </authentication-manager>
+    
+    <b:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+        <b:property name="url" value="jdbc:postgresql://localhost:5432/sigest_db"/>
+        <b:property name="driverClassName" value="org.postgresql.Driver"/>
+        <b:property name="username" value="sigest"/>
+        <b:property name="password" value="12345"/>
+    </b:bean>
+</b:beans>
