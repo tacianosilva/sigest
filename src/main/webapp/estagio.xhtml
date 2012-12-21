@@ -15,7 +15,7 @@
 		<hr />
 
 		<h:form id="form1">
-
+		<p:messages rendered="true"/>
 			<p:panel header="Formulário de Estágio">
 				<h:panelGrid columns="3">
 					<h:outputText value="Data de Cadastro: " />
@@ -53,9 +53,9 @@
 						requiredMessage="Campo Obrigatório"
 						value="#{estagioBean.estagio.situacao}">
 						<f:selectItem itemLabel="Selecione a Situação" itemValue="" />
-						<f:selectItem itemLabel="Aprovado" itemValue="1" />
-						<f:selectItem itemLabel="Reprovado" itemValue="2" />
-						<f:selectItem itemLabel="Em Andamento" itemValue="3" />
+						<f:selectItem itemLabel="Aprovado" itemValue="Aprovado" />
+						<f:selectItem itemLabel="Reprovado" itemValue="reprovado" />
+						<f:selectItem itemLabel="Em Andamento" itemValue="Em Andamento" />
 					</p:selectOneMenu>
 					<p:message id="defaultmessage6" for="situacao" display="text" />
 
@@ -89,9 +89,9 @@
 				<p:commandButton id="botaoalterar" action="#{estagioBean.alterar()}"
 					ajax="false" value="Alterar" />
 				<p:commandButton id="botaopesquisar"
-					action="#{estagioBean.listar()}"   ajax="false" value="Pesquisar" />
-				<p:commandButton id="botaoexcluir" update=":form2" action="#{estagioBean.excluir()}"
-					ajax="false" value="Excluir" />
+					action="#{estagioBean.listar()}" ajax="false" value="Pesquisar" />
+				<p:commandButton id="botaoexcluir" update=":form2"
+					action="#{estagioBean.excluir()}" ajax="false" value="Excluir" />
 			</p:panel>
 
 		</h:form>
@@ -105,6 +105,7 @@
 				<f:facet name="header">
                         Lista de Estágios
                 </f:facet>
+
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Código" />
@@ -112,13 +113,70 @@
 
 					<h:outputText value="#{estagio.codigo}" />
 				</p:column>
+
 				<p:column>
 					<f:facet name="header">
 						<h:outputText value="Descrição" />
 					</f:facet>
 
-					<h:outputText value="#{estagio.descricao}" />
+					<p:commandLink ajax="false" style="color:blue"
+						value="#{estagio.descricao}">
+						<f:setPropertyActionListener target="#{estagioBean.estagio}"
+							value="#{estagio}" />
+
+					</p:commandLink>
+
 				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Cadastro" />
+					</f:facet>
+
+					<h:outputText value="#{estagio.dataCadastro}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="American/Recife"></f:convertDateTime>
+
+					</h:outputText>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Inicio" />
+					</f:facet>
+
+					<h:outputText value="#{estagio.dataInicio}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="American/Recife"></f:convertDateTime>
+
+					</h:outputText>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Fim" />
+					</f:facet>
+
+					<h:outputText value="#{estagio.dataFim}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="American/Recife"></f:convertDateTime>
+
+					</h:outputText>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Média" />
+					</f:facet>
+
+					<h:outputText value="#{estagio.media}" />
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Situação" />
+					</f:facet>
+
+					<h:outputText value="#{estagio.situacao}" />
+				</p:column>
+
 			</p:dataTable>
 
 		</h:form>
