@@ -14,29 +14,29 @@
 	<h:form>
 		<h:messages />
 		<h:inputHidden value="#{professorBean.professor.codigo}" id="Id"/>
-        Nome <h:inputText value="#{professorBean.professor.nome}"/>
+        Nome <p:inputText value="#{professorBean.professor.nome}"/>
         <br/>
         <br/>
-        SIAPE <h:inputText value="#{professorBean.professor.siape}"/>
+        SIAPE <p:inputText value="#{professorBean.professor.siape}"/>
         <br/>
         <br/> 
-        <h:outputText value="Curso" />     
+        Curso     
         <p:selectOneMenu id="selectCurso" value="#{professorBean.professor}" effect="fold" editable="true">  
             <f:selectItem itemLabel="Selecione um curso" itemValue="" />  
             <f:selectItems value="#{cursoBean.cursos}" var="curso" itemLabel="#{curso.nome}"  itemValue="#{curso}" />  
         </p:selectOneMenu>
         <br/>
         <br/>
-        <h:commandButton value="Inserir" action="#{professorBean.inserir}"/>
+        <p:commandButton value="Inserir" action="#{professorBean.inserir}"/>
         <br/>
         <hr />
-        <p:selectOneMenu id="selectProf" value="#{avaliacaoBean.codProf}" effect="fold" editable="true">  
+        <p:selectOneMenu id="selectProf" value="#{avaliacaoBean.professor}" effect="fold" editable="true">  
             <f:selectItem itemLabel="Selecione um professor" itemValue="" />  
-            <f:selectItems value="#{professorBean.professores}" var="prof" itemLabel="#{prof.codigo}"  itemValue="#{prof.codigo}" />  
+            <f:selectItems value="#{professorBean.professores}" var="prof" itemLabel="#{prof.nome}"  itemValue="#{prof}" />  
         </p:selectOneMenu>
         <br/>
         <br/>
-        <!--<h:commandButton value="Consultar" action="#{avaliacaoBean.avaliacoesProf}"/> -->
+        <p:commandButton value="Consultar" action="#{avaliacaoBean.avaliacoesProf}"></p:commandButton>
         <br/>
         <br/>
         <p:dataTable id="dataTable" var="ava" value="#{avaliacaoBean.avaliacoes}"
@@ -67,9 +67,6 @@
 				</p:column>
 				
         </p:dataTable>
-        <br/>
-        <br/>
-        <h:commandLink action="index.xhtml">Voltar</h:commandLink>    
 	</h:form>
 </body>
 </html>

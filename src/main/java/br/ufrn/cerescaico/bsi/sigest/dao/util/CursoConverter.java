@@ -1,4 +1,4 @@
-package br.ufrn.cerescaico.bsi.sigest.web;
+package br.ufrn.cerescaico.bsi.sigest.dao.util;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

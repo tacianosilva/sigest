@@ -41,7 +41,7 @@ import javax.transaction.UserTransaction;
 
 /**
  *
- * @author Mércia Karinny
+ * @author Mercia Karinny
  */
 public class AvaliacaoJpaController implements Serializable {
 
@@ -198,9 +198,9 @@ public class AvaliacaoJpaController implements Serializable {
     
     public List<Avaliacao> buscarPorProf(int codProf){
     	EntityManager em = getEntityManager();
-        Query query = em.createQuery("SELECT a FROM avaliacao a WHERE a.avaliador = :avaliador");
+        Query query = em.createQuery("SELECT * FROM Avaliacao a WHERE a.avaliador = :avaliador");
         query.setParameter("avaliador", codProf);
-        List<Avaliacao> rsl = (List<Avaliacao>) query.getSingleResult();        
+        List<Avaliacao> rsl = query.getResultList();        
         return rsl;
     }
 
