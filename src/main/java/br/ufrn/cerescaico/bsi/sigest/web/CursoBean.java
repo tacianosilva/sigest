@@ -54,7 +54,7 @@ public class CursoBean extends AbstractBean implements Serializable {
         try {
         	//O método retirna o curso com o código
             sigest.inserirCurso(getCurso());
-            context.addMessage("cursoBean.incluir", new FacesMessage(FacesMessage.SEVERITY_INFO, messageSucesso, messageSucesso));
+            context.addMessage("cursoBean.incluir", new FacesMessage(FacesMessage.SEVERITY_INFO, msg("info.cursobean.incluir.sucesso"), messageSucesso));
         } catch (NegocioException ex) {
             cursos = new ArrayList<Curso>();
             Logger.getLogger(CursoBean.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
