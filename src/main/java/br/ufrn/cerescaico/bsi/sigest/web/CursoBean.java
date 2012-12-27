@@ -8,6 +8,7 @@ import br.ufrn.cerescaico.bsi.sigest.model.Professor;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -17,7 +18,7 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "cursoBean")
 @SessionScoped
-public class CursoBean implements Serializable {
+public class CursoBean extends AbstractBean implements Serializable {
 
     /**
 	 * serialVersionUID.
@@ -46,10 +47,14 @@ public class CursoBean implements Serializable {
     
     public String incluir() {
     	FacesContext context = FacesContext.getCurrentInstance();
+    	
+        ResourceBundle bundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "msg");  
+        String messageSucesso = bundle.getString("cursoBean.incluir");  
+    	
         try {
         	//O método retirna o curso com o código
             sigest.inserirCurso(getCurso());
-            context.addMessage("cursoBean.incluir", new FacesMessage(FacesMessage.SEVERITY_INFO, "cursoBean.incluir","XXXXXXXXXXXX"));
+            context.addMessage("cursoBean.incluir", new FacesMessage(FacesMessage.SEVERITY_INFO, msg("info.cursobean.incluir.sucesso"), messageSucesso));
         } catch (NegocioException ex) {
             cursos = new ArrayList<Curso>();
             Logger.getLogger(CursoBean.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
