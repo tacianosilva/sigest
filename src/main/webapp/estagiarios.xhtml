@@ -13,6 +13,37 @@
 	<div>
 		<h1>Sistema Gerenciador de Estágios - SIGEST</h1>
 		<hr />
+
+		<h:form>
+			<p:panel id="panel" header="Cadastro de Estagiários">
+
+				<p:messages id="messages"/>
+
+				<h:panelGrid columns="3" >
+
+					<h:outputLabel for="matricula" value="Matrícula:" />
+					<p:inputText id="matricula" value="#{estagiarioBean.estagiario.matricula}"
+						label="matricula" required="true" requiredMessage="Campo Obrigatório">
+					</p:inputText>
+
+					<h:outputLabel for="nome" value="Nome:" />
+					<p:inputText id="nome" value="#{estagiarioBean.estagiario.nome}"
+						label="nome" required="true" requiredMessage="Campo Obrigatório">
+					</p:inputText>
+
+					<h:outputLabel for="curso" value="Curso:" />
+          <p:selectOneMenu value="#{cursoBean.nome}">
+            <f:selectItem itemLabel="Selecione um curso" itemValue="" />
+            <f:selectItems value="#{cursoBean.cursos}" />
+          </p:selectOneMenu>
+
+				</h:panelGrid>
+			</p:panel>
+
+			<p:commandButton value="Inserir estagiário" update="panel, messages" action="#{estagiarioBean.incluir}" />
+			<p:commandButton immediate="true" ajax="false" update=":form1:dataTable" value="Pesquisar" action="#{estagiarioBean.listar}" />
+		</h:form>
+
 		<h:form>
 			<p:messages id="messages" />
 			<p:dataTable id="dataTable" var="estagiario" value="#{estagiarioBean.estagiarios}" paginator="true" rows="10">
@@ -50,11 +81,14 @@
              </p:dataTable>
 		</h:form>
         <hr />
+<<<<<<< HEAD
 		<h:form>
 		      <p:messages id="messages" />
 				<p:commandButton value="Novo estagiário"
 actionListener="#{estagiarioBean.incluir}" update="messages"/>
 		</h:form>
+=======
+>>>>>>> Formulário de cadastro de estagiário
 	</div>
 </body>
 </html>
