@@ -15,7 +15,7 @@ public class Estagiario implements Serializable, Bean {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ESTAGIARIO_CODIGO_GENERATOR", sequenceName="ESTAGIARIO_CODIGO_SEQ")
+	@SequenceGenerator(name="ESTAGIARIO_CODIGO_GENERATOR", sequenceName="ESTAGIARIO_CODIGO_SEQ", allocationSize = 1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESTAGIARIO_CODIGO_GENERATOR")
 	@Column(unique=true, nullable=false)
 	private Integer codigo;
