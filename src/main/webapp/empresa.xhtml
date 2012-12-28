@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Index Teste do JSF com Primefaces</title>
+</h:head>
+<body>
+	<div>
+		<h1>Sistema Gerenciador de Estágios - SIGEST</h1>
+		<hr />
+		
+		<h:form>
+			<p:messages id="msgs"/>
+		</h:form>
+
+		<h:form id="form0">
+			<p:panel id="panel" header="CADASTRO DE EMPRESAS">
+
+				<!-- p:messages id="msgs"/-->
+
+				<h:panelGrid columns="3" title="Informações da Empresa">
+
+					<h:outputLabel for="nome" value="Nome:" />
+					<p:inputText id="nome" value="#{empresaBean.empresa.nome}"
+						label="Nome" required="true" requiredMessage="Campo Obrigatório">
+						<p:ajax update="msgNome" event="keyup" />
+					</p:inputText>
+					<p:message for="nome" id="msgNome" display="Campo Obrigatório" />
+
+					<h:outputLabel for="crm" value="CNPJ: " />
+					<p:inputText id="crm" value="#{empresaBean.empresa.cnpj}"
+						required="true" requiredMessage="Campo Obrigatório">
+						<f:validateLength maximum="15" /> 
+					</p:inputText>
+					<p:ajax update="msgCrm" event="keyup" />
+					<p:message for="crm" id="msgCrm" display="Campo Obrigatório" />
+					
+					</h:panelGrid>
+			</p:panel>
+			
+		</h:form>
+		
+		<h:form>
+			<p:commandButton value="Inserir" update=":form0:panel,:form1:dataTable" action="#{empresaBean.inserir}" />
+			<p:commandButton ajax="false" update=":form1:dataTable" value="Alterar" action="#{empresaBean.editar}" />
+			<p:commandButton immediate="true" ajax="false" update=":form1:dataTable" value="Pesquisar" action="#{empresaBean.listar}" />
+			<p:commandButton immediate="true" ajax="false" update=":form0:panel" value="Excluir" action="#{empresaBean.excluir}"/>
+		</h:form>
+
+
+
+		<h:form id="form1">
+			<h:messages />
+			<p:dataTable id="dataTable" var="emp" value="#{empresaBean.empresas}">
+				paginator="true" rows="10">
+				<f:facet name="header">
+                        Lista de Empresas
+                </f:facet>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value=" Carregar " />
+					</f:facet>
+					
+					<h:commandLink value="Carregar">
+						<f:setPropertyActionListener value="#{emp}"
+							target="#{empresaBean.empresa}" />
+					</h:commandLink>
+				</p:column>
+				<!-- comentatios -->
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value=" Nome " />
+					</f:facet>
+					<h:outputText value="#{emp.nome}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value=" CNPJ " />
+					</f:facet>
+					<h:outputText value="#{emp.cnpj}" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+		<hr />
+
+	</div>
+</body>
+
+</html>
