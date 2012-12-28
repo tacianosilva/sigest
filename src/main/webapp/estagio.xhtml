@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+</h:head>
+<body>
+	<div>
+		<h1>Sistema Gerenciador de Estágios - SIGEST</h1>
+		<hr />
+
+		<h:form id="form1">
+		<p:messages rendered="true"/>
+			<p:panel header="Formulário de Estágio">
+				<h:panelGrid columns="3">
+					<h:outputText value="Data de Cadastro: " />
+					<p:calendar showOn="button" id="datacadastro" required="true"
+						requiredMessage="Campo Obrigatório"
+						value="#{estagioBean.estagio.dataCadastro}" />
+					<p:message id="defaultmessage1" for="datacadastro" display="text" />
+
+					<h:outputText value="Data Inicio do Estágio: " />
+					<p:calendar showOn="button" id="datainicio" required="true"
+						requiredMessage="Campo Obrigatório"
+						value="#{estagioBean.estagio.dataInicio}" />
+					<p:message id="defaultmessage2" for="datainicio" display="text" />
+
+					<h:outputText value="Data Fim do Estágio: " />
+					<p:calendar showOn="button" id="datafim" required="true"
+						requiredMessage="Campo Obrigatório"
+						value="#{estagioBean.estagio.dataFim}" />
+					<p:message id="defaultmessage3" for="datafim" display="text" />
+
+					<h:outputText value="Descrição: " />
+					<p:inputText id="descricao" required="true"
+						requiredMessage="Campo Obrigatório"
+						value="#{estagioBean.estagio.descricao}" />
+					<p:message id="defaultmessage4" for="descricao" display="text" />
+
+					<h:outputText value="Média: " />
+					<p:inputText id="media" required="true"
+						requiredMessage="Campo Obrigatório"
+						value="#{estagioBean.estagio.media}" />
+					<p:message id="defaultmessage5" for="media" display="text" />
+
+					<h:outputText value="Situação: " />
+					<p:selectOneMenu id="situacao" required="true"
+						requiredMessage="Campo Obrigatório"
+						value="#{estagioBean.estagio.situacao}">
+						<f:selectItem itemLabel="Selecione a Situação" itemValue="" />
+						<f:selectItem itemLabel="Aprovado" itemValue="Aprovado" />
+						<f:selectItem itemLabel="Reprovado" itemValue="reprovado" />
+						<f:selectItem itemLabel="Em Andamento" itemValue="Em Andamento" />
+					</p:selectOneMenu>
+					<p:message id="defaultmessage6" for="situacao" display="text" />
+
+					<!-- <h:outputText value="Empresa: " />
+					<p:selectOneMenu id="empresa"  value="#{empresaBean.nome}"
+						effect="fold" editable="true">
+						<f:selectItem itemLabel="Selecione um Empresa." itemValue="" />
+						<f:selectItems value="#{empresaBean.empresas}" />
+					</p:selectOneMenu>
+					<p:message id="defaultmessage7" for="empresa" display="text" />
+
+					<h:outputText value="Estagiário: " />
+					<p:selectOneMenu id="estagiario" value="#{estagiarioBean.nome}"
+						effect="fold" editable="true">
+						<f:selectItem itemLabel="Selecione um Estagiário." itemValue="" />
+						<f:selectItems value="#{estagiarioBean.estagiarios}" />
+					</p:selectOneMenu>
+					<p:message id="defaultmessage8" for="estagiario" display="text" />
+
+					<h:outputText value="Orientador: " />
+					<p:selectOneMenu id="orientador" value="#{professorBean.nome}"
+						effect="fold" editable="true">
+						<f:selectItem itemLabel="Selecione um Orientador:" itemValue="" />
+						<f:selectItems value="#{professorBean.professores}" />
+					</p:selectOneMenu>
+					<p:message id="defaultmessage9" for="orientador" display="text" />  -->
+
+				</h:panelGrid>
+				<p:commandButton id="botaoinserir" action="#{estagioBean.inserir()}"
+					ajax="false" value="Incluir" />
+				<p:commandButton id="botaoalterar" action="#{estagioBean.alterar()}"
+					ajax="false" value="Alterar" />
+				<p:commandButton id="botaopesquisar"
+					action="#{estagioBean.listar()}" ajax="false" value="Pesquisar" />
+				<p:commandButton id="botaoexcluir" update=":form2"
+					action="#{estagioBean.excluir()}" ajax="false" value="Excluir" />
+			</p:panel>
+
+		</h:form>
+
+		<hr />
+
+		<h:form id="form2">
+			<!--  p:messages id="messages" /-->
+			<p:dataTable id="dataTable" var="estagio"
+				value="#{estagioBean.estagios}" paginator="true" rows="10">
+				<f:facet name="header">
+                        Lista de Estágios
+                </f:facet>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Código" />
+					</f:facet>
+
+					<h:outputText value="#{estagio.codigo}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Descrição" />
+					</f:facet>
+
+					<p:commandLink ajax="false" style="color:blue"
+						value="#{estagio.descricao}">
+						<f:setPropertyActionListener target="#{estagioBean.estagio}"
+							value="#{estagio}" />
+
+					</p:commandLink>
+
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Cadastro" />
+					</f:facet>
+
+					<h:outputText value="#{estagio.dataCadastro}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="American/Recife"></f:convertDateTime>
+
+					</h:outputText>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Inicio" />
+					</f:facet>
+
+					<h:outputText value="#{estagio.dataInicio}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="American/Recife"></f:convertDateTime>
+
+					</h:outputText>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data Fim" />
+					</f:facet>
+
+					<h:outputText value="#{estagio.dataFim}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="American/Recife"></f:convertDateTime>
+
+					</h:outputText>
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Média" />
+					</f:facet>
+
+					<h:outputText value="#{estagio.media}" />
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Situação" />
+					</f:facet>
+
+					<h:outputText value="#{estagio.situacao}" />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+		<hr />
+
+	</div>
+
+</body>
+</html>
