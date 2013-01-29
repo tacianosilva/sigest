@@ -30,6 +30,10 @@ public class EmpresaBean implements Serializable {
 	public Empresa empresa = new Empresa();
 	private Empresa empresa1 = new Empresa();
 	
+    public String manter() {
+        return "/empresa/manter";
+    }
+	
 	public Empresa inserir(){
 		try{
 			empresa1 = sigest.cadastrarEmpresa(empresa);

@@ -60,7 +60,7 @@
 					<p:message id="defaultmessage6" for="situacao" display="text" />
 
 					<!-- <h:outputText value="Empresa: " />
-					<p:selectOneMenu id="empresa"  value="#{empresaBean.nome}"
+					<p:selectOneMenu id="empresa"  value="#{empresaBean.empresa.nome}"
 						effect="fold" editable="true">
 						<f:selectItem itemLabel="Selecione um Empresa." itemValue="" />
 						<f:selectItems value="#{empresaBean.empresas}" />
@@ -68,7 +68,7 @@
 					<p:message id="defaultmessage7" for="empresa" display="text" />
 
 					<h:outputText value="Estagiário: " />
-					<p:selectOneMenu id="estagiario" value="#{estagiarioBean.nome}"
+					<p:selectOneMenu id="estagiario" value="#{estagiarioBean.estagiario.nome}"
 						effect="fold" editable="true">
 						<f:selectItem itemLabel="Selecione um Estagiário." itemValue="" />
 						<f:selectItems value="#{estagiarioBean.estagiarios}" />
@@ -76,7 +76,7 @@
 					<p:message id="defaultmessage8" for="estagiario" display="text" />
 
 					<h:outputText value="Orientador: " />
-					<p:selectOneMenu id="orientador" value="#{professorBean.nome}"
+					<p:selectOneMenu id="orientador" value="#{professorBean.professor.nome}"
 						effect="fold" editable="true">
 						<f:selectItem itemLabel="Selecione um Orientador:" itemValue="" />
 						<f:selectItems value="#{professorBean.professores}" />
@@ -84,14 +84,14 @@
 					<p:message id="defaultmessage9" for="orientador" display="text" />  -->
 
 				</h:panelGrid>
-				<p:commandButton id="botaoinserir" action="#{estagioBean.inserir()}"
+				<p:commandButton id="botaoinserir" action="#{estagioBean.inserir}"
 					ajax="false" value="Incluir" />
-				<p:commandButton id="botaoalterar" action="#{estagioBean.alterar()}"
+				<p:commandButton id="botaoalterar" action="#{estagioBean.alterar}"
 					ajax="false" value="Alterar" />
 				<p:commandButton id="botaopesquisar"
-					action="#{estagioBean.listar()}" ajax="false" value="Pesquisar" />
+					action="#{estagioBean.listar}" ajax="false" value="Pesquisar" />
 				<p:commandButton id="botaoexcluir" update=":form2"
-					action="#{estagioBean.excluir()}" ajax="false" value="Excluir" />
+					action="#{estagioBean.excluir}" ajax="false" value="Excluir" />
 			</p:panel>
 
 		</h:form>

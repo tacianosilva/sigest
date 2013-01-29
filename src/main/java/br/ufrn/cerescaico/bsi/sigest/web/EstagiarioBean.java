@@ -33,6 +33,10 @@ public class EstagiarioBean implements Serializable {
     public EstagiarioBean(){
         estagiario = new Estagiario();
     }
+    
+    public String manter() {
+        return "/estagiario/manter";
+    }
 
     public String incluir() {
      FacesContext context = FacesContext.getCurrentInstance();

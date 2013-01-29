@@ -29,6 +29,10 @@ public class EstagioBean implements Serializable {
 	private List<Estagio> estagios = null;
 
 	private Estagio estagio = new Estagio();
+	
+    public String manter() {
+        return "/estagio/manter";
+    }
 
 	public String inserir() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -102,10 +106,6 @@ public class EstagioBean implements Serializable {
 	public List<Estagio> getEstagios() {
 		listar();
 		return estagios;
-	}
-
-	public String manter() {
-		return "estagio";
 	}
 
 	public void setEstagios(List<Estagio> estagios) {
