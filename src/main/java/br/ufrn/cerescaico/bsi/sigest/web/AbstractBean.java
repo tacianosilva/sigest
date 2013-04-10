@@ -5,23 +5,28 @@ import java.util.ResourceBundle;
 import javax.faces.context.FacesContext;
 
 public abstract class AbstractBean {
-	
-	protected FacesContext context;
-	
-	public AbstractBean() {
-		// TODO Auto-generated constructor stub
-		context = FacesContext.getCurrentInstance();
-	}
-	
-	protected FacesContext getContext() {
-		return context;
-	}
-	
-	protected String msg(String key) {
-		ResourceBundle bundle = context.getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "msg");  
-        String message = bundle.getString(key);
-		return message;
-	}
 
+    protected FacesContext context;
+
+    public AbstractBean() {
+    }
+
+    protected FacesContext getContext() {
+        return context;
+    }
+
+    protected void setContext(FacesContext context) {
+        this.context = context;
+    }
+
+    protected String msg(String key) {
+        String message = null;
+        if (context != null) {
+            ResourceBundle bundle = context.getApplication().getResourceBundle(
+                    FacesContext.getCurrentInstance(), "msg");
+            message = bundle.getString(key);
+        }
+        return message;
+    }
 
 }

@@ -21,99 +21,113 @@ import javax.faces.context.FacesContext;
 public class CursoBean extends AbstractBean implements Serializable {
 
     /**
-	 * serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+     * serialVersionUID.
+     */
+    private static final long serialVersionUID = 1L;
 
-	private Sigest sigest = Sigest.getInstance();
-	
-	private String nome = null;
-	
-	private Professor coordenador = null;
-    
+    private Sigest sigest = Sigest.getInstance();
+
+    private String nome = null;
+
+    private Professor coordenador = null;
+
     private List<Curso> cursos = null;
-    
+
     private List<Professor> professores = null;
-    
+
     public String manter() {
         return "/curso/manter";
     }
-    
+
     private Curso getCurso() {
-    	Curso curso = new Curso();
-    	curso.setNome(getNome());
-    	return curso;
+        Curso curso = new Curso();
+        curso.setNome(getNome());
+        return curso;
     }
-    
+
     public String incluir() {
-    	FacesContext context = FacesContext.getCurrentInstance();
-    	
-        ResourceBundle bundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "msg");  
-        String messageSucesso = bundle.getString("cursoBean.incluir");  
-    	
+        FacesContext context = FacesContext.getCurrentInstance();
+        setContext(context);
+
+        // ResourceBundle bundle =
+        // FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(),
+        // "msg");
+        // String messageSucesso =
+        // bundle.getString("info.cursobean.incluir.sucesso");
+
         try {
-        	//O método retirna o curso com o código
+            // O método retirna o curso com o código
             sigest.inserirCurso(getCurso());
-            context.addMessage("cursoBean.incluir", new FacesMessage(FacesMessage.SEVERITY_INFO, msg("info.cursobean.incluir.sucesso"), messageSucesso));
+            context.addMessage("cursoBean.incluir", new FacesMessage(
+                    msg("info.cursobean.incluir.sucesso")));
         } catch (NegocioException ex) {
             cursos = new ArrayList<Curso>();
-            Logger.getLogger(CursoBean.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-            context.addMessage("cursoBean.listar", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao carregar a lista de cursos", ex.getMessage()));
+            Logger.getLogger(CursoBean.class.getName()).log(Level.SEVERE,
+                    ex.getMessage(), ex);
+            context.addMessage("cursoBean.listar", new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR,
+                    "Erro ao carregar a lista de cursos", ex.getMessage()));
         }
         return "/curso/manter";
     }
-    
+
     public String listar() {
         try {
             cursos = sigest.listarCursos();
         } catch (NegocioException ex) {
             cursos = new ArrayList<Curso>();
-            Logger.getLogger(CursoBean.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            Logger.getLogger(CursoBean.class.getName()).log(Level.SEVERE,
+                    ex.getMessage(), ex);
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage("cursoBean.listar", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao carregar a lista de cursos", ex.getMessage()));
+            context.addMessage("cursoBean.listar", new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR,
+                    "Erro ao carregar a lista de cursos", ex.getMessage()));
         }
         return "index";
     }
-    
+
     public String listarProfessores() {
         try {
             professores = sigest.listarProfessores();
         } catch (NegocioException ex) {
             professores = new ArrayList<Professor>();
-            Logger.getLogger(CursoBean.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            Logger.getLogger(CursoBean.class.getName()).log(Level.SEVERE,
+                    ex.getMessage(), ex);
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage("cursoBean.listarProfessores", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao carregar a lista de professores", ex.getMessage()));
+            context.addMessage("cursoBean.listarProfessores", new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR,
+                    "Erro ao carregar a lista de professores", ex.getMessage()));
         }
         return "curso/manter";
     }
-    
+
     public String getNome() {
-		return nome;
-	}
-    
+        return nome;
+    }
+
     public void setNome(String nome) {
-		this.nome = nome;
-	}
-    
+        this.nome = nome;
+    }
+
     public Professor getCoordenador() {
-		return coordenador;
-	}
-    
+        return coordenador;
+    }
+
     public void setCoordenador(Professor coordenador) {
-		this.coordenador = coordenador;
-	}
+        this.coordenador = coordenador;
+    }
 
     public List<Curso> getCursos() {
-    	listar();
+        listar();
         return cursos;
     }
 
     public void setCursos(List<Curso> cursos) {
         this.cursos = cursos;
     }
-    
+
     public List<Professor> getProfessores() {
-    	listarProfessores();
+        listarProfessores();
         return professores;
     }
 
