@@ -8,7 +8,6 @@ import br.ufrn.cerescaico.bsi.sigest.model.Professor;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
