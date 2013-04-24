@@ -1,35 +1,92 @@
-\subsection{Descrição}
-A entidade Estagiário, será a responsável por conter as características e comportamentos que um estagiário real possui quando está pagando a disciplina Estágio.
+\begin{document}
+\begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|}
+\hline
+\textbf{Analista} &\textbf{Data Criação} &\textbf{Última Revisão}\\
+\hline 
+Jackson &$13\setminus03\setminus2013$ &\\
+\hline
+\end{tabular}
 
-Um estagiário real possui as seguintes características:
+\section{Descrição}
+O Caso de Uso Estagiário, será o responsável por conter as características e comportamentos
+que um estagiário real possui quando está pagando a disciplina Estágio.
 
+\subsection{Características de um Estagiário}
 - Nome completo
+
 - Matrícula
+
 - Curso
 
-Indiretamente, via entidade Estágio, ele será relacionado também as características que se seguem: 
+\subsection{Relacionamentos de Estagiário com outras Entidades} 
 
 - Empresa vinculada
+
 - Coordenador de estágio
+
 - Orientador de estágio
+
 - Supervisor de estágio
+
 - Data de submissão de proposta
+
 - Nota final
 
- 
+\section{Pré-condição}
+Para um estagiário ser cadastrado é necessário todos os seus dados serem preenchidos de
+acordo com RN01 e RN04, e ter um curso anteriormente cadastrado de acordo com a RN02.
+
+Para as funcionalidades “Alterar” e “Excluir”, a lei deverá ter sida já cadastrada no sistema,
+de acordo com a RN03.
+
+\section{Fluxos}
+
 \subsection{Fluxo Principal}
-O aluno que pretende se matricular na disciplina de Estágio, deve acessar o sistema e preencher todas informações referentes ao estágio em si e também suas informações pessoais, pois o
-presente sistema não possui integração com o SIGAA para extrair informações acerca do aluno. Assim no fluxo principal é necessário que o aluno preencha suas informações pessoais como se segue.
+\textbf{$[P1]$} O caso de uso se inicia quando o usuário abre o projeto WEB e aparece a tela de autenticação.
+
+\textbf{$[P2]$} Ao Logar o usuário poderá selecionar a opção “Manter Estagiário”.
+
+\textbf{$[P3]$} O usuário informa os dados necessários de acordo com o estagiário.
+
+\textbf{$[P4]$} O usuário pressiona o botão “Incluir”, de acordo com as RN01, RN02, RN04.
+
+\textbf{$[P5]$} Fim de caso de uso
+
+\subsection{Fluxo Alternativo}
+
+$[A1]$ O sistema exibe a mensagem (MS01) caso os campos obrigatórios não estejam preenchidos
+corretamente ou completamente.
+
+$[A2]$ O sistema exibe a mensagem (MS02) caso o numero da matrícula seja esteja cadastrado para
+outro estagiário
+
+$[A3]$ O usuário retorna para o passo P3 do FP.
+
+\subsection{Excessões}
+
+Não há excessões.
+
+\section{Regras de Negócios Específicas}
+
+$[RN01]$ Só poderá ser cadastrado o estagiário se todos os campos obrigatórios estiverem
+preenchidos.
+
+$[RN02]$ É necessário anteriormente possuir o curso referente ao mesmo cadastrado
+
+$[RN03]$ Não é possível excluir um Estagiário ou alterá-lo sem que o mesmo esteja
+cadastrado anteriormente.
+
+$[RN04]$ O campo matrícula será único para cada cliente cadastrado.
 
 
+\section{Mensagens do sistema}
 
-\subsection{Fluxo Secundário}
-Em segundo plano, a entidade Estágio será a responsável por ligar o Estagiário as demais informações do processo, como Empresa e Coordenador responsável por exemplo.
-A ligação será feita no Banco de Dados via chaves extrangeiras, sempre obedecendo as normas formais. 
+$[MS01]$ – Preencha os campos obrigatórios.
 
+$[MS02]$ – Matrícula já cadastrada, enforme outro número.
 
-\subsection{Fluxo de Exceção}
+\section{Observações}
 
-\subsection{Diagrama de Classe}
+Não há Observações.
 
-\subsection{Diagrama de Sequência}
+\end{document}
