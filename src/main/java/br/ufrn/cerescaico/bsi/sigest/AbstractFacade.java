@@ -7,26 +7,38 @@ import br.ufrn.cerescaico.bsi.sigest.bo.EmpresaBO;
 
 /**
  * Classe Abstrata para a Fachada do sistema Sigest.
- * 
+ *
  * @author Taciano de Morais Silva - tacianosilva@gmail.com
  * @version 25/10/2012, Taciano de Morais Silva - tacianosilva@gmail.com
  * @since 25/10/2012
  */
 class AbstractFacade {
 
-	protected CursoBO createCursoBO() {
-		return new CursoBO();
-	}
-	
-	protected EstagiarioBO createEstagiarioBO() {
-		return new EstagiarioBO();
-	}
-	
-	protected EstagioBO createEstagioBO() {
-		return new EstagioBO();
-	}
+    /**
+     * @return
+     */
+    protected CursoBO createCursoBO() {
+        return new CursoBO();
+    }
 
-	protected EmpresaBO createEmpresaBO(){
-		return new EmpresaBO();
-	}
+    /**
+     * @return
+     */
+    protected EstagiarioBO createEstagiarioBO() {
+        return new EstagiarioBO();
+    }
+
+    /**
+     * @return
+     */
+    protected EstagioBO createEstagioBO() {
+        return new EstagioBO();
+    }
+
+    /**
+     * @return
+     */
+    protected EmpresaBO createEmpresaBO() {
+        return new EmpresaBO();
+    }
 }
