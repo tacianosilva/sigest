@@ -4,20 +4,19 @@
  */
 package br.ufrn.cerescaico.bsi.sigest.dao;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.NonexistentEntityException;
 import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.PreexistingEntityException;
 import br.ufrn.cerescaico.bsi.sigest.model.Curso;
-import br.ufrn.cerescaico.bsi.sigest.model.Curso;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import javax.transaction.UserTransaction;
 
 /**
  *
@@ -26,13 +25,13 @@ import javax.transaction.UserTransaction;
 public class CursoJpaController implements Serializable {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5378480370337728386L;
-	
+     *
+     */
+    private static final long serialVersionUID = -5378480370337728386L;
+
     private EntityManagerFactory emf = null;
 
-	public CursoJpaController(EntityManagerFactory emf) {
+    public CursoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
@@ -48,7 +47,7 @@ public class CursoJpaController implements Serializable {
             em.persist(curso);
             em.flush();
             em.getTransaction().commit();
-            
+
             return curso;
         }
         catch (Exception ex) {
@@ -89,7 +88,7 @@ public class CursoJpaController implements Serializable {
         }
     }
 
-    public void destroy(BigDecimal id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -120,9 +119,11 @@ public class CursoJpaController implements Serializable {
         return findCursoEntities(false, maxResults, firstResult);
     }
 
+    @SuppressWarnings("unchecked")
     private List<Curso> findCursoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
+            @SuppressWarnings("rawtypes")
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Curso.class));
             Query q = em.createQuery(cq);
@@ -147,9 +148,11 @@ public class CursoJpaController implements Serializable {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public int getCursoCount() {
         EntityManager em = getEntityManager();
         try {
+            @SuppressWarnings("rawtypes")
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Curso> rt = cq.from(Curso.class);
             cq.select(em.getCriteriaBuilder().count(rt));
@@ -160,5 +163,5 @@ public class CursoJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

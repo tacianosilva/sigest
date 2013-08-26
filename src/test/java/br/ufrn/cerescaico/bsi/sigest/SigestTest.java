@@ -18,7 +18,6 @@ public class SigestTest {
 
 	@Test
 	public final void testGetInstance() {
-		fail("Not yet implemented");
 		Sigest sigest = Sigest.getInstance();
 		assertNotNull("1 - Testando Not Null: ", sigest);
 		Sigest copia = Sigest.getInstance();

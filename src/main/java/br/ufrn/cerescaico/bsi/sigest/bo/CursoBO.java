@@ -14,18 +14,18 @@ import br.ufrn.cerescaico.bsi.sigest.model.Curso;
  * @author taciano
  */
 public class CursoBO extends AbstractBO {
-    
+
     /**
      * Logger.
      */
-	private static final Logger logger = Logger.getLogger(CursoBO.class.getName());
-    
+    private static final Logger logger = Logger.getLogger(CursoBO.class.getName());
+
     private CursoJpaController dao;
 
     public CursoBO() {
         this.dao = new CursoJpaController(JPAUtil.EMF);
     }
-    
+
     /**
      * Insere um novo curso.
      * @param curso O novo curos.
@@ -45,13 +45,22 @@ public class CursoBO extends AbstractBO {
             throw new NegocioException("erro.curso.bo.inserir.exception",ex);
         }
     }
-    
+
+    public void excluir(Integer codigo) throws NegocioException {
+        try {
+            dao.destroy(codigo);
+        }catch (Exception ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new NegocioException("erro.curso.bo.excluir.exception", ex);
+        }
+    }
+
     public List<Curso> listar() throws NegocioException {
-    	try {
+        try {
             return dao.findCursoEntities();
         }
         catch (Exception ex) {
-        	logger.log(Level.SEVERE, ex.getMessage(), ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.curso.bo.listar", ex);
         }
     }
