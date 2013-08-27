@@ -39,7 +39,8 @@ public class CursoJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public Curso create(Curso curso) throws PreexistingEntityException, Exception {
+    public Curso create(Curso curso) throws PreexistingEntityException,
+            Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -49,14 +50,13 @@ public class CursoJpaController implements Serializable {
             em.getTransaction().commit();
 
             return curso;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             if (findCurso(curso.getCodigo()) != null) {
-                throw new PreexistingEntityException("Curso " + curso + " already exists.", ex);
+                throw new PreexistingEntityException("Curso " + curso
+                        + " already exists.", ex);
             }
             throw ex;
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -70,18 +70,17 @@ public class CursoJpaController implements Serializable {
             em.getTransaction().begin();
             curso = em.merge(curso);
             em.getTransaction().commit();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 Integer id = curso.getCodigo();
                 if (findCurso(id) == null) {
-                    throw new NonexistentEntityException("The curso with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException("The curso with id "
+                            + id + " no longer exists.");
                 }
             }
             throw ex;
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -97,14 +96,13 @@ public class CursoJpaController implements Serializable {
             try {
                 curso = em.getReference(Curso.class, id);
                 curso.getCodigo();
-            }
-            catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The curso with id " + id + " no longer exists.", enfe);
+            } catch (EntityNotFoundException enfe) {
+                throw new NonexistentEntityException("The curso with id " + id
+                        + " no longer exists.", enfe);
             }
             em.remove(curso);
             em.getTransaction().commit();
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -120,7 +118,8 @@ public class CursoJpaController implements Serializable {
     }
 
     @SuppressWarnings("unchecked")
-    private List<Curso> findCursoEntities(boolean all, int maxResults, int firstResult) {
+    private List<Curso> findCursoEntities(boolean all, int maxResults,
+            int firstResult) {
         EntityManager em = getEntityManager();
         try {
             @SuppressWarnings("rawtypes")
@@ -132,8 +131,7 @@ public class CursoJpaController implements Serializable {
                 q.setFirstResult(firstResult);
             }
             return q.getResultList();
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
@@ -142,8 +140,7 @@ public class CursoJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             return em.find(Curso.class, id);
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
@@ -157,11 +154,18 @@ public class CursoJpaController implements Serializable {
             Root<Curso> rt = cq.from(Curso.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            return ( (Long) q.getSingleResult() ).intValue();
-        }
-        finally {
+            return ((Long) q.getSingleResult()).intValue();
+        } finally {
             em.close();
         }
     }
 
+    public Curso buscarPorNome(String nome) {
+        EntityManager em = getEntityManager();
+        Query query = em
+                .createQuery("SELECT c FROM curso c WHERE c.nome like :nome");
+        query.setParameter("nome", nome + "%");
+        Curso rsl = (Curso) query.getSingleResult();
+        return rsl;
+    }
 }

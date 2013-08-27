@@ -28,7 +28,7 @@ public class Curso implements Serializable, Bean {
 	private List<Estagiario> estagiarios;
 
 	//bi-directional many-to-one association to Professor
-	@OneToMany(mappedBy="cursoBean")
+	@OneToMany(mappedBy="curso")
 	private List<Professor> professors;
 
     public Curso() {

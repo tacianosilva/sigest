@@ -1,9 +1,11 @@
 package br.ufrn.cerescaico.bsi.sigest;
 
+import br.ufrn.cerescaico.bsi.sigest.bo.AvaliacaoBO;
 import br.ufrn.cerescaico.bsi.sigest.bo.CursoBO;
 import br.ufrn.cerescaico.bsi.sigest.bo.EstagiarioBO;
 import br.ufrn.cerescaico.bsi.sigest.bo.EstagioBO;
 import br.ufrn.cerescaico.bsi.sigest.bo.EmpresaBO;
+import br.ufrn.cerescaico.bsi.sigest.bo.ProfessorBO;
 
 /**
  * Classe Abstrata para a Fachada do sistema Sigest.
@@ -41,4 +43,12 @@ class AbstractFacade {
     protected EmpresaBO createEmpresaBO() {
         return new EmpresaBO();
     }
+	
+	protected ProfessorBO createProfessorBO(){
+		return new ProfessorBO();
+	}
+	
+	protected AvaliacaoBO createAvaliacaoBO(){
+		return new AvaliacaoBO();
+	}
 }
