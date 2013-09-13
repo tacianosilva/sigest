@@ -8,23 +8,35 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.PreexistingEntityException;
 import br.ufrn.cerescaico.bsi.sigest.model.Curso;
 
 public class CursoBOTest {
 
     CursoBO bo = new CursoBO();
     Curso curso;
+    Curso curso2;
 
     @Before
     public void setUp() throws Exception {
         curso = new Curso();
         curso.setNome("Curso Teste");
+
+        curso2 = new Curso();
+        curso2.setNome("Curso Teste Excluir");
     }
 
     @After
-    public void tearDown() throws Exception {
-        bo.excluir(curso.getCodigo());
+    public void tearDown() {
+        try {
+            bo.excluir(curso.getCodigo());
+            bo.excluir(curso2.getCodigo());
+        } catch (NegocioException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         curso = null;
+        curso2 = null;
     }
 
     @Test
@@ -34,6 +46,51 @@ public class CursoBOTest {
             assertNotNull("1", curso);
             assertNotNull("2", curso.getCodigo());
             assertEquals("3", "Curso Teste", curso.getNome());
+        } catch (NegocioException e) {
+            fail();
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testInserirDuplicata() {
+        try {
+            curso = bo.inserir(curso);
+            curso2 = bo.inserir(curso);
+        } catch (NegocioException e) {
+            assertEquals("1", "erro.curso.bo.inserir.PreexistingEntityException", e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testBuscar() {
+        try {
+            curso = bo.inserir(curso);
+            assertNotNull("1", curso);
+            assertNotNull("2", curso.getCodigo());
+            assertEquals("3", "Curso Teste", curso.getNome());
+            Curso buscado = bo.buscarCurso(curso.getCodigo());
+            assertEquals("4", buscado.getCodigo(), curso.getCodigo());
+        } catch (NegocioException e) {
+            fail();
+            e.printStackTrace();
+        }
+    }
+
+
+    @Test
+    public void testExcluir() {
+        try {
+            curso = bo.inserir(curso2);
+            assertNotNull("1", curso2);
+            assertNotNull("2", curso2.getCodigo());
+            assertEquals("3", "Curso Teste Excluir", curso.getNome());
+            Curso buscado = bo.buscarCurso(curso2.getCodigo());
+            assertEquals("4", buscado.getCodigo(), curso2.getCodigo());
+            bo.excluir(curso2.getCodigo());
+            buscado = bo.buscarCurso(curso2.getCodigo());
+            assertEquals("5", buscado, null);
         } catch (NegocioException e) {
             fail();
             e.printStackTrace();
