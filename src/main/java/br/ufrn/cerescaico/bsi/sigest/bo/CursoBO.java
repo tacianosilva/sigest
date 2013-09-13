@@ -64,23 +64,29 @@ public class CursoBO extends AbstractBO {
             throw new NegocioException("erro.curso.bo.listar", ex);
         }
     }
-    
+
+    /**
+     * Busca a entidade pela chave primária.
+     * @param id Chave primária da entidade.
+     * @return A entidade encontrada ou <code>null</code>, caso contrário.
+     * @throws NegocioException Caso ocorra algum problema ao acessar os dados.
+     */
     public Curso buscarCurso (Integer id) throws NegocioException{
-    	try {
+        try {
             return dao.findCurso(id);
         }
         catch (Exception ex) {
-        	logger.log(Level.SEVERE, ex.getMessage(), ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.curso.bo.buscarCurso", ex);
         }
     }
-    
+
     public Curso buscarCursoPorNome(String nome) throws NegocioException{
-    	try{
-    		return dao.buscarPorNome(nome);
-    	}catch (Exception ex){
-    		logger.log(Level.SEVERE, ex.getMessage(), ex);
+        try{
+            return dao.buscarPorNome(nome);
+        }catch (Exception ex){
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.curso.bo.buscarCurso", ex);
-    	}
+        }
     }
 }

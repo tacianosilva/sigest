@@ -136,6 +136,11 @@ public class CursoJpaController implements Serializable {
         }
     }
 
+    /**
+     * Busca a entidade pela chave primária.
+     * @param id Chave primária da entidade.
+     * @return A entidade encontrada ou <code>null</code>, caso contrário.
+     */
     public Curso findCurso(Integer id) {
         EntityManager em = getEntityManager();
         try {
