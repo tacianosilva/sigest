@@ -1,0 +1,2 @@
+Neste diretório serão colocadas as especificações e documentações do projeto.
+Um resumo será colocado no wiki do github.
