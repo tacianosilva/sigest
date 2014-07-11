@@ -25,17 +25,24 @@ package br.ufrn.cerescaico.bsi.sigest.dao;
 
 import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.IllegalOrphanException;
 import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.NonexistentEntityException;
+import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.PreexistingEntityException;
+
 import java.io.Serializable;
+
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+
 import br.ufrn.cerescaico.bsi.sigest.model.Curso;
 import br.ufrn.cerescaico.bsi.sigest.model.Avaliacao;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import br.ufrn.cerescaico.bsi.sigest.model.Estagio;
 import br.ufrn.cerescaico.bsi.sigest.model.Professor;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
@@ -45,6 +52,11 @@ import javax.transaction.UserTransaction;
  * @author Mércia Karinny
  */
 public class ProfessorJpaController implements Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 7435872895967453723L;
 
     public ProfessorJpaController(EntityManagerFactory emf) {
         //this.utx = utx;
@@ -57,7 +69,7 @@ public class ProfessorJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public Professor create(Professor professor) {
+    public Professor create(Professor professor) throws Exception {
         if (professor.getAvaliacaos() == null) {
             professor.setAvaliacaos(new ArrayList<Avaliacao>());
         }
@@ -304,5 +316,5 @@ public class ProfessorJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

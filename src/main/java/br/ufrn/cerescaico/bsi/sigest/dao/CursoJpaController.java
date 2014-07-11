@@ -39,8 +39,7 @@ public class CursoJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public Curso create(Curso curso) throws PreexistingEntityException,
-            Exception {
+    public Curso create(Curso curso) throws Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();

@@ -5,37 +5,67 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import br.ufrn.cerescaico.bsi.sigest.dao.ProfessorJpaController;
+import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.PreexistingEntityException;
 import br.ufrn.cerescaico.bsi.sigest.dao.util.JPAUtil;
 import br.ufrn.cerescaico.bsi.sigest.model.Professor;
 
+/**
+ * Classe que representa a Entidade de Negócio para Professor.
+ * @author Taciano de Morais Silva
+ */
 public class ProfessorBO extends AbstractBO {
-	
-	private static final Logger logger = Logger.getLogger(ProfessorBO.class.getName());
-	
-	private ProfessorJpaController daoProf;
-	
-	public ProfessorBO (){
-		this.daoProf = new ProfessorJpaController(JPAUtil.EMF);
-	}
-	
-	public Professor inserir(Professor professor) throws NegocioException {
+
+    /**
+     * Logger.
+     */
+    private static final Logger logger = Logger.getLogger(ProfessorBO.class.getName());
+
+    private ProfessorJpaController dao;
+
+    public ProfessorBO (){
+        this.dao = new ProfessorJpaController(JPAUtil.EMF);
+    }
+
+    public Professor inserir(Professor professor) throws NegocioException {
         try {
-            return daoProf.create(professor);
+            return dao.create(professor);
+        }
+        catch (PreexistingEntityException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new NegocioException("erro.professor.bo.inserir.PreexistingEntityException",ex);
         }
         catch (Exception ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.professor.bo.inserir.exception",ex);
         }
     }
-	
-	public List<Professor> listar() throws NegocioException {
-    	try {
-            return daoProf.findProfessorEntities();
+
+    public void excluir(Integer codigo) throws NegocioException {
+        try {
+            dao.destroy(codigo);
+        }catch (Exception ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new NegocioException("erro.professor.bo.excluir.exception", ex);
+        }
+    }
+
+    public List<Professor> listar() throws NegocioException {
+        try {
+            return dao.findProfessorEntities();
         }
         catch (Exception ex) {
-        	logger.log(Level.SEVERE, ex.getMessage(), ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.professor.bo.listar", ex);
         }
     }
 
+    public Professor buscarProfessor(Integer id) throws NegocioException {
+        try {
+            return dao.findProfessor(id);
+        }
+        catch (Exception ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new NegocioException("erro.professor.bo.buscarCurso", ex);
+        }
+    }
 }

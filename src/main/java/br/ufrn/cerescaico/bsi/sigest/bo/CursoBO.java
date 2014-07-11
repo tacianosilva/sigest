@@ -10,7 +10,7 @@ import br.ufrn.cerescaico.bsi.sigest.dao.util.JPAUtil;
 import br.ufrn.cerescaico.bsi.sigest.model.Curso;
 
 /**
- * Classe que representa a Entidade de Négocio para Curso.
+ * Classe que representa a Entidade de Negócio para Curso.
  * @author taciano
  */
 public class CursoBO extends AbstractBO {
@@ -71,7 +71,7 @@ public class CursoBO extends AbstractBO {
      * @return A entidade encontrada ou <code>null</code>, caso contrário.
      * @throws NegocioException Caso ocorra algum problema ao acessar os dados.
      */
-    public Curso buscarCurso (Integer id) throws NegocioException{
+    public Curso buscarCurso(Integer id) throws NegocioException {
         try {
             return dao.findCurso(id);
         }
