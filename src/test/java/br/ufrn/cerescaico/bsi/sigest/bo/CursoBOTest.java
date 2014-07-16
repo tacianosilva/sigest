@@ -81,10 +81,10 @@ public class CursoBOTest {
     @Test
     public void testExcluir() {
         try {
-            curso = bo.inserir(curso2);
+            curso2 = bo.inserir(curso2);
             assertNotNull("1", curso2);
             assertNotNull("2", curso2.getCodigo());
-            assertEquals("3", "Curso Teste Excluir", curso.getNome());
+            assertEquals("3", "Curso Teste Excluir", curso2.getNome());
             Curso buscado = bo.buscarCurso(curso2.getCodigo());
             assertEquals("4", buscado.getCodigo(), curso2.getCodigo());
             bo.excluir(curso2.getCodigo());
