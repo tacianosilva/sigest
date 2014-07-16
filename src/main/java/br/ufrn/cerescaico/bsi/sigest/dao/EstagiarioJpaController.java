@@ -21,13 +21,13 @@ import javax.transaction.UserTransaction;
 public class EstagiarioJpaController implements Serializable {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5378480370337728386L;
-	
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -5378480370337728386L;
+
     private EntityManagerFactory emf = null;
 
-	public EstagiarioJpaController(EntityManagerFactory emf) {
+    public EstagiarioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
@@ -43,16 +43,14 @@ public class EstagiarioJpaController implements Serializable {
             em.persist(estagiario);
             em.flush();
             em.getTransaction().commit();
-            
+
             return estagiario;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             if (findEstagiario(estagiario.getCodigo()) != null) {
                 throw new PreexistingEntityException("Estagiario " + estagiario + " already exists.", ex);
             }
             throw ex;
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -66,8 +64,7 @@ public class EstagiarioJpaController implements Serializable {
             em.getTransaction().begin();
             estagiario = em.merge(estagiario);
             em.getTransaction().commit();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 Integer id = estagiario.getCodigo();
@@ -76,8 +73,7 @@ public class EstagiarioJpaController implements Serializable {
                 }
             }
             throw ex;
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -93,14 +89,12 @@ public class EstagiarioJpaController implements Serializable {
             try {
                 Estagiario = em.getReference(Estagiario.class, id);
                 Estagiario.getCodigo();
-            }
-            catch (EntityNotFoundException enfe) {
+            } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The Estagiario with id " + id + " no longer exists.", enfe);
             }
             em.remove(Estagiario);
             em.getTransaction().commit();
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -126,8 +120,7 @@ public class EstagiarioJpaController implements Serializable {
                 q.setFirstResult(firstResult);
             }
             return q.getResultList();
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
@@ -136,8 +129,7 @@ public class EstagiarioJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             return em.find(Estagiario.class, id);
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
@@ -150,10 +142,9 @@ public class EstagiarioJpaController implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ( (Long) q.getSingleResult() ).intValue();
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
-    
+
 }

@@ -29,12 +29,10 @@ public class ProfessorBO extends AbstractBO {
     public Professor inserir(Professor professor) throws NegocioException {
         try {
             return dao.create(professor);
-        }
-        catch (PreexistingEntityException ex) {
+        } catch (PreexistingEntityException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.professor.bo.inserir.PreexistingEntityException",ex);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.professor.bo.inserir.exception",ex);
         }
@@ -43,7 +41,7 @@ public class ProfessorBO extends AbstractBO {
     public void excluir(Integer codigo) throws NegocioException {
         try {
             dao.destroy(codigo);
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.professor.bo.excluir.exception", ex);
         }
@@ -52,8 +50,7 @@ public class ProfessorBO extends AbstractBO {
     public List<Professor> listar() throws NegocioException {
         try {
             return dao.findProfessorEntities();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.professor.bo.listar", ex);
         }
@@ -62,8 +59,7 @@ public class ProfessorBO extends AbstractBO {
     public Professor buscarProfessor(Integer id) throws NegocioException {
         try {
             return dao.findProfessor(id);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.professor.bo.buscarCurso", ex);
         }

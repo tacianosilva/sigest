@@ -4,42 +4,41 @@
  */
 package br.ufrn.cerescaico.bsi.sigest.bo;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import br.ufrn.cerescaico.bsi.sigest.dao.PerfilJpaController;
 import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.PreexistingEntityException;
 import br.ufrn.cerescaico.bsi.sigest.dao.util.JPAUtil;
 import br.ufrn.cerescaico.bsi.sigest.model.Perfil;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Classe que representa a Entidade de Négocio para Perfil.
  * @author taciano
  */
-public class PerfilNegocio extends AbstractBO {
-    
+public class PerfilBO extends AbstractBO {
+
     /**
      * Logger.
      */
-    private Logger logger = Logger.getLogger(UsuarioBO.class.getName());
-    
+    private Logger logger = Logger.getLogger(PerfilBO.class.getName());
+
     private PerfilJpaController dao;
 
-    public PerfilNegocio() {
+    public PerfilBO() {
         this.dao = new PerfilJpaController(null, JPAUtil.EMF);
     }
-    
+
     public void inserir(Perfil perfil) throws NegocioException {
         try {
             dao.create(perfil);
-        }
-        catch (PreexistingEntityException ex) {
+        } catch (PreexistingEntityException ex) {
             logger.log(Level.SEVERE, null, ex);
             throw new NegocioException("MSG_ERRO_001",ex);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             logger.log(Level.SEVERE, null, ex);
             throw new NegocioException("MSG_ERRO_002",ex);
         }
     }
-    
+
 }

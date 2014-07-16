@@ -11,13 +11,14 @@ import br.ufrn.cerescaico.bsi.sigest.model.Curso;
 
 public class SigestTest {
 
-    Sigest sigest = Sigest.getInstance();
+    Sigest sigest;
 
     Curso curso;
     Curso curso2;
 
     @Before
     public void setUp() throws Exception {
+        sigest = Sigest.getInstance();
         curso = new Curso();
         curso.setNome("Curso 1");
 
