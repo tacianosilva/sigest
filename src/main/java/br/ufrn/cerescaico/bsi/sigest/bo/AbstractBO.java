@@ -1,6 +1,5 @@
 package br.ufrn.cerescaico.bsi.sigest.bo;
 
-import br.ufrn.cerescaico.bsi.sigest.Sigest;
 
 /**
  * Classe de negócio abstrata que contém método auxiliares para os BO's do
@@ -15,32 +14,18 @@ public class AbstractBO {
      * Código do Usuário Administrador.
      */
     protected static final Integer ADMIN = 1;
-    
+
     /**
      * String Vazio.
      */
     protected static final String STRING_VAZIO = "";
-    
+
     /**
      * Tamanho mínimo para um nome e login.
      */
-    protected static final int TAMANHO_MINIMO = 3;
-    
-    private Sigest sigest;
+    protected static final int TAMANHO_MINIMO = 6;
 
     protected AbstractBO() {
-    }
-    
-    protected AbstractBO(Sigest sigest) {
-        this.sigest = sigest;
-    }
-
-    public Sigest getSigest() {
-        return sigest;
-    }
-
-    public void setSigest(Sigest sigest) {
-        this.sigest = sigest;
     }
 
     /**
@@ -54,7 +39,7 @@ public class AbstractBO {
         }
         return false;
     }
-    
+
         /**
      *
      * @param obj
