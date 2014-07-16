@@ -43,12 +43,12 @@ class AbstractFacade {
     protected EmpresaBO createEmpresaBO() {
         return new EmpresaBO();
     }
-	
-	protected ProfessorBO createProfessorBO(){
-		return new ProfessorBO();
-	}
-	
-	protected AvaliacaoBO createAvaliacaoBO(){
-		return new AvaliacaoBO();
-	}
+
+    protected ProfessorBO createProfessorBO(){
+        return new ProfessorBO();
+    }
+
+    protected AvaliacaoBO createAvaliacaoBO(){
+        return new AvaliacaoBO();
+    }
 }

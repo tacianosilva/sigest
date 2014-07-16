@@ -23,21 +23,20 @@
  */
 package br.ufrn.cerescaico.bsi.sigest.dao;
 
-import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.NonexistentEntityException;
-import br.ufrn.cerescaico.bsi.sigest.model.Avaliacao;
 import java.io.Serializable;
-import javax.persistence.Query;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import br.ufrn.cerescaico.bsi.sigest.model.Curso;
+import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.NonexistentEntityException;
+import br.ufrn.cerescaico.bsi.sigest.model.Avaliacao;
 import br.ufrn.cerescaico.bsi.sigest.model.Estagio;
 import br.ufrn.cerescaico.bsi.sigest.model.Professor;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.transaction.UserTransaction;
 
 /**
  *
@@ -45,11 +44,15 @@ import javax.transaction.UserTransaction;
  */
 public class AvaliacaoJpaController implements Serializable {
 
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -8780293159416728927L;
+
     public AvaliacaoJpaController(EntityManagerFactory emf) {
-        //this.utx = utx;
         this.emf = emf;
     }
-    //private UserTransaction utx = null;
+
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
@@ -72,14 +75,6 @@ public class AvaliacaoJpaController implements Serializable {
                 avaliacao.setProfessor(professor);
             }
             em.persist(avaliacao);
-            if (estagioBean != null) {
-                estagioBean.getAvaliacaos().add(avaliacao);
-                estagioBean = em.merge(estagioBean);
-            }
-            if (professor != null) {
-                professor.getAvaliacaos().add(avaliacao);
-                professor = em.merge(professor);
-            }
             em.getTransaction().commit();
             return avaliacao;
         } finally {
@@ -94,10 +89,7 @@ public class AvaliacaoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Avaliacao persistentAvaliacao = em.find(Avaliacao.class, avaliacao.getCodigo());
-            Estagio estagioBeanOld = persistentAvaliacao.getEstagioBean();
             Estagio estagioBeanNew = avaliacao.getEstagioBean();
-            Professor professorOld = persistentAvaliacao.getProfessor();
             Professor professorNew = avaliacao.getProfessor();
             if (estagioBeanNew != null) {
                 estagioBeanNew = em.getReference(estagioBeanNew.getClass(), estagioBeanNew.getCodigo());
@@ -108,22 +100,6 @@ public class AvaliacaoJpaController implements Serializable {
                 avaliacao.setProfessor(professorNew);
             }
             avaliacao = em.merge(avaliacao);
-            if (estagioBeanOld != null && !estagioBeanOld.equals(estagioBeanNew)) {
-                estagioBeanOld.getAvaliacaos().remove(avaliacao);
-                estagioBeanOld = em.merge(estagioBeanOld);
-            }
-            if (estagioBeanNew != null && !estagioBeanNew.equals(estagioBeanOld)) {
-                estagioBeanNew.getAvaliacaos().add(avaliacao);
-                estagioBeanNew = em.merge(estagioBeanNew);
-            }
-            if (professorOld != null && !professorOld.equals(professorNew)) {
-                professorOld.getAvaliacaos().remove(avaliacao);
-                professorOld = em.merge(professorOld);
-            }
-            if (professorNew != null && !professorNew.equals(professorOld)) {
-                professorNew.getAvaliacaos().add(avaliacao);
-                professorNew = em.merge(professorNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -153,16 +129,6 @@ public class AvaliacaoJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The avaliacao with id " + id + " no longer exists.", enfe);
             }
-            Estagio estagioBean = avaliacao.getEstagioBean();
-            if (estagioBean != null) {
-                estagioBean.getAvaliacaos().remove(avaliacao);
-                estagioBean = em.merge(estagioBean);
-            }
-            Professor professor = avaliacao.getProfessor();
-            if (professor != null) {
-                professor.getAvaliacaos().remove(avaliacao);
-                professor = em.merge(professor);
-            }
             em.remove(avaliacao);
             em.getTransaction().commit();
         } finally {
@@ -180,10 +146,11 @@ public class AvaliacaoJpaController implements Serializable {
         return findAvaliacaoEntities(false, maxResults, firstResult);
     }
 
+    @SuppressWarnings("unchecked")
     private List<Avaliacao> findAvaliacaoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            CriteriaQuery<Object> cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Avaliacao.class));
             Query q = em.createQuery(cq);
             if (!all) {
@@ -195,12 +162,13 @@ public class AvaliacaoJpaController implements Serializable {
             em.close();
         }
     }
-    
+
     public List<Avaliacao> buscarPorProf(int codProf){
-    	EntityManager em = getEntityManager();
+        EntityManager em = getEntityManager();
         Query query = em.createQuery("SELECT * FROM Avaliacao a WHERE a.avaliador = :avaliador");
         query.setParameter("avaliador", codProf);
-        List<Avaliacao> rsl = query.getResultList();        
+        @SuppressWarnings("unchecked")
+        List<Avaliacao> rsl = query.getResultList();
         return rsl;
     }
 
@@ -216,7 +184,7 @@ public class AvaliacaoJpaController implements Serializable {
     public int getAvaliacaoCount() {
         EntityManager em = getEntityManager();
         try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            CriteriaQuery<Object> cq = em.getCriteriaBuilder().createQuery();
             Root<Avaliacao> rt = cq.from(Avaliacao.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
@@ -225,5 +193,5 @@ public class AvaliacaoJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }
