@@ -29,7 +29,7 @@ public class EstagiarioBO {
 
     /**
      * Insere um novo Estagiario.
-     * @param Estagiario.
+     * @param estagiario O Estagiário a ser inserido.
      * @return O Estagiario inserido com a chave primária preenchida.
      * @throws NegocioException Caso ocorra erro na inserção.
      */

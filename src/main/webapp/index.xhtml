@@ -6,28 +6,28 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Página Principal</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Página Principal</title>
 </h:head>
 <body>
-	<div>
-		<h1>Sistema Gerenciador de Estágios - SIGEST</h1>
-		<hr />
-		<h2>Menu</h2>
-		<h:form>
-			<h:messages />
-			<h:commandLink action="#{cursoBean.manter}">Manter Curso</h:commandLink>
-			<br />
-			<h:commandLink action="#{professorBean.manter}">Manter Professor (Não integrado)</h:commandLink>
-			<br />
-			<h:commandLink action="#{empresaBean.manter}">Manter Empresa</h:commandLink>
-			<br />
-			<h:commandLink action="#{estagiarioBean.manter}">Manter Estagiário</h:commandLink>
-			<br />
-			<h:commandLink action="#{estagioBean.manter}">Manter Estágio</h:commandLink>
-			<br />
-		</h:form>
-		<hr />
-	</div>
+    <div>
+        <h1>Sistema Gerenciador de Estágios - SIGEST</h1>
+        <hr />
+        <h2>Menu</h2>
+        <h:form>
+            <h:messages />
+            <h:commandLink action="#{cursoBean.manter}">Manter Curso</h:commandLink>
+            <br />
+            <h:commandLink action="#{professorBean.manter}">Manter Professor</h:commandLink>
+            <br />
+            <h:commandLink action="#{empresaBean.manter}">Manter Empresa</h:commandLink>
+            <br />
+            <h:commandLink action="#{estagiarioBean.manter}">Manter Estagiário</h:commandLink>
+            <br />
+            <h:commandLink action="#{estagioBean.manter}">Manter Estágio</h:commandLink>
+            <br />
+        </h:form>
+        <hr />
+    </div>
 </body>
 </html>

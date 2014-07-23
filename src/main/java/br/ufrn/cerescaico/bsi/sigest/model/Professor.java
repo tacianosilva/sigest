@@ -1,7 +1,9 @@
 package br.ufrn.cerescaico.bsi.sigest.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 /**
@@ -93,4 +95,8 @@ public class Professor implements Serializable, Bean {
         this.curso = cursoBean;
     }
 
+    @Override
+    public String toString() {
+        return getSiape() + " - " + getNome();
+    }
 }

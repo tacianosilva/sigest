@@ -28,11 +28,6 @@ public class AbstractBO {
     protected AbstractBO() {
     }
 
-    /**
-     *
-     * @param obj
-     * @return
-     */
     protected boolean checkNullVazio(String obj) {
         if (obj == null || "".equals(obj)) {
             return true;
@@ -40,11 +35,6 @@ public class AbstractBO {
         return false;
     }
 
-        /**
-     *
-     * @param obj
-     * @return
-     */
     protected boolean checkNull(Object obj) {
         if (obj == null) {
             return true;
@@ -52,11 +42,6 @@ public class AbstractBO {
         return false;
     }
 
-    /**
-     *
-     * @param id
-     * @return
-     */
     protected boolean checkNullZero(Integer id) {
         if (id == null || id == 0) {
             return true;

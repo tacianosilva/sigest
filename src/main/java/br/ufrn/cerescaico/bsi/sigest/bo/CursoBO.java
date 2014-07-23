@@ -45,8 +45,8 @@ public class CursoBO extends AbstractBO {
     }
 
     /**
-     * @param codigo
-     * @throws NegocioException
+     * @param codigo O código do curso a ser excluído.
+     * @throws NegocioException Caso ocorra erro ao excluir.
      */
     public void excluir(Integer codigo) throws NegocioException {
         try {
@@ -57,10 +57,6 @@ public class CursoBO extends AbstractBO {
         }
     }
 
-    /**
-     * @return
-     * @throws NegocioException
-     */
     public List<Curso> listar() throws NegocioException {
         try {
             return dao.findCursoEntities();

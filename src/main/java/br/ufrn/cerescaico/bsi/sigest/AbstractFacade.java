@@ -17,28 +17,28 @@ import br.ufrn.cerescaico.bsi.sigest.bo.ProfessorBO;
 class AbstractFacade {
 
     /**
-     * @return
+     * @return Um objeto de negócio para a Entidade Curso.
      */
     protected CursoBO createCursoBO() {
         return new CursoBO();
     }
 
     /**
-     * @return
+     * @return Um objeto de negócio para a Entidade Estagiário.
      */
     protected EstagiarioBO createEstagiarioBO() {
         return new EstagiarioBO();
     }
 
     /**
-     * @return
+     * @return Um objeto de negócio para a Entidade Estágio.
      */
     protected EstagioBO createEstagioBO() {
         return new EstagioBO();
     }
 
     /**
-     * @return
+     * @return Um objeto de negócio para a Entidade Empresa.
      */
     protected EmpresaBO createEmpresaBO() {
         return new EmpresaBO();

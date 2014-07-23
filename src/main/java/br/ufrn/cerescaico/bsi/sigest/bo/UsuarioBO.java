@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Classe de negócio do bean Usuário do sistema SisEventos.
+ * Classe de negócio do bean Usuário do sistema Sigest.
  *
  * @author Taciano Morais Silva
  * @version 23/05/2012, 19h27m
@@ -40,7 +40,7 @@ public class UsuarioBO extends AbstractBO {
      * @param password Senha do usuário.
      * @return O usuário autenticado, ou
      * <code>null</code> caso contrário.
-     * @throws SepeException Casp ocorra algum erro de acesso ao banco.
+     * @throws NegocioException Caso ocorra algum erro de acesso ao banco.
      */
     public Usuario autenticar(String username, String password) throws NegocioException {
         //TODO Implementar validação de login com Spring
@@ -58,6 +58,7 @@ public class UsuarioBO extends AbstractBO {
      *
      * @param usuario O usuário a ser incluído.
      * @return O usuário inserido com o código gerado automaticamente.
+     * @throws NegocioException Caso ocorra erro ao inserir.
      */
     public Usuario inserir(Usuario usuario) throws NegocioException {
         verificarNull(usuario);
@@ -79,6 +80,7 @@ public class UsuarioBO extends AbstractBO {
      * Lista todos os usuários cadastrados no sistema.
      *
      * @return A lista de usuários.
+     * @throws NegocioException Caso ocorra erro ao listar.
      */
     public List<Usuario> listar() throws NegocioException {
         try {
@@ -98,6 +100,7 @@ public class UsuarioBO extends AbstractBO {
      *
      * @param id O identificador do usuário.
      * @return O usuário localizado.
+     * @throws NegocioException Caso ocorra erro ao buscar.
      */
     public Usuario buscar(Integer id) throws NegocioException {
         try {
@@ -113,6 +116,7 @@ public class UsuarioBO extends AbstractBO {
      *
      * @param email O email do usuário.
      * @return O usuário localizado.
+     * @throws NegocioException Caso ocorra erro ao buscar.
      */
     public Usuario buscarPorEmail(String email) throws NegocioException {
         try {
@@ -123,11 +127,6 @@ public class UsuarioBO extends AbstractBO {
         }
     }
 
-    /**
-     *
-     * @param usuario
-     * @throws NegocioException
-     */
     private void verificarLoginExistente(Usuario usuario) throws NegocioException {
         try {
             Usuario usuarioBD = dao.buscarPorEmail(usuario.getEmail());
@@ -144,6 +143,7 @@ public class UsuarioBO extends AbstractBO {
      * Exclui o usuário do sistema.
      *
      * @param usuario O usuário a ser excluído.
+     * @throws NegocioException Caso ocorra erro ao excluir.
      */
     public void excluir(Usuario usuario) throws NegocioException {
         if (isAdminUser(usuario)) {
@@ -161,6 +161,7 @@ public class UsuarioBO extends AbstractBO {
      * Exclui o usuário do sistema.
      *
      * @param id O identificador do usuário a ser excluído.
+     * @throws NegocioException Caso ocorra erro ao excluir.
      */
     public void excluir(Integer id) throws NegocioException {
         if (isAdminUser(id)) {
@@ -178,6 +179,7 @@ public class UsuarioBO extends AbstractBO {
      * Pesquisar usuário filtrando por nome.
      *
      * @param nome O nome do usuário.
+     * @throws NegocioException Caso ocorra erro ao pesquisar.
      */
     public List<Usuario> pesquisar(String nome) throws NegocioException {
         try {
@@ -208,11 +210,6 @@ public class UsuarioBO extends AbstractBO {
         }
     }
 
-    /**
-     *
-     * @param texto
-     * @throws br.cesed.lti.Sepe.bo.SepeException
-     */
     private void verificarTamMin(String att, String texto) throws NegocioException {
         if (texto == null || texto.equals(STRING_VAZIO)
                 || texto.length() < TAMANHO_MINIMO) {

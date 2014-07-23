@@ -64,6 +64,16 @@ public final class Sigest extends AbstractFacade implements Serializable {
         return bo.inserir(curso);
     }
 
+    public Curso buscarCurso(Integer id) throws NegocioException {
+        CursoBO bo = createCursoBO();
+        return bo.buscarCurso(id);
+    }
+
+    public Curso buscarCursoPorNome(String nome) throws NegocioException {
+        CursoBO bo =createCursoBO();
+        return bo.buscarCursoPorNome(nome);
+    }
+
     public List<Curso> listarCursos() throws NegocioException {
         CursoBO bo = createCursoBO();
         return bo.listar();
@@ -128,34 +138,19 @@ public final class Sigest extends AbstractFacade implements Serializable {
 
     }
 
-    public List<Professor> listarProfessores() throws NegocioException {
-        // TODO Auto-generated method stub
-        return null;
+    /**
+     * @param professor O Professor a ser inserido.
+     * @return Retorna o professor inserido com a chave primária definida.
+     * @throws NegocioException Caso ocorra erro na inserção do Professor.
+     */
+    public Professor inserirProfessor(Professor professor) throws NegocioException {
+        ProfessorBO bo = createProfessorBO();
+        return bo.inserir(professor);
     }
 
-    public Curso cadastrarCurso(Curso curso) throws NegocioException {
-        CursoBO bo = createCursoBO();
-        return bo.inserir(curso);
-    }
-
-    public Curso buscarCurso(Integer id) throws NegocioException{
-        CursoBO bo = createCursoBO();
-        return bo.buscarCurso(id);
-    }
-
-    public Curso buscarCursoPorNome(String nome) throws NegocioException{
-        CursoBO bo =createCursoBO();
-        return bo.buscarCursoPorNome(nome);
-    }
-
-    public Professor cadastrarProfessor(Professor professor) throws NegocioException{
-        ProfessorBO boProf = createProfessorBO();
-        return boProf.inserir(professor);
-    }
-
-    public List<Professor> listarProfessor() throws NegocioException{
-        ProfessorBO boProf = createProfessorBO();
-        return boProf.listar();
+    public List<Professor> listarProfessores() throws NegocioException{
+        ProfessorBO bo = createProfessorBO();
+        return bo.listar();
     }
 
     public Avaliacao cadastrarAvaliacao(Avaliacao avaliacao) throws NegocioException {
