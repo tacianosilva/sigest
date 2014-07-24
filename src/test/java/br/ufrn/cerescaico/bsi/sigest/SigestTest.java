@@ -52,10 +52,8 @@ public class SigestTest {
     public void testCurso() {
         try {
             Curso add = sigest.inserirCurso(curso);
-            System.out.println("kkkkkk"+ curso.getCodigo());
             assertNotNull("0", curso.getCodigo());
             assertNotNull("1", add.getCodigo());
-            System.out.println("kkkkkk"+ add.getCodigo());
             assertEquals("2",curso.getNome(), add.getNome());
             Curso buscado = sigest.buscarCurso(add.getCodigo());
             assertEquals("3", buscado.getCodigo(), add.getCodigo());
@@ -64,9 +62,8 @@ public class SigestTest {
             buscado = sigest.buscarCurso(add.getCodigo());
             assertEquals("5", buscado, null);
         } catch (NegocioException e) {
-            // TODO Auto-generated catch block
             fail();
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 }

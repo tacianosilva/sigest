@@ -19,12 +19,12 @@ import br.ufrn.cerescaico.bsi.sigest.model.Estagiario;
 @SessionScoped
 public class EstagiarioBean implements Serializable {
 
-	/**
-	 * serialVersionUID.
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * serialVersionUID.
+     */
+    private static final long serialVersionUID = 1L;
 
-	private Sigest sigest = Sigest.getInstance();
+    private Sigest sigest = Sigest.getInstance();
 
     private List<Estagiario> estagiarios = null;
 
@@ -33,7 +33,7 @@ public class EstagiarioBean implements Serializable {
     public EstagiarioBean(){
         estagiario = new Estagiario();
     }
-    
+
     public String manter() {
         return "/estagiario/manter";
     }
@@ -62,7 +62,7 @@ public class EstagiarioBean implements Serializable {
     }
 
     public List<Estagiario> getEstagiarios() {
-    	listar();
+        listar();
         return estagiarios;
     }
 

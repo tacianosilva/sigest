@@ -64,4 +64,9 @@ public class ProfessorBO extends AbstractBO {
             throw new NegocioException("erro.professor.bo.buscarCurso", ex);
         }
     }
+
+    public Professor buscarProfessorPorSiape(Integer siape) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

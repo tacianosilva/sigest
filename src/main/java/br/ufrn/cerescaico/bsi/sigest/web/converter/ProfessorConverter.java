@@ -10,7 +10,7 @@ import javax.faces.convert.FacesConverter;
 
 import br.ufrn.cerescaico.bsi.sigest.Sigest;
 import br.ufrn.cerescaico.bsi.sigest.bo.NegocioException;
-import br.ufrn.cerescaico.bsi.sigest.model.Curso;
+import br.ufrn.cerescaico.bsi.sigest.model.Professor;
 
 @FacesConverter(value = "professorConverter")
 public class ProfessorConverter implements Converter {
@@ -20,21 +20,20 @@ public class ProfessorConverter implements Converter {
      */
     private static final Logger logger = Logger.getLogger(ProfessorConverter.class.getName());
 
-    public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
+    public Object getAsObject(FacesContext arg0, UIComponent arg1, String siape) {
         Sigest sigest = Sigest.getInstance();
-        //try {
-            return "Teste PickList Professor"; // TODO sigest.buscarProfessorPorNome(arg2);
-        /*} catch (NegocioException ex) {
+        try {
+            return sigest.buscarProfessorPorSiape(Integer.parseInt(siape));
+        } catch (NegocioException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
-            //ex.printStackTrace();
-        }*/
-        //return null;
+            throw new RuntimeException("erro.professor.converter.asobject.exception",ex);
+        }
     }
 
     public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
-        if (arg2 instanceof Curso) {
-            Curso curso = (Curso) arg2;
-            return String.valueOf(curso.getNome());
+        if (arg2 instanceof Professor) {
+            Professor professor = (Professor) arg2;
+            return String.valueOf(professor.getNome());
         }
         return "";
     }

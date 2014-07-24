@@ -70,7 +70,7 @@ public final class Sigest extends AbstractFacade implements Serializable {
     }
 
     public Curso buscarCursoPorNome(String nome) throws NegocioException {
-        CursoBO bo =createCursoBO();
+        CursoBO bo = createCursoBO();
         return bo.buscarCursoPorNome(nome);
     }
 
@@ -151,6 +151,11 @@ public final class Sigest extends AbstractFacade implements Serializable {
     public List<Professor> listarProfessores() throws NegocioException{
         ProfessorBO bo = createProfessorBO();
         return bo.listar();
+    }
+
+    public Professor buscarProfessorPorSiape(Integer siape) throws NegocioException {
+        ProfessorBO bo = createProfessorBO();
+        return bo.buscarProfessorPorSiape(siape);
     }
 
     public Avaliacao cadastrarAvaliacao(Avaliacao avaliacao) throws NegocioException {

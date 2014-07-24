@@ -1,4 +1,4 @@
-package br.ufrn.cerescaico.bsi.sigest.dao.util;
+package br.ufrn.cerescaico.bsi.sigest.web.converter;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

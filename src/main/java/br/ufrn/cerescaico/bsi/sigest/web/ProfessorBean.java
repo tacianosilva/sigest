@@ -23,6 +23,12 @@ import br.ufrn.cerescaico.bsi.sigest.model.Professor;
 @ManagedBean(name = "professorBean")
 @SessionScoped
 public class ProfessorBean extends AbstractBean implements Serializable {
+
+    /**
+     * Logger.
+     */
+    private static final Logger logger = Logger.getLogger(ProfessorBean.class.getName());
+
     private static final long serialVersionUID = 1L;
 
     private Sigest sigest = Sigest.getInstance();
@@ -49,9 +55,10 @@ public class ProfessorBean extends AbstractBean implements Serializable {
 
         try {
             cursosSource.addAll(sigest.listarCursos());
-        } catch (NegocioException e) {
+        } catch (NegocioException ex) {
             cursosSource.addAll(new ArrayList<Curso>());
-            e.printStackTrace();
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new RuntimeException("erro.professor.bean.init.exception", ex);
         }
 
         cursos = new DualListModel<Curso>(cursosSource, cursosTarget);
