@@ -109,6 +109,12 @@
             <url>http://repo1.maven.org/maven2/</url>
         </repository>
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jqana-mvn-repo</id>
+            <url>https://raw.github.com/cleuton/jqana/mvn-repo/</url>
+        </pluginRepository>
+    </pluginRepositories>
     <build>
         <finalName>sigest</finalName>
 
@@ -128,6 +134,11 @@
                 <version>3.4</version>
                 <configuration>
                     <reportPlugins>
+                        <plugin>
+                            <groupId>com.obomprogramador.tools</groupId>
+                            <artifactId>jqana-maven-plugin</artifactId>
+                            <version>0.0.6</version>
+                        </plugin>
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-project-info-reports-plugin</artifactId>
