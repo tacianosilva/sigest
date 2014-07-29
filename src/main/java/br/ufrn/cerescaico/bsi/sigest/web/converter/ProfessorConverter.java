@@ -22,6 +22,7 @@ public class ProfessorConverter implements Converter {
 
     public Object getAsObject(FacesContext arg0, UIComponent arg1, String siape) {
         Sigest sigest = Sigest.getInstance();
+        if (siape.equals("0")) return new Professor(0, Integer.parseInt(siape), "Select One");
         try {
             return sigest.buscarProfessorPorSiape(Integer.parseInt(siape));
         } catch (NegocioException ex) {
@@ -33,8 +34,8 @@ public class ProfessorConverter implements Converter {
     public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
         if (arg2 instanceof Professor) {
             Professor professor = (Professor) arg2;
-            return String.valueOf(professor.getNome());
+            return String.valueOf(professor.getSiape());
         }
-        return "";
+        return "0";
     }
 }

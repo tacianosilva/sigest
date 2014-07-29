@@ -61,12 +61,16 @@ public class ProfessorBO extends AbstractBO {
             return dao.findProfessor(id);
         } catch (Exception ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
-            throw new NegocioException("erro.professor.bo.buscarCurso", ex);
+            throw new NegocioException("erro.professor.bo.buscarProfessor", ex);
         }
     }
 
-    public Professor buscarProfessorPorSiape(Integer siape) {
-        // TODO Auto-generated method stub
-        return null;
+    public Professor buscarProfessorPorSiape(Integer siape) throws NegocioException {
+        try {
+            return dao.buscarPorSiape(siape);
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new NegocioException("erro.professor.bo.buscarProfessorPorSiape", ex);
+        }
     }
 }

@@ -52,11 +52,11 @@ public class ProfessorJpaController implements Serializable {
      */
     private static final long serialVersionUID = 7435872895967453723L;
 
+    private EntityManagerFactory emf = null;
+
     public ProfessorJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-
-    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -308,4 +308,12 @@ public class ProfessorJpaController implements Serializable {
         }
     }
 
+    public Professor buscarPorSiape(Integer siape) {
+        EntityManager em = getEntityManager();
+        Query query = em
+                .createQuery("SELECT p FROM Professor p WHERE p.siape = :siape");
+        query.setParameter("siape", siape);
+        Professor rsl = (Professor) query.getSingleResult();
+        return rsl;
+    }
 }

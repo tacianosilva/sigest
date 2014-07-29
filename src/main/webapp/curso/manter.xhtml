@@ -27,11 +27,11 @@
                 <h:outputLabel for="coordenador" value="Coordenador: *" />
                 <h:selectOneMenu id="coordenador" value="#{cursoBean.coordenador}"
                     required="false">
-                    <f:selectItem itemLabel="Select One" itemValue="" />
-                    <f:selectItems value="#{cursoBean.professores}" />
+                    <f:selectItem itemLabel="Select One" itemValue="#{cursoBean.coordenador.siape}" />
+                    <f:selectItems value="#{cursoBean.professores}" itemValue="#{cursoBean.coordenador.siape}" itemLabel="#{cursoBean.coordenador}"/>
+                    <f:converter converterId="professorConverter"/>
                 </h:selectOneMenu>
                 <p:message for="coordenador" />
-                <h:outputText value="#{cursoBean.coordenador}" />
             </h:panelGrid>
 
             <p:commandButton value="Incluir"
