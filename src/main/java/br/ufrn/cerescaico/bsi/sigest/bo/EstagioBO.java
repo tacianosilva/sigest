@@ -9,9 +9,13 @@ import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.PreexistingEntityException;
 import br.ufrn.cerescaico.bsi.sigest.dao.util.JPAUtil;
 import br.ufrn.cerescaico.bsi.sigest.model.Estagio;
 
+/**
+ * Classe que representa a Entidade de Negócio para Estágio.
+ * @author Taciano de Morais Silva
+ */
 public class EstagioBO extends AbstractBO {
 
-private static final Logger logger = Logger.getLogger(EstagioBO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(EstagioBO.class.getName());
 
     private EstagioJpaController dao;
 
@@ -29,10 +33,10 @@ private static final Logger logger = Logger.getLogger(EstagioBO.class.getName())
         try {
             return dao.create(estagio);
         } catch (PreexistingEntityException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.Estagio.bo.inserir.PreexistingEntityException",ex);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.Estagio.bo.inserir.exception",ex);
         }
     }
@@ -45,7 +49,7 @@ private static final Logger logger = Logger.getLogger(EstagioBO.class.getName())
         try {
             return dao.findEstagioEntities();
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.Estagio.bo.listar", ex);
         }
     }
@@ -54,10 +58,10 @@ private static final Logger logger = Logger.getLogger(EstagioBO.class.getName())
         try {
             dao.edit(estagio);
         } catch (PreexistingEntityException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.Estagio.bo.inserir.PreexistingEntityException",ex);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.Estagio.bo.inserir.exception",ex);
         }
     }
@@ -66,7 +70,7 @@ private static final Logger logger = Logger.getLogger(EstagioBO.class.getName())
         try {
             dao.destroy(id);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.Estagio.bo.inserir.exception",ex);
         }
     }

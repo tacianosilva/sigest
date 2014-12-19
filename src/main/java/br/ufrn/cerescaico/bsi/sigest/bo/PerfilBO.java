@@ -21,7 +21,7 @@ public class PerfilBO extends AbstractBO {
     /**
      * Logger.
      */
-    private Logger logger = Logger.getLogger(PerfilBO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(PerfilBO.class.getName());
 
     private PerfilJpaController dao;
 
@@ -33,10 +33,10 @@ public class PerfilBO extends AbstractBO {
         try {
             dao.create(perfil);
         } catch (PreexistingEntityException ex) {
-            logger.log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
             throw new NegocioException("MSG_ERRO_001",ex);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
             throw new NegocioException("MSG_ERRO_002",ex);
         }
     }

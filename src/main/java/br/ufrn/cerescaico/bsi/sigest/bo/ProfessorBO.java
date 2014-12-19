@@ -18,7 +18,7 @@ public class ProfessorBO extends AbstractBO {
     /**
      * Logger.
      */
-    private static final Logger logger = Logger.getLogger(ProfessorBO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ProfessorBO.class.getName());
 
     private ProfessorJpaController dao;
 
@@ -30,10 +30,10 @@ public class ProfessorBO extends AbstractBO {
         try {
             return dao.create(professor);
         } catch (PreexistingEntityException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.professor.bo.inserir.PreexistingEntityException",ex);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.professor.bo.inserir.exception",ex);
         }
     }
@@ -42,7 +42,7 @@ public class ProfessorBO extends AbstractBO {
         try {
             dao.destroy(codigo);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.professor.bo.excluir.exception", ex);
         }
     }
@@ -51,7 +51,7 @@ public class ProfessorBO extends AbstractBO {
         try {
             return dao.findProfessorEntities();
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.professor.bo.listar", ex);
         }
     }
@@ -60,7 +60,7 @@ public class ProfessorBO extends AbstractBO {
         try {
             return dao.findProfessor(id);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.professor.bo.buscarProfessor", ex);
         }
     }
@@ -69,7 +69,7 @@ public class ProfessorBO extends AbstractBO {
         try {
             return dao.buscarPorSiape(siape);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.professor.bo.buscarProfessorPorSiape", ex);
         }
     }

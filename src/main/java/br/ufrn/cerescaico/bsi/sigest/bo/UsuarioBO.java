@@ -25,6 +25,7 @@ public class UsuarioBO extends AbstractBO {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(UsuarioBO.class.getName());
+
     private UsuarioDao dao;
 
     public UsuarioBO() {
@@ -134,8 +135,9 @@ public class UsuarioBO extends AbstractBO {
             if (usuarioBD != null && usuarioBD.getCodigo().equals(usuarioBD.getCodigo())) {
                 throw new NegocioException("erro.usuario.dao.usuario.duplicado");
             }
-        } catch (NegocioException e) {
-            throw new NegocioException("erro.usuario.login.existente");
+        } catch (NegocioException ex) {
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new NegocioException("erro.usuario.login.existente", ex);
         }
     }
 

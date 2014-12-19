@@ -40,6 +40,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <sonar.language>java</sonar.language>
     </properties>
 
     <dependencies>
@@ -109,12 +110,8 @@
             <url>http://repo1.maven.org/maven2/</url>
         </repository>
     </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>jqana-mvn-repo</id>
-            <url>https://raw.github.com/cleuton/jqana/mvn-repo/</url>
-        </pluginRepository>
-    </pluginRepositories>
+    <!-- <pluginRepositories> <pluginRepository> <id>jqana-mvn-repo</id> <url>https://raw.github.com/cleuton/jqana/mvn-repo/</url>
+        </pluginRepository> </pluginRepositories> -->
     <build>
         <finalName>sigest</finalName>
 
@@ -201,6 +198,15 @@
                 </configuration>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>2.3</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
 </project>

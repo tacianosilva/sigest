@@ -1,6 +1,7 @@
 package br.ufrn.cerescaico.bsi.sigest.bo;
 
 import java.util.List;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -9,9 +10,16 @@ import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.PreexistingEntityException;
 import br.ufrn.cerescaico.bsi.sigest.dao.util.JPAUtil;
 import br.ufrn.cerescaico.bsi.sigest.model.Empresa;
 
-public class EmpresaBO extends AbstractBO{
+/**
+ * Classe que representa a Entidade de Negócio para Empresa.
+ * @author Taciano de Morais Silva
+ */
+public class EmpresaBO extends AbstractBO {
 
-private static final Logger logger = Logger.getLogger(CursoBO.class.getName());
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = Logger.getLogger(EmpresaBO.class.getName());
 
     private EmpresaJpaController dao;
 
@@ -29,10 +37,10 @@ private static final Logger logger = Logger.getLogger(CursoBO.class.getName());
         try {
             return dao.create(empresa);
         } catch (PreexistingEntityException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.empresa.bo.inserir.PreexistingEntityException",ex);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.empresa.bo.inserir.exception",ex);
         }
     }
@@ -41,10 +49,10 @@ private static final Logger logger = Logger.getLogger(CursoBO.class.getName());
         try {
             dao.edit(empresa);
         } catch (PreexistingEntityException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.empresa.bo.editar.PreexistingEntityException",ex);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.empresa.bo.editar.exception",ex);
         }
     }
@@ -53,7 +61,7 @@ private static final Logger logger = Logger.getLogger(CursoBO.class.getName());
         try {
             dao.destroy(codigo);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.empresa.bo.editar.exception",ex);
         }
     }
@@ -62,7 +70,7 @@ private static final Logger logger = Logger.getLogger(CursoBO.class.getName());
         try {
             return dao.findEmpresaEntities();
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.empresa.bo.listar", ex);
         }
     }

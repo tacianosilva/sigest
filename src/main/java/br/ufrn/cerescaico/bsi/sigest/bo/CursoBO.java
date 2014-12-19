@@ -11,14 +11,14 @@ import br.ufrn.cerescaico.bsi.sigest.model.Curso;
 
 /**
  * Classe que representa a Entidade de Negócio para Curso.
- * @author taciano
+ * @author Taciano Morais Silva
  */
 public class CursoBO extends AbstractBO {
 
     /**
      * Logger.
      */
-    private static final Logger logger = Logger.getLogger(CursoBO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(CursoBO.class.getName());
 
     private CursoJpaController dao;
 
@@ -36,10 +36,10 @@ public class CursoBO extends AbstractBO {
         try {
             return dao.create(curso);
         } catch (PreexistingEntityException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.curso.bo.inserir.PreexistingEntityException",ex);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.curso.bo.inserir.exception",ex);
         }
     }
@@ -52,7 +52,7 @@ public class CursoBO extends AbstractBO {
         try {
             dao.destroy(codigo);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.curso.bo.excluir.exception", ex);
         }
     }
@@ -61,7 +61,7 @@ public class CursoBO extends AbstractBO {
         try {
             return dao.findCursoEntities();
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.curso.bo.listar", ex);
         }
     }
@@ -76,7 +76,7 @@ public class CursoBO extends AbstractBO {
         try {
             return dao.findCurso(id);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.curso.bo.buscarCurso", ex);
         }
     }
@@ -85,7 +85,7 @@ public class CursoBO extends AbstractBO {
         try{
             return dao.buscarPorNome(nome);
         } catch (Exception ex){
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.curso.bo.buscarCurso", ex);
         }
     }

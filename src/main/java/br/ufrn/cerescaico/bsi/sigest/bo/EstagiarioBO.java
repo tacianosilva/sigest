@@ -12,6 +12,7 @@ import br.ufrn.cerescaico.bsi.sigest.model.Estagiario;
 /**
  * Classe que representa a Entidade de Négocio para Estagiário.
  * @author fladson
+ * @author Taciano Morais Silva
  */
 
 public class EstagiarioBO {
@@ -19,7 +20,7 @@ public class EstagiarioBO {
      /**
      * Logger.
      */
-    private static final Logger logger = Logger.getLogger(EstagiarioBO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(EstagiarioBO.class.getName());
 
     private EstagiarioJpaController dao;
 
@@ -37,10 +38,10 @@ public class EstagiarioBO {
         try {
             return dao.create(estagiario);
         } catch (PreexistingEntityException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.Estagiario.bo.inserir.PreexistingEntityException",ex);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.Estagiario.bo.inserir.exception",ex);
         }
     }
@@ -49,7 +50,7 @@ public class EstagiarioBO {
         try {
             return dao.findEstagiarioEntities();
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.Estagiario.bo.listar", ex);
         }
     }

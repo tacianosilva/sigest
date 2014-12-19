@@ -10,7 +10,7 @@ import br.ufrn.cerescaico.bsi.sigest.model.Avaliacao;
 
 public class AvaliacaoBO {
 
-    private static final Logger logger = Logger.getLogger(AvaliacaoBO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AvaliacaoBO.class.getName());
 
     private AvaliacaoJpaController daoAvaliacao;
 
@@ -22,7 +22,7 @@ public class AvaliacaoBO {
         try {
             return daoAvaliacao.create(avaliacao);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.avaliacao.bo.inserir.exception",ex);
         }
     }
@@ -31,7 +31,7 @@ public class AvaliacaoBO {
         try {
             return daoAvaliacao.findAvaliacaoEntities();
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.avaliacao.bo.listar", ex);
         }
     }
@@ -40,7 +40,7 @@ public class AvaliacaoBO {
         try {
             return daoAvaliacao.findAvaliacao(id);
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.avaliacao.bo.buscarAvaliacao", ex);
         }
     }
@@ -49,7 +49,7 @@ public class AvaliacaoBO {
         try{
             return daoAvaliacao.buscarPorProf(codProf);
         } catch (Exception ex){
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.avaliacao.bo.buscarAvaliacaoPorProf", ex);
         }
     }
