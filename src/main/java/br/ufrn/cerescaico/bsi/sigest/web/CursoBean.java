@@ -56,12 +56,12 @@ public class CursoBean extends AbstractBean implements Serializable {
             context.addMessage("cursoBean.incluir", new FacesMessage(
                     msg("info.curso.bean.incluir.sucesso")));
         } catch (NegocioException ex) {
-            cursos = new ArrayList<Curso>();
+            //cursos = new ArrayList<Curso>();
             Logger.getLogger(CursoBean.class.getName()).log(Level.SEVERE,
                     ex.getMessage(), ex);
-            context.addMessage("cursoBean.listar", new FacesMessage(
+            context.addMessage("cursoBean.incluir", new FacesMessage(
                     FacesMessage.SEVERITY_ERROR,
-                    "Erro ao carregar a lista de cursos", ex.getMessage()));
+                    "Erro ao incluir novo curso!", ex.getMessage()));
         }
         return "/curso/manter";
     }

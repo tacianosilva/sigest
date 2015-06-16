@@ -166,7 +166,8 @@ public class ProfessorBean extends AbstractBean implements Serializable {
     }
 
     public Curso getCurso() throws NegocioException {
-        if (curso == null) {
+        //TODO Rever este código!
+        if (curso == null && getCodigocurso() != null) {
             curso = sigest.buscarCurso(getCodigocurso());
         }
         return curso;
