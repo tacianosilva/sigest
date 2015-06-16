@@ -34,7 +34,9 @@ public class CursoBO extends AbstractBO {
      */
     public Curso inserir(Curso curso) throws NegocioException {
         try {
-            return dao.create(curso);
+            Curso novo = dao.create(curso);
+            //enviarEmailNotificacao(curso.toString());
+            return novo;
         } catch (PreexistingEntityException ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.curso.bo.inserir.PreexistingEntityException",ex);
