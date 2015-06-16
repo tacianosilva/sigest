@@ -28,7 +28,7 @@
                 <h:selectOneMenu id="coordenador" value="#{cursoBean.coordenador}"
                     required="false">
                     <f:selectItem itemLabel="Select One" itemValue="#{cursoBean.coordenador.siape}" />
-                    <f:selectItems value="#{cursoBean.professores}" itemValue="#{cursoBean.coordenador.siape}" itemLabel="#{cursoBean.coordenador}"/>
+                    <f:selectItems id="prof" value="#{cursoBean.professores}" itemValue="#{prof.siape}" itemLabel="#{prof}"/>
                     <f:converter converterId="professorConverter"/>
                 </h:selectOneMenu>
                 <p:message for="coordenador" />
