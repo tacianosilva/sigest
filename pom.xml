@@ -39,6 +39,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <sonar.language>java</sonar.language>
     </properties>
 
     <dependencies>
@@ -62,17 +64,7 @@
         <dependency>
             <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>8.4-702.jdbc4</version>
-        </dependency>
-        <dependency>
-            <groupId>postgresql</groupId>
-            <artifactId>postgresql</artifactId>
             <version>9.1-901-1.jdbc4</version>
-        </dependency>
-        <dependency>
-            <groupId>postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>9.1-901.jdbc4</version>
         </dependency>
         <dependency>
             <groupId>javax.transaction</groupId>
@@ -92,7 +84,7 @@
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>3.4</version>
+            <version>4.0</version>
         </dependency>
     </dependencies>
 
@@ -118,16 +110,32 @@
             <url>http://repo1.maven.org/maven2/</url>
         </repository>
     </repositories>
+    <!-- <pluginRepositories> <pluginRepository> <id>jqana-mvn-repo</id> <url>https://raw.github.com/cleuton/jqana/mvn-repo/</url>
+        </pluginRepository> </pluginRepositories> -->
     <build>
         <finalName>sigest</finalName>
 
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.2</version>
+                <version>3.4</version>
                 <configuration>
                     <reportPlugins>
+                        <plugin>
+                            <groupId>com.obomprogramador.tools</groupId>
+                            <artifactId>jqana-maven-plugin</artifactId>
+                            <version>0.0.6</version>
+                        </plugin>
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-project-info-reports-plugin</artifactId>
@@ -145,7 +153,7 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-surefire-report-plugin</artifactId>
-                            <version>2.12.4</version>
+                            <version>2.17</version>
                         </plugin>
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
@@ -155,14 +163,20 @@
                         <plugin>
                             <groupId>org.codehaus.mojo</groupId>
                             <artifactId>findbugs-maven-plugin</artifactId>
-                            <version>2.5.2</version>
+                            <version>2.5.4</version>
+                            <configuration>
+                                <threshold>High</threshold>
+                                <effort>Default</effort>
+                            </configuration>
                         </plugin>
                         <plugin>
                             <groupId>org.codehaus.mojo</groupId>
                             <artifactId>cobertura-maven-plugin</artifactId>
+                            <version>2.6</version>
                             <configuration>
                                 <formats>
                                     <format>html</format>
+                                    <format>xml</format>
                                 </formats>
                             </configuration>
                         </plugin>
@@ -176,10 +190,23 @@
                             <artifactId>maven-jxr-plugin</artifactId>
                             <version>2.3</version>
                         </plugin>
+                        <plugin>
+                            <groupId>org.codehaus.sonar-plugins</groupId>
+                            <artifactId>maven-report</artifactId>
+                        </plugin>
                     </reportPlugins>
                 </configuration>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>2.3</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
 </project>

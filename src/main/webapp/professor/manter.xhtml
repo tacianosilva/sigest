@@ -6,46 +6,52 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui">
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </h:head>
 <body>
     <div class="container" style="-moz-appearance: normal">
-    <h1>Manter Professor</h1>
-    <hr />
-    <h:form>
-        <h:messages id="messages" class="alert-error"/>
-        <h:panelGrid columns="3">
-            <h:outputLabel value="Nome: *" for="nome" />
-            <p:inputText id="nome" value="#{professorBean.nome}"
-                required="true" label="nome">
+        <h1>Manter Professor</h1>
+        <hr />
+        <h:form>
+            <h:messages id="messages" class="alert-error" />
+            <h:panelGrid columns="3">
+                <h:outputLabel value="Nome: *" for="nome" />
+                <p:inputText id="nome" value="#{professorBean.nome}" required="true"
+                    label="nome">
                     <f:validateLength minimum="2" />
-            </p:inputText>
-            <p:message for="nome" />
+                </p:inputText>
+                <p:message for="nome" />
 
-            <h:outputLabel value="Siape: *" for="siape" />
-            <p:inputText id="siape" value="#{professorBean.siape}"
-                required="true" label="siape"/>
-            <p:message for="siape" />
+                <h:outputLabel value="Siape: *" for="siape" />
+                <p:inputText id="siape" value="#{professorBean.siape}"
+                    required="true" label="siape" />
+                <p:message for="siape" />
 
-            <h:outputLabel for="curso" value="Curso: *" />
-            <p:selectOneMenu id="curso" value="#{professorBean.codigocurso}">
-                <f:selectItem itemLabel="Selecione um curso" itemValue="#{null}" />
-                <f:selectItems value="#{cursoBean.cursos}" var="crs" itemLabel="#{crs.nome}" itemValue="#{crs.codigo}"/>
-            </p:selectOneMenu>
-            <p:message for="curso" />
-        </h:panelGrid>
+                <h:outputLabel for="curso" value="Curso: *" />
+                <p:selectOneMenu id="curso" value="#{professorBean.codigocurso}">
+                    <f:selectItem itemLabel="Selecione um curso" itemValue="#{null}" />
+                    <f:selectItems value="#{cursoBean.cursos}" var="crs"
+                        itemLabel="#{crs.nome}" itemValue="#{crs.codigo}" />
+                </p:selectOneMenu>
+                <p:message for="curso" />
+            </h:panelGrid>
 
-        <p:commandButton value="Inserir"
-            action="#{professorBean.inserir}"  update="messages"/>
+            <h:outputLabel for="pickList" value="Cursos: *" />
+            <p:pickList id="pickList" value="#{professorBean.cursos}" var="curso"
+                itemLabel="#{curso}" itemValue="#{curso}" converter="professorConverter" />
+            <p:message for="pickList" />
 
-    </h:form>
+            <p:commandButton value="Inserir" action="#{professorBean.incluir}"
+                update="messages" />
+
+        </h:form>
     </div>
     <hr />
     <div>
         <h:form>
             <h:messages />
-            <p:dataTable id="dataTable" var="professor" value="#{professorBean.professores}"
-                paginator="true" rows="10">
+            <p:dataTable id="dataTable" var="professor"
+                value="#{professorBean.professores}" paginator="true" rows="10">
                 <f:facet name="header">
                         Lista de Professores
                 </f:facet>
@@ -62,6 +68,13 @@
                     </f:facet>
 
                     <h:outputText value="#{professor.nome}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Curso" />
+                    </f:facet>
+
+                    <h:outputText value="#{professor.curso}" />
                 </p:column>
             </p:dataTable>
         </h:form>

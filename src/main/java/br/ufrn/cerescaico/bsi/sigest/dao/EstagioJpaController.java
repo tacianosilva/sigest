@@ -1,6 +1,6 @@
 package br.ufrn.cerescaico.bsi.sigest.dao;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -14,12 +14,13 @@ import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.NonexistentEntityException;
 import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.PreexistingEntityException;
 import br.ufrn.cerescaico.bsi.sigest.model.Estagio;
 
-public class EstagioJpaController {
-private static final long serialVersionUID = -5378480370337728386L;
-	
+public class EstagioJpaController implements Serializable {
+
+    private static final long serialVersionUID = -5378480370337728386L;
+
     private EntityManagerFactory emf = null;
 
-	public EstagioJpaController(EntityManagerFactory emf) {
+    public EstagioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
@@ -35,16 +36,14 @@ private static final long serialVersionUID = -5378480370337728386L;
             em.persist(Estagio);
             em.flush();
             em.getTransaction().commit();
-            
+
             return Estagio;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             if (findEstagio(Estagio.getCodigo()) != null) {
                 throw new PreexistingEntityException("Estagio " + Estagio + " already exists.", ex);
             }
             throw ex;
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -58,8 +57,7 @@ private static final long serialVersionUID = -5378480370337728386L;
             em.getTransaction().begin();
             Estagio = em.merge(Estagio);
             em.getTransaction().commit();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 Integer id = Estagio.getCodigo();
@@ -68,8 +66,7 @@ private static final long serialVersionUID = -5378480370337728386L;
                 }
             }
             throw ex;
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -85,14 +82,12 @@ private static final long serialVersionUID = -5378480370337728386L;
             try {
                 Estagio = em.getReference(Estagio.class, id);
                 Estagio.getCodigo();
-            }
-            catch (EntityNotFoundException enfe) {
+            } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The Estagio with id " + id + " no longer exists.", enfe);
             }
             em.remove(Estagio);
             em.getTransaction().commit();
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -118,8 +113,7 @@ private static final long serialVersionUID = -5378480370337728386L;
                 q.setFirstResult(firstResult);
             }
             return q.getResultList();
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
@@ -128,8 +122,7 @@ private static final long serialVersionUID = -5378480370337728386L;
         EntityManager em = getEntityManager();
         try {
             return em.find(Estagio.class, id);
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
@@ -142,10 +135,8 @@ private static final long serialVersionUID = -5378480370337728386L;
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ( (Long) q.getSingleResult() ).intValue();
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
-
 }

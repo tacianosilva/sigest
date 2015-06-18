@@ -19,6 +19,11 @@ import javax.transaction.UserTransaction;
  */
 public class UsuarioJpaController implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -3253107927678256951L;
+
     public UsuarioJpaController(UserTransaction utx, EntityManagerFactory emf) {
         this.utx = utx;
         this.emf = emf;
@@ -39,14 +44,12 @@ public class UsuarioJpaController implements Serializable {
             em.flush();
             em.getTransaction().commit();
             return usuario;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             if (findUsuario(usuario.getCodigo()) != null) {
                 throw new PreexistingEntityException("Usuario " + usuario + " already exists.", ex);
             }
             throw ex;
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -60,8 +63,7 @@ public class UsuarioJpaController implements Serializable {
             em.getTransaction().begin();
             usuario = em.merge(usuario);
             em.getTransaction().commit();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 Integer id = usuario.getCodigo();
@@ -70,8 +72,7 @@ public class UsuarioJpaController implements Serializable {
                 }
             }
             throw ex;
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -87,14 +88,12 @@ public class UsuarioJpaController implements Serializable {
             try {
                 usuario = em.getReference(Usuario.class, id);
                 usuario.getCodigo();
-            }
-            catch (EntityNotFoundException enfe) {
+            } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
             }
             em.remove(usuario);
             em.getTransaction().commit();
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -120,8 +119,7 @@ public class UsuarioJpaController implements Serializable {
                 q.setFirstResult(firstResult);
             }
             return q.getResultList();
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
@@ -130,8 +128,7 @@ public class UsuarioJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             return em.find(Usuario.class, id);
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
@@ -144,10 +141,9 @@ public class UsuarioJpaController implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ( (Long) q.getSingleResult() ).intValue();
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
-    
+
 }

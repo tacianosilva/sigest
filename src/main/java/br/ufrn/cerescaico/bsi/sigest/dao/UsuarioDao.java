@@ -17,11 +17,11 @@ import javax.transaction.UserTransaction;
  * @author taciano
  */
 public class UsuarioDao extends UsuarioJpaController {
-    
+
     public UsuarioDao(UserTransaction utx, EntityManagerFactory emf) {
         super(utx, emf);
     }
-    
+
     @SuppressWarnings("unchecked")
     public Usuario autenticar(String username, String password) {
         Usuario usuario = null;
@@ -29,14 +29,14 @@ public class UsuarioDao extends UsuarioJpaController {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            
-            CriteriaBuilder cb = em.getCriteriaBuilder();  
-            CriteriaQuery<Usuario> cq = cb.createQuery(Usuario.class);  
+
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Usuario> cq = cb.createQuery(Usuario.class);
             Root<Usuario> root = cq.from(Usuario.class);
-            
+
             if (username != null && !username.equals("") && password != null && !password.equals("")) {
-                Predicate byLogin = cb.equal(root.get("username"), username);  
-                Predicate byGroup = cb.equal(root.get("password"), password);  
+                Predicate byLogin = cb.equal(root.get("username"), username);
+                Predicate byGroup = cb.equal(root.get("password"), password);
                 cq.where(byLogin, byGroup);
             }
             //
@@ -50,12 +50,7 @@ public class UsuarioDao extends UsuarioJpaController {
         }
         return usuario;
     }
-    
-    /**
-     * 
-     * @param email
-     * @return 
-     */
+
     public Usuario buscarPorEmail(String email) {
         EntityManager em = getEntityManager();
         try {
@@ -68,7 +63,7 @@ public class UsuarioDao extends UsuarioJpaController {
             em.close();
         }
     }
-    
+
     public List<Usuario> pesquisar(String nome) {
         EntityManager em = getEntityManager();
         try {

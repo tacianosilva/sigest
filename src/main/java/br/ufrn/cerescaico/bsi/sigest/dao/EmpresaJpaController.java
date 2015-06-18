@@ -1,11 +1,12 @@
 package br.ufrn.cerescaico.bsi.sigest.dao;
 
-
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -14,15 +15,15 @@ import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.PreexistingEntityException;
 import br.ufrn.cerescaico.bsi.sigest.model.Empresa;
 
 public class EmpresaJpaController implements Serializable {
-	
+
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5378480370337728386L;
-	
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = -5378480370337728386L;
+
     private EntityManagerFactory emf = null;
 
-	public EmpresaJpaController(EntityManagerFactory emf) {
+    public EmpresaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
@@ -38,16 +39,14 @@ public class EmpresaJpaController implements Serializable {
             em.persist(empresa);
             em.flush();
             em.getTransaction().commit();
-            
+
             return empresa;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             if (findEmpresa(empresa.getCodigo()) != null) {
                 throw new PreexistingEntityException("Empresa " + empresa + " already exists.", ex);
             }
             throw ex;
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -61,8 +60,7 @@ public class EmpresaJpaController implements Serializable {
             em.getTransaction().begin();
             empresa = em.merge(empresa);
             em.getTransaction().commit();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 Integer id = empresa.getCodigo();
@@ -71,8 +69,7 @@ public class EmpresaJpaController implements Serializable {
                 }
             }
             throw ex;
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -88,14 +85,12 @@ public class EmpresaJpaController implements Serializable {
             try {
                 empresa = em.getReference(Empresa.class, id);
                 empresa.getCodigo();
-            }
-            catch (EntityNotFoundException enfe) {
+            } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The empresa with id " + id + " no longer exists.", enfe);
             }
             em.remove(empresa);
             em.getTransaction().commit();
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -121,8 +116,7 @@ public class EmpresaJpaController implements Serializable {
                 q.setFirstResult(firstResult);
             }
             return q.getResultList();
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
@@ -131,8 +125,7 @@ public class EmpresaJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             return em.find(Empresa.class, id);
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
@@ -145,10 +138,9 @@ public class EmpresaJpaController implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ( (Long) q.getSingleResult() ).intValue();
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
-    
+
 }

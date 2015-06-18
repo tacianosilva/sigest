@@ -23,22 +23,23 @@
  */
 package br.ufrn.cerescaico.bsi.sigest.dao;
 
-import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.IllegalOrphanException;
-import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import br.ufrn.cerescaico.bsi.sigest.model.Curso;
-import br.ufrn.cerescaico.bsi.sigest.model.Avaliacao;
 import java.util.ArrayList;
 import java.util.List;
-import br.ufrn.cerescaico.bsi.sigest.model.Estagio;
-import br.ufrn.cerescaico.bsi.sigest.model.Professor;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.transaction.UserTransaction;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.IllegalOrphanException;
+import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.NonexistentEntityException;
+import br.ufrn.cerescaico.bsi.sigest.model.Avaliacao;
+import br.ufrn.cerescaico.bsi.sigest.model.Curso;
+import br.ufrn.cerescaico.bsi.sigest.model.Estagio;
+import br.ufrn.cerescaico.bsi.sigest.model.Professor;
 
 /**
  *
@@ -46,18 +47,22 @@ import javax.transaction.UserTransaction;
  */
 public class ProfessorJpaController implements Serializable {
 
+    /**
+     * serialVersionUID
+     */
+    private static final long serialVersionUID = 7435872895967453723L;
+
+    private EntityManagerFactory emf = null;
+
     public ProfessorJpaController(EntityManagerFactory emf) {
-        //this.utx = utx;
         this.emf = emf;
     }
-    //private UserTransaction utx = null;
-    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public Professor create(Professor professor) {
+    public Professor create(Professor professor) throws Exception {
         if (professor.getAvaliacaos() == null) {
             professor.setAvaliacaos(new ArrayList<Avaliacao>());
         }
@@ -86,10 +91,7 @@ public class ProfessorJpaController implements Serializable {
             }
             professor.setEstagios(attachedEstagios);
             em.persist(professor);
-            if (cursoBean != null) {
-                cursoBean.getProfessors().add(professor);
-                cursoBean = em.merge(cursoBean);
-            }
+
             for (Avaliacao avaliacaosAvaliacao : professor.getAvaliacaos()) {
                 Professor oldProfessorOfAvaliacaosAvaliacao = avaliacaosAvaliacao.getProfessor();
                 avaliacaosAvaliacao.setProfessor(professor);
@@ -267,10 +269,11 @@ public class ProfessorJpaController implements Serializable {
         return findProfessorEntities(false, maxResults, firstResult);
     }
 
+    @SuppressWarnings("unchecked")
     private List<Professor> findProfessorEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            CriteriaQuery<Object> cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Professor.class));
             Query q = em.createQuery(cq);
             if (!all) {
@@ -295,7 +298,7 @@ public class ProfessorJpaController implements Serializable {
     public int getProfessorCount() {
         EntityManager em = getEntityManager();
         try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            CriteriaQuery<Object> cq = em.getCriteriaBuilder().createQuery();
             Root<Professor> rt = cq.from(Professor.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
@@ -304,5 +307,13 @@ public class ProfessorJpaController implements Serializable {
             em.close();
         }
     }
-    
+
+    public Professor buscarPorSiape(Integer siape) {
+        EntityManager em = getEntityManager();
+        Query query = em
+                .createQuery("SELECT p FROM Professor p WHERE p.siape = :siape");
+        query.setParameter("siape", siape);
+        Professor rsl = (Professor) query.getSingleResult();
+        return rsl;
+    }
 }

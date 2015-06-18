@@ -1,19 +1,20 @@
 package br.ufrn.cerescaico.bsi.sigest.web;
 
-import br.ufrn.cerescaico.bsi.sigest.Sigest;
-import br.ufrn.cerescaico.bsi.sigest.bo.NegocioException;
-import br.ufrn.cerescaico.bsi.sigest.model.Curso;
-import br.ufrn.cerescaico.bsi.sigest.model.Professor;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+
+import br.ufrn.cerescaico.bsi.sigest.Sigest;
+import br.ufrn.cerescaico.bsi.sigest.bo.NegocioException;
+import br.ufrn.cerescaico.bsi.sigest.model.Curso;
+import br.ufrn.cerescaico.bsi.sigest.model.Professor;
 
 @ManagedBean(name = "cursoBean")
 @SessionScoped
@@ -41,6 +42,7 @@ public class CursoBean extends AbstractBean implements Serializable {
     private Curso getCurso() {
         Curso curso = new Curso();
         curso.setNome(getNome());
+        curso.setCoordenador(getCoordenador());
         return curso;
     }
 
@@ -48,24 +50,18 @@ public class CursoBean extends AbstractBean implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         setContext(context);
 
-        // ResourceBundle bundle =
-        // FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(),
-        // "msg");
-        // String messageSucesso =
-        // bundle.getString("info.cursobean.incluir.sucesso");
-
         try {
-            // O método retirna o curso com o código
+            // O método retorna o curso com o código
             sigest.inserirCurso(getCurso());
             context.addMessage("cursoBean.incluir", new FacesMessage(
-                    msg("info.cursobean.incluir.sucesso")));
+                    msg("info.curso.bean.incluir.sucesso")));
         } catch (NegocioException ex) {
-            cursos = new ArrayList<Curso>();
+            //cursos = new ArrayList<Curso>();
             Logger.getLogger(CursoBean.class.getName()).log(Level.SEVERE,
                     ex.getMessage(), ex);
-            context.addMessage("cursoBean.listar", new FacesMessage(
+            context.addMessage("cursoBean.incluir", new FacesMessage(
                     FacesMessage.SEVERITY_ERROR,
-                    "Erro ao carregar a lista de cursos", ex.getMessage()));
+                    "Erro ao incluir novo curso!", ex.getMessage()));
         }
         return "/curso/manter";
     }

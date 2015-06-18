@@ -8,7 +8,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.ufrn.cerescaico.bsi.sigest.dao.exceptions.PreexistingEntityException;
 import br.ufrn.cerescaico.bsi.sigest.model.Curso;
 
 public class CursoBOTest {
@@ -59,7 +58,7 @@ public class CursoBOTest {
             curso2 = bo.inserir(curso);
         } catch (NegocioException e) {
             assertEquals("1", "erro.curso.bo.inserir.PreexistingEntityException", e.getMessage());
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -74,7 +73,7 @@ public class CursoBOTest {
             assertEquals("4", buscado.getCodigo(), curso.getCodigo());
         } catch (NegocioException e) {
             fail();
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -82,10 +81,10 @@ public class CursoBOTest {
     @Test
     public void testExcluir() {
         try {
-            curso = bo.inserir(curso2);
+            curso2 = bo.inserir(curso2);
             assertNotNull("1", curso2);
             assertNotNull("2", curso2.getCodigo());
-            assertEquals("3", "Curso Teste Excluir", curso.getNome());
+            assertEquals("3", "Curso Teste Excluir", curso2.getNome());
             Curso buscado = bo.buscarCurso(curso2.getCodigo());
             assertEquals("4", buscado.getCodigo(), curso2.getCodigo());
             bo.excluir(curso2.getCodigo());
@@ -93,7 +92,7 @@ public class CursoBOTest {
             assertEquals("5", buscado, null);
         } catch (NegocioException e) {
             fail();
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 

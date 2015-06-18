@@ -1,0 +1,82 @@
+\subsection{Descrição}
+A entidade \emph{Curso}, será a responsável por representar e armazenar as
+características de um curso que receberá alunos para estágios.
+
+Um \emph{Curso} possui as seguintes características:
+
+\begin{itemize}
+  \item código: Numérico tipo serial;
+  \item nome: Texto tipo varchar;
+  \item coordenador: Numérico tipo serial - código de um professor;
+  \item vice coordenador: Numérico tipo serial - código de um professor;
+  \item coordenador de estágios: Numérico tipo serial - código de um professor;
+  \item resolução de estágios: Binário - tipo  blob para enviar um pdf;
+  \item fórmulários avaliativos para os estágios (voluntários ou obrigatórios);
+\end{itemize}
+
+A entidade Curso terá relacionamentos com as seguintes entidades:
+
+\begin{itemize}
+  \item Estágios de alunos do curso;
+  \item Coordenador do curso - um professor;
+  \item Vice coordenador do curso - um professor;
+  \item Coordenador de estágios - um professor;
+\end{itemize}
+
+\subsection{Fluxo Principal}
+
+Dependendo dos atores a entidade curso poderá ser acessada de formas diferentes.
+Temos os seguintes atores possíveis: Professor, Coordenador, Aluno Estagiário e
+Supervisor.
+
+\subsubsection{Incluir Curso}
+
+Para incluir um curso o ator segue os seguintes passos:
+
+\begin{itemize}
+  \item O ator faz login no sistema;
+  \item O sistema verifica se o ator tem permissão para a função (apenas
+  administradores);
+  \item O sistema abre a tela para cadastrar um novo curso;
+  \item O ator preenche os dados do curso;
+  \item O ator salva o novo curso;
+\end{itemize}
+
+
+\subsubsection{Alterar Curso}
+
+\begin{itemize}
+  \item O ator faz login no sistema;
+  \item O sistema verifica se o ator tem permissão para a função (apenas
+  administradores);
+  \item O sistema abre a tela para alterar o curso;
+  \item O ator preenche os dados do curso;
+  \item O ator salva as alterações curso;
+\end{itemize}
+
+\subsubsection{Consultar Curso}
+
+\begin{itemize}
+  \item O ator faz login no sistema;
+  \item O sistema verifica se o ator tem permissão para a função (apenas
+  administradores);
+  \item O sistema abre a tela para consultar e listar os cursos;
+\end{itemize}
+
+\subsection{Fluxo Secundário}
+
+\subsubsection{Consultar Estágios do Curso}
+
+\begin{itemize}
+  \item O ator faz login no sistema;
+  \item O sistema verifica se o ator tem permissão para a função;
+  \item O sistema abre a tela para consultar e listar os cursos;
+  \item O ator define as informações de filtragem;
+  \item O sistema apresenta a lista de estágios do curso;
+\end{itemize}
+
+\subsection{Fluxo de Exceção}
+
+\subsection{Diagrama de Classe}
+
+\subsection{Diagrama de Sequência}

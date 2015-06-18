@@ -7,51 +7,31 @@ package br.ufrn.cerescaico.bsi.sigest.bo;
  * @since 15/06/2012
  */
 public class NegocioException extends Exception {
-    
+
+    private static final long serialVersionUID = 3788893181715411426L;
+
     /**
      * Parâmetros para as mensagens.
      */
     private String[] parametros;
 
-    /**
-     * 
-     * @param message
-     * @param ex 
-     */
     public NegocioException(String message, Exception ex) {
         super(message, ex);
     }
 
-    /**
-     * 
-     * @param message 
-     */
     public NegocioException(String message) {
         super(message);
     }
-    
-    /**
-     * 
-     * @param message
-     * @param parametros 
-     */
+
     public NegocioException(String message, String[] parametros) {
         super(message);
         this.parametros = parametros;
     }
 
-    /**
-     * 
-     * @return 
-     */
     public String[] getParametros() {
         return parametros;
     }
 
-    /**
-     * 
-     * @param parametros 
-     */
     public void setParametros(String[] parametros) {
         this.parametros = parametros;
     }

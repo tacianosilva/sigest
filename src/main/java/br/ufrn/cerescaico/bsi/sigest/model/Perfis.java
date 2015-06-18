@@ -6,54 +6,54 @@ import javax.persistence.*;
 
 /**
  * The persistent class for the perfis database table.
- * 
+ *
  */
 @Entity
 @Table(name="perfis")
 public class Perfis implements Serializable, Bean {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@SequenceGenerator(name="PERFIS_CODIGO_GENERATOR", sequenceName="PERFIS_CODIGO_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PERFIS_CODIGO_GENERATOR")
-	@Column(unique=true, nullable=false)
-	private Integer codigo;
+    @Id
+    @SequenceGenerator(name="PERFIS_CODIGO_GENERATOR", sequenceName="PERFIS_CODIGO_SEQ")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PERFIS_CODIGO_GENERATOR")
+    @Column(unique=true, nullable=false)
+    private Integer codigo;
 
-	//bi-directional many-to-one association to Perfil
+    //bi-directional many-to-one association to Perfil
     @ManyToOne
-	@JoinColumn(name="codigo_perfil", nullable=false)
-	private Perfil perfil;
+    @JoinColumn(name="codigo_perfil", nullable=false)
+    private Perfil perfil;
 
-	//bi-directional many-to-one association to Usuario
+    //bi-directional many-to-one association to Usuario
     @ManyToOne
-	@JoinColumn(name="codigo_usuario", nullable=false)
-	private Usuario usuario;
+    @JoinColumn(name="codigo_usuario", nullable=false)
+    private Usuario usuario;
 
     public Perfis() {
     }
 
-	public Integer getCodigo() {
-		return this.codigo;
-	}
+    public Integer getCodigo() {
+        return this.codigo;
+    }
 
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
-	}
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
 
-	public Perfil getPerfil() {
-		return this.perfil;
-	}
+    public Perfil getPerfil() {
+        return this.perfil;
+    }
 
-	public void setPerfil(Perfil perfil) {
-		this.perfil = perfil;
-	}
-	
-	public Usuario getUsuario() {
-		return this.usuario;
-	}
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	
+    public Usuario getUsuario() {
+        return this.usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
 }

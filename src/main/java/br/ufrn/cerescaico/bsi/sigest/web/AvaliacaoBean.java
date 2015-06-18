@@ -1,5 +1,6 @@
 package br.ufrn.cerescaico.bsi.sigest.web;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,20 +18,21 @@ import br.ufrn.cerescaico.bsi.sigest.model.Professor;
 
 @ManagedBean(name = "avaliacaoBean")
 @SessionScoped
-public class AvaliacaoBean {
-	private static final long serialVersionUID = 1L;
+public class AvaliacaoBean extends AbstractBean implements Serializable {
 
-	private Sigest sigest = Sigest.getInstance();
-    
+    private static final long serialVersionUID = 1L;
+
+    private Sigest sigest = Sigest.getInstance();
+
     private List<Avaliacao> avaliacoes = null;
     private List<Avaliacao> avaliacoesProf = null;
     private Avaliacao avaliacao = new Avaliacao();
     private Professor professor = new Professor();
     private int codProf;
-    
+
     public String inserir(){
-    	try {
-    		sigest.cadastrarAvaliacao(avaliacao);
+        try {
+            sigest.cadastrarAvaliacao(avaliacao);
         } catch (NegocioException ex) {
             Logger.getLogger(AvaliacaoBean.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             FacesContext context = FacesContext.getCurrentInstance();
@@ -38,24 +40,24 @@ public class AvaliacaoBean {
         }
         return "manterAvaliacao";
     }
-    
+
     public String listar() {
         try {
-        	avaliacoes = sigest.listarAvaliacoes();
+            avaliacoes = sigest.listarAvaliacoes();
         } catch (NegocioException ex) {
-        	avaliacoes = new ArrayList<Avaliacao>();
+            avaliacoes = new ArrayList<Avaliacao>();
             Logger.getLogger(AvaliacaoBean.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage("avaliacaoBean.listar", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao carregar a lista de avaliacoes", ex.getMessage()));
         }
         return "manterProfessor";
     }
-    
+
     public String consultarPorProf() {
         try {
-        	avaliacoesProf = sigest.listarAvaliacoesProf(professor.getCodigo());
+            avaliacoesProf = sigest.listarAvaliacoesProf(professor.getCodigo());
         } catch (NegocioException ex) {
-        	avaliacoesProf = new ArrayList<Avaliacao>();
+            avaliacoesProf = new ArrayList<Avaliacao>();
             Logger.getLogger(AvaliacaoBean.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage("avaliacaoBean.consultarPorProf", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao carregar a lista de avaliacoes", ex.getMessage()));
@@ -64,7 +66,7 @@ public class AvaliacaoBean {
     }
 
     public List<Avaliacao> getAvaliacoes() {
-    	listar();
+        listar();
         return avaliacoes;
     }
 
@@ -73,35 +75,35 @@ public class AvaliacaoBean {
     }
 
     public List<Avaliacao> getAvaliacoesProf() {
-    	consultarPorProf();
+        consultarPorProf();
         return avaliacoesProf;
     }
 
     public void setAvaliacoesProf(List<Avaliacao> avaliacoesProf) {
         this.avaliacoesProf = avaliacoesProf;
     }
-    
+
     public void setCodProf(int codProf){
-    	this.codProf = codProf;
+        this.codProf = codProf;
     }
-    
+
     public int getCodProf(){
-    	return codProf;
+        return codProf;
     }
-    
+
     public Avaliacao getAvaliacao(){
-    	return avaliacao;
+        return avaliacao;
     }
-    
+
     public void setAvaliacao(Avaliacao avaliacao){
-    	this.avaliacao = avaliacao;
+        this.avaliacao = avaliacao;
     }
-    
+
     public void setProfessor(Professor professor){
-    	this.professor = professor;
+        this.professor = professor;
     }
-    
+
     public Professor getProfessor(){
-    	return professor;
+        return professor;
     }
 }

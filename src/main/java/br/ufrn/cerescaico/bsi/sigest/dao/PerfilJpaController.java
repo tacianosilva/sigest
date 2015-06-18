@@ -20,6 +20,11 @@ import javax.transaction.UserTransaction;
  */
 public class PerfilJpaController implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -1405051051069042942L;
+
     public PerfilJpaController(UserTransaction utx, EntityManagerFactory emf) {
         this.utx = utx;
         this.emf = emf;
@@ -38,14 +43,12 @@ public class PerfilJpaController implements Serializable {
             em.getTransaction().begin();
             em.persist(perfil);
             em.getTransaction().commit();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             if (findPerfil(perfil.getCodigo()) != null) {
                 throw new PreexistingEntityException("Perfil " + perfil + " already exists.", ex);
             }
             throw ex;
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -59,8 +62,7 @@ public class PerfilJpaController implements Serializable {
             em.getTransaction().begin();
             perfil = em.merge(perfil);
             em.getTransaction().commit();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 Integer id = perfil.getCodigo();
@@ -69,8 +71,7 @@ public class PerfilJpaController implements Serializable {
                 }
             }
             throw ex;
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -86,14 +87,12 @@ public class PerfilJpaController implements Serializable {
             try {
                 perfil = em.getReference(Perfil.class, id);
                 perfil.getCodigo();
-            }
-            catch (EntityNotFoundException enfe) {
+            } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The perfil with id " + id + " no longer exists.", enfe);
             }
             em.remove(perfil);
             em.getTransaction().commit();
-        }
-        finally {
+        } finally {
             if (em != null) {
                 em.close();
             }
@@ -119,8 +118,7 @@ public class PerfilJpaController implements Serializable {
                 q.setFirstResult(firstResult);
             }
             return q.getResultList();
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
@@ -129,8 +127,7 @@ public class PerfilJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             return em.find(Perfil.class, id);
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
@@ -143,10 +140,9 @@ public class PerfilJpaController implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ( (Long) q.getSingleResult() ).intValue();
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
-    
+
 }

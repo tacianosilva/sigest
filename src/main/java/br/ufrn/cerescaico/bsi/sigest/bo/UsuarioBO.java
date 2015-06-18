@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Classe de negócio do bean Usuário do sistema SisEventos.
+ * Classe de negócio do bean Usuário do sistema Sigest.
  *
  * @author Taciano Morais Silva
  * @version 23/05/2012, 19h27m
@@ -25,6 +25,7 @@ public class UsuarioBO extends AbstractBO {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(UsuarioBO.class.getName());
+
     private UsuarioDao dao;
 
     public UsuarioBO() {
@@ -40,15 +41,14 @@ public class UsuarioBO extends AbstractBO {
      * @param password Senha do usuário.
      * @return O usuário autenticado, ou
      * <code>null</code> caso contrário.
-     * @throws SepeException Casp ocorra algum erro de acesso ao banco.
+     * @throws NegocioException Caso ocorra algum erro de acesso ao banco.
      */
     public Usuario autenticar(String username, String password) throws NegocioException {
-        //FIXME
+        //TODO Implementar validação de login com Spring
         validarLogin(username);
         try {
             return dao.autenticar(username, password);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.usuario.bo.autenticar", ex);
         }
@@ -59,18 +59,19 @@ public class UsuarioBO extends AbstractBO {
      *
      * @param usuario O usuário a ser incluído.
      * @return O usuário inserido com o código gerado automaticamente.
+     * @throws NegocioException Caso ocorra erro ao inserir.
      */
     public Usuario inserir(Usuario usuario) throws NegocioException {
         verificarNull(usuario);
         verificarLoginExistente(usuario);
+        verificarTamMin("nome", usuario.getNome());
+        verificarTamMin("senha", usuario.getSenha());
         try {
             return dao.create(usuario);
-        }
-        catch (PreexistingEntityException ex) {
+        } catch (PreexistingEntityException ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.usuario.bo.inserir.preexist", ex);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.usuario.bo.inserir", ex);
         }
@@ -80,12 +81,12 @@ public class UsuarioBO extends AbstractBO {
      * Lista todos os usuários cadastrados no sistema.
      *
      * @return A lista de usuários.
+     * @throws NegocioException Caso ocorra erro ao listar.
      */
     public List<Usuario> listar() throws NegocioException {
         try {
             return dao.findUsuarioEntities();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.usuario.bo.listar", ex);
         }
@@ -100,12 +101,12 @@ public class UsuarioBO extends AbstractBO {
      *
      * @param id O identificador do usuário.
      * @return O usuário localizado.
+     * @throws NegocioException Caso ocorra erro ao buscar.
      */
     public Usuario buscar(Integer id) throws NegocioException {
         try {
             return dao.findUsuario(id);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.usuario.bo.buscar", ex);
         }
@@ -116,22 +117,17 @@ public class UsuarioBO extends AbstractBO {
      *
      * @param email O email do usuário.
      * @return O usuário localizado.
+     * @throws NegocioException Caso ocorra erro ao buscar.
      */
     public Usuario buscarPorEmail(String email) throws NegocioException {
         try {
             return dao.buscarPorEmail(email);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.usuario.bo.buscarPorEmail", ex);
         }
     }
 
-    /**
-     *
-     * @param usuario
-     * @throws NegocioException
-     */
     private void verificarLoginExistente(Usuario usuario) throws NegocioException {
         try {
             Usuario usuarioBD = dao.buscarPorEmail(usuario.getEmail());
@@ -139,31 +135,17 @@ public class UsuarioBO extends AbstractBO {
             if (usuarioBD != null && usuarioBD.getCodigo().equals(usuarioBD.getCodigo())) {
                 throw new NegocioException("erro.usuario.dao.usuario.duplicado");
             }
-        }
-        catch (NegocioException e) {
-            throw new NegocioException("erro.usuario.login.existente");
+        } catch (NegocioException ex) {
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new NegocioException("erro.usuario.login.existente", ex);
         }
     }
 
-    /*
-     * Alterar os dados do usário. @param usuario O usuário a ser alterado.
-     *
-     * public void alterar(Usuario usuario) throws NegocioException {
-     * verificarNull(usuario); if (isAdminUser(usuario) &&
-     * !isAdminUser(getSisEventos().getUsuarioSessao())) { throw new
-     * NegocioException("erro.usuario.bo.isAdminUser"); }
-     * //verificarLoginExistente(usuario); try { verificarTamMin("login",
-     * usuario.getLogin()); verificarTamMin("nome", usuario.getNome());
-     *
-     * Dao<Usuario> dao = new UsuarioDao(); dao.update(usuario); } catch
-     * (DataAccessLayerException ex) { LOGGER.error(ex.getMessage(), ex); throw
-     * new SepeException("erro.usuario.bo.alterar", ex); }
-    }
-     */
     /**
      * Exclui o usuário do sistema.
      *
      * @param usuario O usuário a ser excluído.
+     * @throws NegocioException Caso ocorra erro ao excluir.
      */
     public void excluir(Usuario usuario) throws NegocioException {
         if (isAdminUser(usuario)) {
@@ -171,8 +153,7 @@ public class UsuarioBO extends AbstractBO {
         }
         try {
             excluir(usuario.getCodigo());
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.usuario.bo.excluir", ex);
         }
@@ -182,6 +163,7 @@ public class UsuarioBO extends AbstractBO {
      * Exclui o usuário do sistema.
      *
      * @param id O identificador do usuário a ser excluído.
+     * @throws NegocioException Caso ocorra erro ao excluir.
      */
     public void excluir(Integer id) throws NegocioException {
         if (isAdminUser(id)) {
@@ -189,8 +171,7 @@ public class UsuarioBO extends AbstractBO {
         }
         try {
             dao.destroy(id);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.usuario.bo.excluir.id", ex);
         }
@@ -200,14 +181,12 @@ public class UsuarioBO extends AbstractBO {
      * Pesquisar usuário filtrando por nome.
      *
      * @param nome O nome do usuário.
+     * @throws NegocioException Caso ocorra erro ao pesquisar.
      */
     public List<Usuario> pesquisar(String nome) throws NegocioException {
         try {
-            // verificarTamMin("login", login);
-            //verificarTamMin("nome", nome);
             return dao.pesquisar(nome);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             throw new NegocioException("erro.usuario.bo.pesquisar", ex);
         }
@@ -233,11 +212,6 @@ public class UsuarioBO extends AbstractBO {
         }
     }
 
-    /**
-     *
-     * @param texto
-     * @throws br.cesed.lti.Sepe.bo.SepeException
-     */
     private void verificarTamMin(String att, String texto) throws NegocioException {
         if (texto == null || texto.equals(STRING_VAZIO)
                 || texto.length() < TAMANHO_MINIMO) {
