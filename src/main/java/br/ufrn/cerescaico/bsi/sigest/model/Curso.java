@@ -117,18 +117,23 @@ public class Curso implements Serializable, Bean {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (!(obj instanceof Curso))
+        }
+        if (!(obj instanceof Curso)) {
             return false;
+        }
         Curso other = (Curso) obj;
         if (codigo == null) {
-            if (other.codigo != null)
+            if (other.codigo != null) {
                 return false;
-        } else if (!codigo.equals(other.codigo))
+            }
+        } else if (!codigo.equals(other.codigo)) {
             return false;
+        }
         return true;
     }
 }

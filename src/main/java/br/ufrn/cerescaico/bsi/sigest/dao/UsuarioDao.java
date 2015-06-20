@@ -1,7 +1,9 @@
 package br.ufrn.cerescaico.bsi.sigest.dao;
 
 import br.ufrn.cerescaico.bsi.sigest.model.Usuario;
+
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
@@ -17,6 +19,11 @@ import javax.transaction.UserTransaction;
  * @author taciano
  */
 public class UsuarioDao extends UsuarioJpaController {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
     public UsuarioDao(UserTransaction utx, EntityManagerFactory emf) {
         super(utx, emf);
@@ -42,13 +49,18 @@ public class UsuarioDao extends UsuarioJpaController {
             //
             em.getTransaction().commit();
         } catch (Exception e) {
-           //handleException(e);
+           handleException(e);
         } finally {
             if (em != null) {
                 em.close();
             }
         }
         return usuario;
+    }
+
+    private void handleException(Exception e) {
+        // TODO Auto-generated method stub
+
     }
 
     public Usuario buscarPorEmail(String email) {

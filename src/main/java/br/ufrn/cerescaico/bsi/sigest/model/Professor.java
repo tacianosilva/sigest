@@ -61,23 +61,30 @@ public class Professor implements Serializable, Bean {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Professor other = (Professor) obj;
         if (codigo == null) {
-            if (other.codigo != null)
+            if (other.codigo != null) {
                 return false;
-        } else if (!codigo.equals(other.codigo))
+            }
+        } else if (!codigo.equals(other.codigo)) {
             return false;
+        }
         if (siape == null) {
-            if (other.siape != null)
+            if (other.siape != null) {
                 return false;
-        } else if (!siape.equals(other.siape))
+            }
+        } else if (!siape.equals(other.siape)) {
             return false;
+        }
         return true;
     }
 

@@ -56,7 +56,6 @@ public class CursoBean extends AbstractBean implements Serializable {
             context.addMessage("cursoBean.incluir", new FacesMessage(
                     msg("info.curso.bean.incluir.sucesso")));
         } catch (NegocioException ex) {
-            //cursos = new ArrayList<Curso>();
             Logger.getLogger(CursoBean.class.getName()).log(Level.SEVERE,
                     ex.getMessage(), ex);
             context.addMessage("cursoBean.incluir", new FacesMessage(
