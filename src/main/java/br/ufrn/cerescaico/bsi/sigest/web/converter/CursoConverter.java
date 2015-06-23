@@ -12,23 +12,26 @@ import br.ufrn.cerescaico.bsi.sigest.Sigest;
 import br.ufrn.cerescaico.bsi.sigest.bo.NegocioException;
 import br.ufrn.cerescaico.bsi.sigest.model.Curso;
 
+/**
+ * Conversor para Curso a partir do seu nome.
+ * @author Taciano
+ */
 @FacesConverter(value = "cursoConverter")
 public class CursoConverter implements Converter {
 
     /**
      * Logger.
      */
-    private static final Logger logger = Logger.getLogger(CursoConverter.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(CursoConverter.class.getName());
 
     public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
         Sigest sigest = Sigest.getInstance();
         try {
             return sigest.buscarCursoPorNome(arg2);
         } catch (NegocioException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
-            //ex.printStackTrace();
+            LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new RuntimeException(ex);
         }
-        return null;
     }
 
     public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
