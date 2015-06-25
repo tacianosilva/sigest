@@ -22,7 +22,6 @@ public class Estagio implements Serializable, Bean {
 
     @Temporal( TemporalType.DATE)
     @Column(name="data_cadastro", nullable=false)
-    //@Column(name="data_cadastro", nullable=false, length=2147483647)
     private Date dataCadastro;
 
     @Temporal( TemporalType.DATE)
@@ -47,7 +46,7 @@ public class Estagio implements Serializable, Bean {
 
     //bi-directional many-to-one association to Avaliacao
     @OneToMany(mappedBy="estagioBean")
-    private List<Avaliacao> avaliacaos;
+    private List<Avaliacao> avaliacoes;
 
     //bi-directional many-to-one association to Empresa
     @ManyToOne
@@ -131,12 +130,12 @@ public class Estagio implements Serializable, Bean {
         this.situacao = situacao;
     }
 
-    public List<Avaliacao> getAvaliacaos() {
-        return this.avaliacaos;
+    public List<Avaliacao> getAvaliacoes() {
+        return this.avaliacoes;
     }
 
-    public void setAvaliacaos(List<Avaliacao> avaliacaos) {
-        this.avaliacaos = avaliacaos;
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
     }
 
     public Empresa getEmpresaBean() {
