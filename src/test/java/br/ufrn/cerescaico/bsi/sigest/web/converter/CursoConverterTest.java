@@ -51,8 +51,13 @@ public class CursoConverterTest {
 
     }
 
-    //@Test
+    @Test
     public final void testGetAsString() {
-        fail("Not yet implemented"); // TODO
+        CursoConverter converter = new CursoConverter();
+        String nomeConvertido = converter.getAsString(null, null, inserido);
+        assertNotNull("1- Curso Existe!", nomeConvertido);
+        if (nomeConvertido != null) {
+            assertEquals("2", nomeCurso, nomeConvertido);
+        }
     }
 }
