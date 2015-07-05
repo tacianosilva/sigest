@@ -54,7 +54,7 @@ public class SigestTest {
             Curso add = sigest.inserirCurso(curso);
             assertNotNull("0", curso.getCodigo());
             assertNotNull("1", add.getCodigo());
-            assertEquals("2",curso.getNome(), add.getNome());
+            assertEquals("2", curso.getNome(), add.getNome());
             Curso buscado = sigest.buscarCurso(add.getCodigo());
             assertEquals("3", buscado.getCodigo(), add.getCodigo());
             assertEquals("4", buscado.getNome(), add.getNome());
@@ -63,7 +63,7 @@ public class SigestTest {
             assertEquals("5", buscado, null);
         } catch (NegocioException e) {
             fail();
-            //e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 }
