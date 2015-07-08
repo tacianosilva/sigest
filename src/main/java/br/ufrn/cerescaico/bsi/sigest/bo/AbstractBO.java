@@ -40,8 +40,9 @@ public class AbstractBO {
     }
 
     /**
-     * @param obj
-     * @return
+     * Verifica se a string passada como parâmetro é nula ou vazia.
+     * @param obj Uma string.
+     * @return True se a string passada é nula ou vazia.
      */
     protected boolean checkNullVazio(String obj) {
         if (obj == null || "".equals(obj)) {
@@ -51,8 +52,9 @@ public class AbstractBO {
     }
 
     /**
-     * @param obj
-     * @return
+     * Verifica se o objeto passado como parâmetro é nulo.
+     * @param obj Um objeto.
+     * @return True se o objeto passado é nulo.
      */
     protected boolean checkNull(Object obj) {
         if (obj == null) {
@@ -62,8 +64,9 @@ public class AbstractBO {
     }
 
     /**
-     * @param id
-     * @return
+     * Verifica se o inteiro passado como parâmetro é nulo ou tem valor zero.
+     * @param id Um inteiro.
+     * @return True se o inteiro passado é nulo ou de valor zero.
      */
     protected boolean checkNullZero(Integer id) {
         if (id == null || id == 0) {
