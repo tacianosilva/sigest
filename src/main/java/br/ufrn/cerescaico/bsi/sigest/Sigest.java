@@ -3,6 +3,7 @@ package br.ufrn.cerescaico.bsi.sigest;
 import java.io.Serializable;
 import java.util.List;
 
+import br.ufrn.cerescaico.bsi.sigest.annotation.AnnotationA;
 import br.ufrn.cerescaico.bsi.sigest.bo.AvaliacaoBO;
 import br.ufrn.cerescaico.bsi.sigest.bo.CursoBO;
 import br.ufrn.cerescaico.bsi.sigest.bo.EstagiarioBO;
@@ -24,6 +25,7 @@ import br.ufrn.cerescaico.bsi.sigest.model.Empresa;
  * @version 25/10/2012, Taciano de Morais Silva - tacianosilva@gmail.com
  * @since 25/10/2012
  */
+@AnnotationA
 public final class Sigest extends AbstractFacade implements Serializable {
 
     /**
