@@ -9,3 +9,6 @@
 /target
 /docs/
 /test-output/
+/.travis.yml.swp
+/createDDL_ddlGeneration.jdbc
+/dropDDL_ddlGeneration.jdbc
