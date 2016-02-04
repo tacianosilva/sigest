@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
@@ -21,9 +20,7 @@ public class Avaliacao implements Bean {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="AVALIACAO_CODIGO_GENERATOR", sequenceName="AVALIACAO_CODIGO_SEQ")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="AVALIACAO_CODIGO_GENERATOR")
-    @Column(unique=true, nullable=false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer codigo;
 
     @Column(nullable=false, length=255)

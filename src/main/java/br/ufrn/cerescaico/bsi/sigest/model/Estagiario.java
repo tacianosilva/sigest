@@ -14,9 +14,7 @@ public class Estagiario implements Serializable, Bean {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="ESTAGIARIO_CODIGO_GENERATOR", sequenceName="ESTAGIARIO_CODIGO_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESTAGIARIO_CODIGO_GENERATOR")
-    @Column(unique=true, nullable=false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer codigo;
 
     @Column(nullable=false, length=10)
@@ -28,10 +26,10 @@ public class Estagiario implements Serializable, Bean {
     //bi-directional many-to-one association to Curso
     @ManyToOne
     @JoinColumn(name="curso", nullable=false)
-    private Curso cursoBean;
+    private Curso curso;
 
     //bi-directional many-to-one association to Estagio
-    @OneToMany(mappedBy="estagiarioBean")
+    @OneToMany(mappedBy="estagiario")
     private List<Estagio> estagios;
 
     public Estagiario() {
@@ -61,12 +59,12 @@ public class Estagiario implements Serializable, Bean {
         this.nome = nome;
     }
 
-    public Curso getCursoBean() {
-        return this.cursoBean;
+    public Curso getCurso() {
+        return this.curso;
     }
 
-    public void setCursoBean(Curso cursoBean) {
-        this.cursoBean = cursoBean;
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 
     public List<Estagio> getEstagios() {

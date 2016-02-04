@@ -16,9 +16,7 @@ public class Professor implements Serializable, Bean {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="PROFESSOR_CODIGO_GENERATOR", sequenceName="PROFESSOR_CODIGO_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PROFESSOR_CODIGO_GENERATOR")
-    @Column(unique=true, nullable=false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer codigo;
 
     @Column(nullable=false, length=255)

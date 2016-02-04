@@ -14,9 +14,7 @@ public class Empresa implements Serializable, Bean {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="EMPRESA_CODIGO_GENERATOR", sequenceName="EMPRESA_CODIGO_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EMPRESA_CODIGO_GENERATOR")
-    @Column(unique=true, nullable=false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer codigo;
 
     @Column(nullable=false, length=15)
@@ -26,11 +24,11 @@ public class Empresa implements Serializable, Bean {
     private String nome;
 
     //bi-directional many-to-one association to Convenio
-    @OneToMany(mappedBy="empresaBean")
+    @OneToMany(mappedBy="empresa")
     private List<Convenio> convenios;
 
     //bi-directional many-to-one association to Estagio
-    @OneToMany(mappedBy="empresaBean")
+    @OneToMany(mappedBy="empresa")
     private List<Estagio> estagios;
 
     //bi-directional many-to-one association to Supervisor

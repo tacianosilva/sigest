@@ -15,9 +15,7 @@ public class Estagio implements Serializable, Bean {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="ESTAGIO_CODIGO_GENERATOR", sequenceName="ESTAGIO_CODIGO_SEQ", allocationSize=1)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESTAGIO_CODIGO_GENERATOR")
-    @Column(unique=true, nullable=false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer codigo;
 
     @Temporal( TemporalType.DATE)
@@ -38,7 +36,10 @@ public class Estagio implements Serializable, Bean {
     @Column(nullable=false)
     private float media;
 
-    @Column(nullable=false)
+    /**
+     * Coluna para upload do relatório em pdf.
+     */
+    @Column
     private byte[] relatorio;
 
     @Column(nullable=false, length=50)
@@ -51,12 +52,12 @@ public class Estagio implements Serializable, Bean {
     //bi-directional many-to-one association to Empresa
     @ManyToOne
     @JoinColumn(name="empresa", nullable=false)
-    private Empresa empresaBean;
+    private Empresa empresa;
 
     //bi-directional many-to-one association to Estagiario
     @ManyToOne
     @JoinColumn(name="estagiario", nullable=false)
-    private Estagiario estagiarioBean;
+    private Estagiario estagiario;
 
     //bi-directional many-to-one association to Professor
     @ManyToOne
@@ -138,20 +139,20 @@ public class Estagio implements Serializable, Bean {
         this.avaliacoes = avaliacoes;
     }
 
-    public Empresa getEmpresaBean() {
-        return this.empresaBean;
+    public Empresa getEmpresa() {
+        return this.empresa;
     }
 
-    public void setEmpresaBean(Empresa empresaBean) {
-        this.empresaBean = empresaBean;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
-    public Estagiario getEstagiarioBean() {
-        return this.estagiarioBean;
+    public Estagiario getEstagiario() {
+        return this.estagiario;
     }
 
-    public void setEstagiarioBean(Estagiario estagiarioBean) {
-        this.estagiarioBean = estagiarioBean;
+    public void setEstagiario(Estagiario estagiario) {
+        this.estagiario = estagiario;
     }
 
     public Professor getProfessor() {

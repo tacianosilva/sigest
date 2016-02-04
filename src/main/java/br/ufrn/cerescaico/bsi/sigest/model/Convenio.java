@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,9 +24,7 @@ public class Convenio implements Bean {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="CONVENIO_CODIGO_GENERATOR", sequenceName="CONVENIO_CODIGO_SEQ")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CONVENIO_CODIGO_GENERATOR")
-    @Column(unique=true, nullable=false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer codigo;
 
     @Temporal( TemporalType.DATE)
@@ -47,7 +44,7 @@ public class Convenio implements Bean {
     //bi-directional many-to-one association to Empresa
     @ManyToOne
     @JoinColumn(name="empresa", nullable=false)
-    private Empresa empresaBean;
+    private Empresa empresa;
 
     public Convenio() {
     }
@@ -92,12 +89,12 @@ public class Convenio implements Bean {
         this.documento = documento;
     }
 
-    public Empresa getEmpresaBean() {
-        return this.empresaBean;
+    public Empresa getEmpresa() {
+        return this.empresa;
     }
 
-    public void setEmpresaBean(Empresa empresaBean) {
-        this.empresaBean = empresaBean;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
 }

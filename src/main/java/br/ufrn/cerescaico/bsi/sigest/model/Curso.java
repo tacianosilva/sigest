@@ -1,10 +1,16 @@
 package br.ufrn.cerescaico.bsi.sigest.model;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 
 /**
@@ -17,24 +23,22 @@ public class Curso implements Serializable, Bean {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="CURSO_CODIGO_GENERATOR", sequenceName="CURSO_CODIGO_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CURSO_CODIGO_GENERATOR")
-    @Column(unique=true, nullable=false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer codigo;
 
     @Column(nullable=false, length=255)
     private String nome;
 
     @OneToOne
-    @PrimaryKeyJoinColumn
+    //@PrimaryKeyJoinColumn
     private Professor coordenador;
 
     @OneToOne
-    @PrimaryKeyJoinColumn
+    //@PrimaryKeyJoinColumn
     private Professor viceCoordenador;
 
     //bi-directional many-to-one association to Estagiario
-    @OneToMany(mappedBy="cursoBean")
+    @OneToMany(mappedBy="curso")
     private List<Estagiario> estagiarios;
 
     //bi-directional many-to-one association to Professor

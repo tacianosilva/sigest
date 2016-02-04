@@ -14,9 +14,7 @@ public class Supervisor implements Serializable, Bean {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="SUPERVISOR_CODIGO_GENERATOR", sequenceName="SUPERVISOR_CODIGO_SEQ")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SUPERVISOR_CODIGO_GENERATOR")
-    @Column(unique=true, nullable=false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer codigo;
 
     @Column(nullable=false, length=255)

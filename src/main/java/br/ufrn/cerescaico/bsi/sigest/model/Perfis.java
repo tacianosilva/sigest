@@ -14,9 +14,7 @@ public class Perfis implements Serializable, Bean {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="PERFIS_CODIGO_GENERATOR", sequenceName="PERFIS_CODIGO_SEQ")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PERFIS_CODIGO_GENERATOR")
-    @Column(unique=true, nullable=false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer codigo;
 
     //bi-directional many-to-one association to Perfil

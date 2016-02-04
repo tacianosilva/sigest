@@ -15,9 +15,7 @@ public class Usuario implements Serializable, Bean {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="USUARIO_CODIGO_GENERATOR", sequenceName="USUARIO_CODIGO_SEQ")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USUARIO_CODIGO_GENERATOR")
-    @Column(unique=true, nullable=false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer codigo;
 
     @Column(nullable=false, length=255)
