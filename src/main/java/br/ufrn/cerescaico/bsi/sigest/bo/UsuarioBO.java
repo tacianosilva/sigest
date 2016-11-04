@@ -181,6 +181,7 @@ public class UsuarioBO extends AbstractBO {
      * Pesquisar usuário filtrando por nome.
      *
      * @param nome O nome do usuário.
+     * @return Lista de usuários que atendem a busca por nome.
      * @throws NegocioException Caso ocorra erro ao pesquisar.
      */
     public List<Usuario> pesquisar(String nome) throws NegocioException {
