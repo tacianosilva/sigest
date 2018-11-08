@@ -6,14 +6,16 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <meta charset="utf-8"/>
-    <title>SisEventos - Login de Usuário</title>
+    <title>SisEventos - Cursos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="Tela Manter Curso - SIGEST"/>
     <meta name="author" content="Taciano Morais Silva"/>
 </h:head>
 <h:body>
+    <h1>Cursos</h1>
+    <hr/>
     <h:form>
-        <p:dataTable id="dataTable" var="curso" value="#{cursoBean.cursos}" paginator="true" rows="10">
+        <p:dataTable id="dataTable" var="curso" value="#{cursoBean.cursos}" paginator="true" rows="10" emptyMessage="Sem registros.">
             <f:facet name="header">
                 <h:outputLabel value="Lista de Cursos"/>
                 <br/>
@@ -45,7 +47,7 @@
         </p:dataTable>
     </h:form>
 
-    <p:dialog header="Adicionar Curso" widgetVar="dialog" modal="true" height="100">
+    <p:dialog header="Adicionar Curso" widgetVar="dialog" modal="true" responsive="true">
         <h:form>
             <h:messages id="messages" class="alert-error" />
             <h:panelGrid columns="3">
@@ -56,11 +58,11 @@
                 <p:message for="nome"/>
 
                 <h:outputLabel for="coordenador" value="Coordenador: *"/>
-                <h:selectOneMenu id="coordenador" value="#{cursoBean.coordenador}" required="false">
-                    <f:selectItem itemLabel="Select One" itemValue="#{cursoBean.coordenador.siape}"/>
+                <p:selectOneMenu id="coordenador" value="#{cursoBean.coordenador}" required="false">
+                    <f:selectItem itemLabel="Selecionar" itemValue="#{cursoBean.coordenador.siape}"/>
                     <f:selectItems id="prof" value="#{cursoBean.professores}" itemValue="#{professorBean.siape}" itemLabel="#{professorBean}"/>
                     <f:converter converterId="professorConverter"/>
-                </h:selectOneMenu>
+                </p:selectOneMenu>
                 <p:message for="coordenador"/>
             </h:panelGrid>
             <p:commandButton value="Incluir" actionListener="#{cursoBean.incluir}" update="messages"/>
