@@ -15,7 +15,7 @@
 </h:head>
 <h:body>
     <div class="container" style="-moz-appearance: normal">
-    	<a href = '../sigest'><button class = 'button btn-voltar'>Voltar para o menu</button></a>
+        <a href = '../sigest'><button class = 'button btn-voltar'>Voltar para o menu</button></a>
         <h1>Manter Curso</h1>
         <h:form>
             <h:messages id="messages" class="alert-error" />
@@ -26,7 +26,7 @@
                     <f:validateLength minimum="2" />
                 </p:inputText>
                 <p:message for="nome" />
-                <h:outputLabel for="coordenador" value="Coordenador: *" />
+                <h:outputLabel for="coordenador" value="Coordenador: " />
                 <h:selectOneMenu id="coordenador" value="#{cursoBean.coordenador}"
                     required="false">
                     <f:selectItem itemLabel="Select One" itemValue="#{cursoBean.coordenador.siape}" />
@@ -35,8 +35,7 @@
                 </h:selectOneMenu>
                 <p:message for="coordenador" />
             </h:panelGrid>
-
-            <p:commandButton value="Incluir"
+             <p:commandButton value="Incluir"
                 actionListener="#{cursoBean.incluir}" update="messages"/>
         </h:form>
     </div>
@@ -53,25 +52,22 @@
                     <f:facet name="header">
                         <h:outputText value="Codigo" />
                     </f:facet>
-
-                    <h:outputText value="#{curso.codigo}" />
+                     <h:outputText value="#{curso.codigo}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Nome" />
                     </f:facet>
-
-                    <h:outputText value="#{curso.nome}" />
+                     <h:outputText value="#{curso.nome}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Coordenador" />
                     </f:facet>
-
-                    <h:outputText value="#{curso.coordenador}" />
+                     <h:outputText value="#{curso.coordenador}" />
                 </p:column>
             </p:dataTable>
         </h:form>
     </div>
 </h:body>
-</html>
+</html> 
