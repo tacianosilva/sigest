@@ -29,7 +29,7 @@ public class Curso implements Serializable, Bean {
     @Column(nullable=false, length=255)
     private String nome;
 
-    @OneToOne
+    @OneToOne(optional = true)
     //@PrimaryKeyJoinColumn
     private Professor coordenador;
 

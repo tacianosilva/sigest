@@ -1,0 +1,35 @@
+/* Estilos personalizados para a aplicação 
+		By @Mathmed  */
+
+h2 {
+	margin-left: 30px;
+}
+
+.btn {
+	width: 200px;
+	margin-bottom: 10px;
+	border: 3px solid #007bff;
+	transition: 0.8s all;
+}		
+
+.btn:hover{
+	background: white;
+}
+
+a:hover {
+	color:#007bff!important;
+	font-weight:bold;
+}
+
+.btn a {
+	color: white;
+	font-weight:bold;
+}
+
+a:hover, a:focus {
+	text-decoration: none;
+}
+
+.principal {
+	margin-left: 30px;
+}
