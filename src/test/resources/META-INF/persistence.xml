@@ -23,8 +23,7 @@
             <property name="eclipselink.logging.level" value="ALL" />
 
             <!-- atualiza o banco, gera as tabelas se for preciso -->
-            <property name="eclipselink.ddl-generation" value="none" />
-            <!-- property name="eclipselink.ddl-generation" value="drop-and-create-tables" / -->
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
             <!-- property name="eclipselink.ddl-generation" value="create-or-extend-tables" / -->
             <property name="eclipselink.create-ddl-jdbc-file-name"
                 value="createDDL_ddlGeneration.jdbc" />
