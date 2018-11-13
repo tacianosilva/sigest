@@ -54,12 +54,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.9.10</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>br.edu.ufcg.splab</groupId>
             <artifactId>designtests</artifactId>
             <version>1.0.1</version>
