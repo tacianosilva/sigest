@@ -6,7 +6,7 @@ A idéia é permitir que professores, alunos e coordenação acompanhem de forma
 
 ## Execução
 
-[![Build Status](https://travis-ci.org/tacianosilva/sigest.svg?branch=sigest-1.0)]
+![Build Status](https://travis-ci.org/tacianosilva/sigest.svg?branch=sigest-1.0)
 
 ### Criar Banco de Dados (dev e test)
 
