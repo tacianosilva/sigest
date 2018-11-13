@@ -7,8 +7,6 @@
         <description>Sigest - Unidade de Pesistência para Testes</description>
         <!-- https://www.thoughts-on-java.org/jpa-persistence-xml/ -->
         
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        
         <class>br.ufrn.cerescaico.bsi.sigest.model.Supervisor</class>
         <class>br.ufrn.cerescaico.bsi.sigest.model.Professor</class>
         <class>br.ufrn.cerescaico.bsi.sigest.model.Estagio</class>
@@ -33,9 +31,6 @@
             <property name="eclipselink.logging.parameters" value="true"/>
             
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />
-            
-            <property name="javax.persistence.schema-generation.create-source" value="script"/>
-            <property name="javax.persistence.schema-generation.drop-source" value="script"/>
            
         </properties>
     </persistence-unit>
