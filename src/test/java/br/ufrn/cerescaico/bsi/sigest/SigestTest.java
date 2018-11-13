@@ -2,6 +2,9 @@ package br.ufrn.cerescaico.bsi.sigest;
 
 import static org.junit.Assert.*;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +13,8 @@ import br.ufrn.cerescaico.bsi.sigest.bo.NegocioException;
 import br.ufrn.cerescaico.bsi.sigest.model.Curso;
 
 public class SigestTest {
+    
+    private static final Logger LOGGER = Logger.getLogger(SigestTest.class.getName());
 
     Sigest sigest;
 
@@ -31,9 +36,8 @@ public class SigestTest {
         try {
             sigest.excluirCurso(curso.getCodigo());
             sigest.excluirCurso(curso2.getCodigo());
-        } catch (NegocioException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOGGER.log(Level.INFO, e.getMessage(), e);
         }
         curso = null;
         curso2 = null;
