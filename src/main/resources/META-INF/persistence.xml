@@ -3,6 +3,10 @@
     xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
     <persistence-unit name="sigestPU" transaction-type="RESOURCE_LOCAL">
+    
+        <description>Sigest - Unidade de Pesistência</description>
+        <!-- https://www.thoughts-on-java.org/jpa-persistence-xml/ -->
+        
         <class>br.ufrn.cerescaico.bsi.sigest.model.Supervisor</class>
         <class>br.ufrn.cerescaico.bsi.sigest.model.Professor</class>
         <class>br.ufrn.cerescaico.bsi.sigest.model.Estagio</class>
@@ -16,20 +20,15 @@
         <class>br.ufrn.cerescaico.bsi.sigest.model.Usuario</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sigest_db" />
-            <property name="javax.persistence.jdbc.user" value="travis" />
-            <property name="javax.persistence.jdbc.password" value="" />
+            <property name="javax.persistence.jdbc.user" value="sigest_user" />
+            <property name="javax.persistence.jdbc.password" value="sigest_user" />
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 
-            <property name="eclipselink.logging.level" value="ALL" />
-
-            <!-- atualiza o banco, gera as tabelas se for preciso -->
-            <property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
-            <!-- property name="eclipselink.ddl-generation" value="create-or-extend-tables" / -->
-            <property name="eclipselink.create-ddl-jdbc-file-name"
-                value="createDDL_ddlGeneration.jdbc" />
-            <property name="eclipselink.drop-ddl-jdbc-file-name" value="dropDDL_ddlGeneration.jdbc" />
-            <property name="eclipselink.ddl-generation.output-mode"
-                value="both" />
-        </properties>
+            <!-- configure logging -->
+            <property name="eclipselink.logging.level" value="INFO"/>
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+            <property name="eclipselink.logging.parameters" value="true"/>
+            
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />        </properties>
     </persistence-unit>
 </persistence>
