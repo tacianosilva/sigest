@@ -7,24 +7,26 @@
     xmlns:p="http://primefaces.org/ui">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="css/styles.css"></link>
     <title>Página Principal</title>
 </h:head>
 <body>
-    <div>
-        <h1>Sistema Gerenciador de Estágios - SIGEST</h1>
+    <div class = 'principal'>
+        <h1 class = 'h1'>Sistema Gerenciador de Estágios - SIGEST</h1>
         <hr />
         <h2>Menu</h2>
         <h:form>
             <h:messages />
-            <h:commandLink action="#{cursoBean.manter}">Manter Curso</h:commandLink>
+            <h:commandLink class = 'btn btn-primary' action="#{cursoBean.manter}">Manter Curso</h:commandLink>
             <br />
-            <h:commandLink action="#{professorBean.manter}">Manter Professor</h:commandLink>
+            <h:commandLink class = 'btn btn-primary' action="#{professorBean.manter}">Manter Professor</h:commandLink>
             <br />
-            <h:commandLink action="#{empresaBean.manter}">Manter Empresa</h:commandLink>
+            <h:commandLink class = 'btn btn-primary' action="#{empresaBean.manter}">Manter Empresa</h:commandLink>
             <br />
-            <h:commandLink action="#{estagiarioBean.manter}">Manter Estagiário</h:commandLink>
+            <h:commandLink class = 'btn btn-primary' action="#{estagiarioBean.manter}">Manter Estagiário</h:commandLink>
             <br />
-            <h:commandLink action="#{estagioBean.manter}">Manter Estágio</h:commandLink>
+            <h:commandLink class = 'btn btn-primary' action="#{estagioBean.manter}">Manter Estágio</h:commandLink>
             <br />
         </h:form>
         <hr />
