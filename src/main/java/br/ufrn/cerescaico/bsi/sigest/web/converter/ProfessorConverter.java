@@ -23,7 +23,8 @@ public class ProfessorConverter implements Converter {
     public Object getAsObject(FacesContext arg0, UIComponent arg1, String siape) {
         Sigest sigest = Sigest.getInstance();
         if (siape.equals("0")) {
-            return new Professor(0, Integer.parseInt(siape), "Select One");
+            //return new Professor(0, Integer.parseInt(siape), "Select One");
+            return null;
         }
         try {
             return sigest.buscarProfessorPorSiape(Integer.parseInt(siape));

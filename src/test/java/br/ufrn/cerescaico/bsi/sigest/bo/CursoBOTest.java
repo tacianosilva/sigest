@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +14,8 @@ import org.junit.Test;
 import br.ufrn.cerescaico.bsi.sigest.model.Curso;
 
 public class CursoBOTest {
+    
+    private static final Logger LOGGER = Logger.getLogger(CursoBOTest.class.getName());
 
     CursoBO bo = new CursoBO();
     Curso curso;
@@ -18,6 +23,7 @@ public class CursoBOTest {
 
     @Before
     public void setUp() throws Exception {
+        bo.listar();
         curso = new Curso();
         curso.setNome("Curso Teste");
 
@@ -31,8 +37,7 @@ public class CursoBOTest {
             bo.excluir(curso.getCodigo());
             bo.excluir(curso2.getCodigo());
         } catch (NegocioException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.log(Level.INFO, e.getMessage(), e);
         }
         curso = null;
         curso2 = null;

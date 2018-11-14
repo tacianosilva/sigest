@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
     <persistence-unit name="sigestPU" transaction-type="RESOURCE_LOCAL">
     
-        <description>Sigest - Unidade de Pesistência</description>
+        <description>Sigest - Unidade de Pesistência para Testes</description>
         <!-- https://www.thoughts-on-java.org/jpa-persistence-xml/ -->
         
         <class>br.ufrn.cerescaico.bsi.sigest.model.Supervisor</class>
@@ -18,17 +18,20 @@
         <class>br.ufrn.cerescaico.bsi.sigest.model.Perfil</class>
         <class>br.ufrn.cerescaico.bsi.sigest.model.Perfis</class>
         <class>br.ufrn.cerescaico.bsi.sigest.model.Usuario</class>
+
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sigest_db" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sigest_db_test" />
             <property name="javax.persistence.jdbc.user" value="sigest_user" />
             <property name="javax.persistence.jdbc.password" value="sigest_user" />
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-
+            
             <!-- configure logging -->
             <property name="eclipselink.logging.level" value="INFO"/>
             <property name="eclipselink.logging.level.sql" value="FINE"/>
             <property name="eclipselink.logging.parameters" value="true"/>
             
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />        </properties>
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />
+           
+        </properties>
     </persistence-unit>
 </persistence>
