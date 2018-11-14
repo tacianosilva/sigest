@@ -2,15 +2,6 @@ package br.ufrn.cerescaico.bsi.sigest.bo;
 
 import java.util.Properties;
 
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 /**
  * Classe de negócio abstrata que contém método auxiliares para os BO's do
  * sistema Sigest.
@@ -73,59 +64,6 @@ public class AbstractBO {
             return true;
         }
         return false;
-    }
-
-    //TODO Colocar como protected depois dos testes!
-    public static void enviarEmailNotificacao(String texto) {
-        String remetente = "tacianosilva@gmail.com";
-        String destinatario = "tacianosilva@yahoo.com.br";
-        String assunto = "Notificação Sigest";
-        String mensagem = texto;
-        enviaEmail(remetente, destinatario, assunto, mensagem);
-    }
-
-    // Método que envia o email
-    public static void enviaEmail(String remetente, String destinatario,
-            String assunto, String mensagem) {
-
-        Session session = Session.getDefaultInstance(getPropriedades(),
-                getAuthenticator());
-
-        /** Ativa Debug para sessão */
-        session.setDebug(true);
-
-        try {
-
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(remetente)); // Seta o remetente
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(destinatario)); // Define o
-                                                            // destinatário
-            message.setSubject(assunto); // Define o assunto
-            message.setText(mensagem); // Mensagem do email
-
-            Transport.send(message);
-
-
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    // Método que retorna a autenticação de sua conta de email
-    public static Authenticator getAuthenticator() {
-
-        Authenticator autenticacao = new Authenticator() {
-
-            public PasswordAuthentication getPasswordAuthentication() {
-
-                // Preencha com seu email e com sua senha
-                return new PasswordAuthentication("tacianosilva@gmail.com",
-                        "EvouDDb25DDsj");
-            }
-        };
-
-        return autenticacao;
     }
 
     // Método que retorna as propriedades de configuração do servidor de email

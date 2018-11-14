@@ -1,10 +1,16 @@
 language: java
 jdk:
-  - oraclejdk8
+    - oraclejdk8
 before_script:
-  - mysql -e 'create database sigest_db'
+    - mysql -e 'CREATE DATABASE sigest_db'
+    - mysql -e 'CREATE DATABASE sigest_db_test'
+
+    - mysql -e "CREATE USER 'sigest_user'@'localhost' IDENTIFIED BY 'sigest_user';"
+
+    - mysql -e "GRANT ALL ON sigest_db.* TO 'sigest_user'@'localhost';"
+    - mysql -e "GRANT ALL ON sigest_db_test.* TO 'sigest_user'@'localhost';"
 services:
-  - mysql
+    - mysql
 cache:
   directories:
     - '$HOME/.m2/repository'
