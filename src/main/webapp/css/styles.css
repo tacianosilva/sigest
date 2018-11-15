@@ -65,6 +65,12 @@ a:hover, a:focus {
 /* Estilos personalizados para o menu inicial da página manter curso
 		By @eduviictor  */
 
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
 .container-principal {
 	max-width: 1280px;
 	margin: 0 2%;
@@ -72,6 +78,7 @@ a:hover, a:focus {
 
 .container-form{
 	text-align: center;
+	margin: 0 2%;
 }
 
 .titulo-principal {
@@ -93,7 +100,21 @@ a:hover, a:focus {
 	margin: 0 auto;
 }
 
+.primeiro-form .text-cursos {
+	margin-left: -234px;
+}
+
 .linha {
     max-width: 1280px;
     margin: 2% 2%;
+}
+
+.ui-picklist .ui-picklist-list{
+	height: 185px;
+	width: 175px;
+	margin: 2px;
+}
+
+.ui.widget {
+	font-size: 0.9em;
 }
