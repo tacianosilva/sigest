@@ -61,3 +61,39 @@ a:hover, a:focus {
 .btn-voltar {
 	
 }
+
+/* Estilos personalizados para o menu inicial da página manter curso
+		By @eduviictor  */
+
+.container-principal {
+	max-width: 1280px;
+	margin: 0 2%;
+}
+
+.container-form{
+	text-align: center;
+}
+
+.titulo-principal {
+	color: black;	
+	margin: 0 auto;
+}
+
+.primeiro-form{
+	margin: 17px 2%;
+    border-radius: 13px;
+    background-color: #efefef;
+    display: inline-block;
+    padding: 25px;
+}
+
+.primeiro-form table{
+	text-align: left;
+	padding-bottom: 29px;
+	margin: 0 auto;
+}
+
+.linha {
+    max-width: 1280px;
+    margin: 2% 2%;
+}
