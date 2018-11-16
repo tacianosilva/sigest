@@ -18,7 +18,7 @@
         <a href = '../sigest'><button class = 'button btn-voltar'>Voltar para o menu</button></a>
 
         <h1>Manter Curso</h1>
-        <h:form>
+        <h:form id = "form0">
             <h:messages id="messages" class="alert-error" />
             <h:panelGrid columns="3">
                 <h:outputLabel value="Nome:" for="nome" />
@@ -38,12 +38,12 @@
             </h:panelGrid>
 
             <p:commandButton value="Incluir"
-                actionListener="#{cursoBean.incluir}" update="messages"/>
+                update=":form1:dataTable" action="#{cursoBean.incluir}" />
         </h:form>
     </div>
     <hr />
     <div>
-        <h:form>
+        <h:form id = "form1">
             <h:messages />
             <p:dataTable id="dataTable" var="curso" value="#{cursoBean.cursos}"
                 paginator="true" rows="10">
