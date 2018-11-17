@@ -37,16 +37,16 @@
                         </h:selectOneMenu>
                         <p:message for="coordenador" />
                     </h:panelGrid>
-
-                    <p:commandButton value="Incluir"
-                        actionListener="#{cursoBean.incluir}" update="messages"/>
+            
+                     <p:commandButton value="Incluir"
+                          update=":form1:dataTable" action="#{cursoBean.incluir}" />
                 </h:form>
-            </div>
-        </div>
+          </div>
+      </div>
     </div>
     <hr class="linha" />
     <div class="container-principal">
-        <h:form>
+        <h:form id = "form1">
             <h:messages />
             <p:dataTable id="dataTable" var="curso" value="#{cursoBean.cursos}"
                 paginator="true" rows="10">
