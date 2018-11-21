@@ -34,6 +34,8 @@ public class CursoBean extends AbstractBean implements Serializable {
     private List<Curso> cursos = null;
 
     private List<Professor> professores = null;
+    
+    private Curso curso1 = new Curso();
 
     public String manter() {
         return "/curso/manter";
@@ -46,13 +48,14 @@ public class CursoBean extends AbstractBean implements Serializable {
         return curso;
     }
 
-    public String incluir() {
+    public Curso incluir() {
         FacesContext context = FacesContext.getCurrentInstance();
         setContext(context);
 
         try {
             // O método retorna o curso com o código
-            sigest.inserirCurso(getCurso());
+            curso1 = sigest.inserirCurso(getCurso());
+            listar();
             context.addMessage("cursoBean.incluir", new FacesMessage(
                     msg("info.curso.bean.incluir.sucesso")));
         } catch (NegocioException ex) {
@@ -62,7 +65,7 @@ public class CursoBean extends AbstractBean implements Serializable {
                     FacesMessage.SEVERITY_ERROR,
                     "Erro ao incluir novo curso!", ex.getMessage()));
         }
-        return "/curso/manter";
+        return curso1;
     }
 
     public String listar() {
