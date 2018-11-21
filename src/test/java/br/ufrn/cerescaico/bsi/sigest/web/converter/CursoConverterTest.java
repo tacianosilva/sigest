@@ -2,6 +2,9 @@ package br.ufrn.cerescaico.bsi.sigest.web.converter;
 
 import static org.junit.Assert.*;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +14,8 @@ import br.ufrn.cerescaico.bsi.sigest.bo.NegocioException;
 import br.ufrn.cerescaico.bsi.sigest.model.Curso;
 
 public class CursoConverterTest {
+    
+    private static final Logger LOGGER = Logger.getLogger(CursoConverterTest.class.getName());
 
     CursoBO bo = new CursoBO();
     Curso curso;
@@ -29,8 +34,7 @@ public class CursoConverterTest {
         try {
             bo.excluir(inserido.getCodigo());
         } catch (NegocioException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.log(Level.INFO, e.getMessage(), e);
         }
         curso = null;
         inserido = null;
