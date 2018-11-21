@@ -7,47 +7,52 @@
     xmlns:p="http://primefaces.org/ui">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="css/styles.css"></link>
 </h:head>
 <body>
-    <div class="container" style="-moz-appearance: normal">
-        <h1>Manter Professor</h1>
-        <hr />
-        <h:form>
-            <h:messages id="messages" class="alert-error" />
-            <h:panelGrid columns="3">
-                <h:outputLabel value="Nome: *" for="nome" />
-                <p:inputText id="nome" value="#{professorBean.nome}" required="true"
-                    label="nome">
-                    <f:validateLength minimum="2" />
-                </p:inputText>
-                <p:message for="nome" />
+    <div class="container-principal">
+        <div class="container" style="-moz-appearance: normal">
+            <a href = '../sigest'><button class = 'button btn-voltar'>Voltar para o menu</button></a>
+            <div class="container-form">
+                <h1 class="titulo-principal">Manter Professor</h1>
+                <h:form class="primeiro-form">
+                    <h:messages id="messages" class="alert-error" />
+                    <h:panelGrid columns="3">
+                        <h:outputLabel value="Nome: *" for="nome" />
+                        <p:inputText id="nome" value="#{professorBean.nome}" required="true"
+                            label="nome">
+                            <f:validateLength minimum="2" />
+                        </p:inputText>
+                        <p:message for="nome" />
 
-                <h:outputLabel value="Siape: *" for="siape" />
-                <p:inputText id="siape" value="#{professorBean.siape}"
-                    required="true" label="siape" />
-                <p:message for="siape" />
+                        <h:outputLabel value="Siape: *" for="siape" />
+                        <p:inputText id="siape" value="#{professorBean.siape}"
+                            required="true" label="siape" />
+                        <p:message for="siape" />
 
-                <h:outputLabel for="curso" value="Curso: *" />
-                <p:selectOneMenu id="curso" value="#{professorBean.codigocurso}">
-                    <f:selectItem itemLabel="Selecione um curso" itemValue="#{null}" />
-                    <f:selectItems value="#{cursoBean.cursos}" var="crs"
-                        itemLabel="#{crs.nome}" itemValue="#{crs.codigo}" />
-                </p:selectOneMenu>
-                <p:message for="curso" />
-            </h:panelGrid>
+                        <h:outputLabel for="curso" value="Curso: *" />
+                        <p:selectOneMenu id="curso" value="#{professorBean.codigocurso}">
+                            <f:selectItem itemLabel="Selecione um curso" itemValue="#{null}" />
+                            <f:selectItems value="#{cursoBean.cursos}" var="crs"
+                                itemLabel="#{crs.nome}" itemValue="#{crs.codigo}" />
+                        </p:selectOneMenu>
+                        <p:message for="curso" />
+                    </h:panelGrid>
 
-            <h:outputLabel for="pickList" value="Cursos: *" />
-            <p:pickList id="pickList" value="#{professorBean.cursos}" var="curso"
-                itemLabel="#{curso}" itemValue="#{curso}" converter="professorConverter" />
-            <p:message for="pickList" />
+                    <h:outputLabel class="text-cursos" for="pickList" value="Cursos: *" />
+                    <p:pickList id="pickList" value="#{professorBean.cursos}" var="curso"
+                        itemLabel="#{curso}" itemValue="#{curso}" converter="professorConverter" />
+                    <p:message for="pickList" />
 
-            <p:commandButton value="Inserir" action="#{professorBean.incluir}"
-                update="messages" />
+                    <p:commandButton value="Inserir" action="#{professorBean.incluir}"
+                        update="messages" />
 
-        </h:form>
+                </h:form>
+            </div>
+        </div>
     </div>
-    <hr />
-    <div>
+    <hr class="linha" />
+    <div class="container-principal">
         <h:form>
             <h:messages />
             <p:dataTable id="dataTable" var="professor"
