@@ -36,6 +36,15 @@
                             <f:converter converterId="professorConverter"/>
                         </h:selectOneMenu>
                         <p:message for="coordenador" />
+                        
+                        <h:outputLabel for="viceCoordenador" value="Vice Coordenador:" />
+                        <h:selectOneMenu id="viceCoordenador" value="#{cursoBean.viceCoordenador}"
+                            required="false">
+                            <f:selectItem itemLabel="Select One" itemValue="#{cursoBean.viceCoordenador.siape}" />
+                            <f:selectItems id="prof2" value="#{cursoBean.professores}" itemValue="#{prof.siape}" itemLabel="#{prof}"/>
+                            <f:converter converterId="professorConverter"/>
+                        </h:selectOneMenu>
+                        <p:message for="viceCoordenador" />
                     </h:panelGrid>
             
                      <p:commandButton value="Incluir"
@@ -73,6 +82,14 @@
                     </f:facet>
 
                     <h:outputText value="#{curso.coordenador}" />
+                </p:column>
+                
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="ViceCoordenador" />
+                    </f:facet>
+
+                    <h:outputText value="#{curso.viceCoordenador}" />
                 </p:column>
             </p:dataTable>
         </h:form>
