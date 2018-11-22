@@ -7,6 +7,8 @@
         <description>Sigest - Unidade de Pesistência</description>
         <!-- https://www.thoughts-on-java.org/jpa-persistence-xml/ -->
         
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        
         <class>br.ufrn.cerescaico.bsi.sigest.model.Supervisor</class>
         <class>br.ufrn.cerescaico.bsi.sigest.model.Professor</class>
         <class>br.ufrn.cerescaico.bsi.sigest.model.Estagio</class>
@@ -23,12 +25,13 @@
             <property name="javax.persistence.jdbc.user" value="sigest_user" />
             <property name="javax.persistence.jdbc.password" value="sigest_user" />
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-
+            
             <!-- configure logging -->
             <property name="eclipselink.logging.level" value="INFO"/>
             <property name="eclipselink.logging.level.sql" value="FINE"/>
             <property name="eclipselink.logging.parameters" value="true"/>
             
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />        </properties>
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />        
+        </properties>
     </persistence-unit>
 </persistence>

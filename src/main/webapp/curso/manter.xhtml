@@ -7,40 +7,46 @@
     xmlns:p="http://primefaces.org/ui">
 <h:head>
     <meta charset="utf-8" />
-    <title>SisEventos - Login de Usuário</title>
+    <title>Manter Curso</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Tela Manter Curso - SIGEST" />
     <meta name="author" content="Taciano Morais Silva" />
+    <link rel="stylesheet" href="css/styles.css"></link>
 </h:head>
 <h:body>
-    <div class="container" style="-moz-appearance: normal">
-        <h1>Manter Curso</h1>
-        <h:form>
-            <h:messages id="messages" class="alert-error" />
-            <h:panelGrid columns="3">
-                <h:outputLabel value="Nome:" for="nome" />
-                <p:inputText id="nome" value="#{cursoBean.nome}"
-                    required="true" label="nome">
-                    <f:validateLength minimum="2" />
-                </p:inputText>
-                <p:message for="nome" />
-                <h:outputLabel for="coordenador" value="Coordenador: " />
-                <h:selectOneMenu id="coordenador" value="#{cursoBean.coordenador}"
-                    required="false">
-                    <f:selectItem itemLabel="Select One" itemValue="#{cursoBean.coordenador.siape}" />
-                    <f:selectItems id="prof" value="#{cursoBean.professores}" itemValue="#{prof.siape}" itemLabel="#{prof}"/>
-                    <f:converter converterId="professorConverter"/>
-                </h:selectOneMenu>
-                <p:message for="coordenador" />
-            </h:panelGrid>
-
-            <p:commandButton value="Incluir"
-                actionListener="#{cursoBean.incluir}" update="messages"/>
-        </h:form>
+    <div class="container-principal">
+        <div class="container" style="-moz-appearance: normal">
+            <a href = '../sigest'><button class = 'button btn-voltar'>Voltar para o menu</button></a>
+            <div class="container-form">
+                <h1 class="titulo-principal">Manter Curso</h1>
+                <h:form class="primeiro-form">
+                    <h:messages id="messages" class="alert-error" />
+                    <h:panelGrid columns="3">
+                        <h:outputLabel value="Nome:" for="nome" />
+                        <p:inputText id="nome" value="#{cursoBean.nome}"
+                            required="true" label="nome">
+                            <f:validateLength minimum="2" />
+                        </p:inputText>
+                        <p:message for="nome" />
+                        <h:outputLabel for="coordenador" value="Coordenador: " />
+                        <h:selectOneMenu id="coordenador" value="#{cursoBean.coordenador}"
+                            required="false">
+                            <f:selectItem itemLabel="Select One" itemValue="#{cursoBean.coordenador.siape}" />
+                            <f:selectItems id="prof" value="#{cursoBean.professores}" itemValue="#{prof.siape}" itemLabel="#{prof}"/>
+                            <f:converter converterId="professorConverter"/>
+                        </h:selectOneMenu>
+                        <p:message for="coordenador" />
+                    </h:panelGrid>
+            
+                     <p:commandButton value="Incluir"
+                          update=":form1:dataTable" action="#{cursoBean.incluir}" />
+                </h:form>
+          </div>
+      </div>
     </div>
-    <hr />
-    <div>
-        <h:form>
+    <hr class="linha" />
+    <div class="container-principal">
+        <h:form id = "form1">
             <h:messages />
             <p:dataTable id="dataTable" var="curso" value="#{cursoBean.cursos}"
                 paginator="true" rows="10">

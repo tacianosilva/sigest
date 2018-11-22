@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -46,8 +45,11 @@ public class ProfessorBean extends AbstractBean implements Serializable {
     private Integer codigocurso = null;
 
     private DualListModel<Curso> cursos;
+    
+    public ProfessorBean() {
+        init(); 
+    }
 
-    @PostConstruct
     public void init() {
         //Cursos
         List<Curso> cursosSource = new ArrayList<Curso>();
