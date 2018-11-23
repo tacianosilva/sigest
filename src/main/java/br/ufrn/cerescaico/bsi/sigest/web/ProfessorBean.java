@@ -92,14 +92,16 @@ public class ProfessorBean extends AbstractBean implements Serializable {
         return "/professor/manter";
     }
 
-    public String incluir() {
+    public Professor incluir() {
         FacesContext context = FacesContext.getCurrentInstance();
         setContext(context);
 
         try {
-            sigest.inserirProfessor(getProfessor());
+            professor = sigest.inserirProfessor(getProfessor());
+            
             context.addMessage("ProfessorBean.incluir", new FacesMessage(
                     msg("info.professor.bean.incluir.sucesso")));
+            listar();
         } catch (NegocioException ex) {
             Logger.getLogger(ProfessorBean.class.getName()).log(Level.SEVERE,
                     ex.getMessage(), ex);
@@ -108,7 +110,7 @@ public class ProfessorBean extends AbstractBean implements Serializable {
                     msg("erro.professor.bean.incluir.exception"),
                     ex.getMessage()));
         }
-        return "/professor/manter";
+        return professor;
     }
 
     public String listar() {
