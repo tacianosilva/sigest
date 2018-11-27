@@ -32,18 +32,14 @@
 
                         <h:outputLabel for="curso" value="Curso: *" />
                         <p:selectOneMenu id="curso" value="#{professorBean.codigocurso}">
-                            <f:selectItem itemLabel="Selecione um curso" itemValue="#{null}" />
+                            <f:selectItem itemLabel="Selecione um curso" itemValue="#{codigocurso}" />
                             <f:selectItems value="#{cursoBean.cursos}" var="crs"
                                 itemLabel="#{crs.nome}" itemValue="#{crs.codigo}" />
                         </p:selectOneMenu>
                         <p:message for="curso" />
                     </h:panelGrid>
 
-                    <h:outputLabel class="text-cursos" for="pickList" value="Cursos: *" />
-                    <p:pickList id="pickList" value="#{professorBean.cursos}" var="curso"
-                        itemLabel="#{curso}" itemValue="#{curso}" converter="professorConverter" />
-                    <p:message for="pickList" />
-
+                   
                     <p:commandButton value="Inserir" action="#{professorBean.incluir}"
                         update="messages" />
 
