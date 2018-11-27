@@ -45,6 +45,10 @@ public class ProfessorBean extends AbstractBean implements Serializable {
     private Integer codigocurso = null;
 
     private DualListModel<Curso> cursos;
+    
+    public ProfessorBean() {
+        init(); 
+    }
 
     public void init() {
         //Cursos
