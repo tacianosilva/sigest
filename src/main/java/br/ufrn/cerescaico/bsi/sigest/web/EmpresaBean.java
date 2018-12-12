@@ -81,7 +81,7 @@ public class EmpresaBean implements Serializable {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage("empresaBean.excluir", new FacesMessage(
                     FacesMessage.SEVERITY_ERROR,
-                    "Erro ao cadastrar a empresa", ex.getMessage()));
+                    "Erro ao excluir a empresa", ex.getMessage()));
         }
     }
 
