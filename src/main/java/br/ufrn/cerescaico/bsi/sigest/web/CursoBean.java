@@ -30,6 +30,8 @@ public class CursoBean extends AbstractBean implements Serializable {
     private String nome = null;
 
     private Professor coordenador = null;
+    
+    private Professor viceCoordenador = null;
 
     private List<Curso> cursos = null;
 
@@ -45,6 +47,7 @@ public class CursoBean extends AbstractBean implements Serializable {
         Curso curso = new Curso();
         curso.setNome(getNome());
         curso.setCoordenador(getCoordenador());
+        curso.setViceCoordenador(getViceCoordenador());
         return curso;
     }
 
@@ -112,6 +115,14 @@ public class CursoBean extends AbstractBean implements Serializable {
 
     public void setCoordenador(Professor coordenador) {
         this.coordenador = coordenador;
+    }
+    
+    public Professor getViceCoordenador() {
+        return viceCoordenador;
+    }
+
+    public void setViceCoordenador(Professor viceCoordenador) {
+        this.viceCoordenador = viceCoordenador;
     }
 
     public List<Curso> getCursos() {
