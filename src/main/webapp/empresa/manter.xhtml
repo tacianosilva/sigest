@@ -12,7 +12,7 @@
 </h:head>
 <body>
 	<div>
-		<a href = '../sigest'><button class = 'button btn-voltar'>Voltar para o menu</button></a>
+		<a href="../sigest"><button class = 'button btn-voltar'>Voltar para o menu</button></a>
 		<h1>Sistema Gerenciador de Estágios - SIGEST</h1>
 		<hr />
 		
@@ -66,13 +66,13 @@
 				
 				<p:column>
 					<f:facet name="header">
-						<h:outputText value=" Carregar " />
+						<h:outputText value=" Carregar" />
 					</f:facet>
 					
-					<h:commandLink value="Carregar">
+					<h:commandButton value="Selecionar">
 						<f:setPropertyActionListener value="#{emp}"
 							target="#{empresaBean.empresa}" />
-					</h:commandLink>
+					</h:commandButton>
 				</p:column>
 				<!-- comentatios -->
 				<p:column>
